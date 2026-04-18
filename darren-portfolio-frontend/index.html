@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darren Sorrels - UX Designer</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Darren Sorrels</h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <h2>UX Designer & Design Thinker</h2>
+            <p>Creating thoughtful digital experiences</p>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="blog">
+            <h2>Latest Blog Posts</h2>
+            <div id="blog-posts" class="posts-grid">
+                <!-- Posts will load here -->
+            </div>
+        </section>
+
+        <!-- Work/Case Studies Section -->
+        <section id="work" class="case-studies">
+            <h2>Featured Work</h2>
+            <div id="case-studies" class="studies-grid">
+                <!-- Case studies will load here -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2>Get In Touch</h2>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <p id="form-status"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Darren Sorrels. All rights reserved.</p>
+    </footer>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
