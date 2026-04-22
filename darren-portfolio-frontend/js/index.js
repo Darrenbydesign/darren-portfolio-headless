@@ -25,21 +25,23 @@ function extractTextFromRichContent(content) {
 function extractListItemsFromRichContent(content) {
   if (!Array.isArray(content)) return [];
 
-  return content.flatMap((block) => {
-    if (block.type !== 'list' || !Array.isArray(block.children)) return [];
+  return content
+    .flatMap((block) => {
+      if (block.type !== 'list' || !Array.isArray(block.children)) return [];
 
-    return block.children.map((item) => {
-      if (!Array.isArray(item.children)) return '';
+      return block.children.map((item) => {
+        if (!Array.isArray(item.children)) return '';
 
-      return item.children
-        .map((child) => child.text || '')
-        .join('')
-        .trim();
-    });
-  }).filter(Boolean);
+        return item.children
+          .map((child) => child.text || '')
+          .join('')
+          .trim();
+      });
+    })
+    .filter(Boolean);
 }
 
-function getPreviewText(text, length = 150) {
+function getPreviewText(text, length = 160) {
   if (!text || typeof text !== 'string') return '';
   return text.length > length ? `${text.substring(0, length)}...` : text;
 }
@@ -68,18 +70,18 @@ async function fetchBlogPosts() {
     const html = posts
       .map((post) => {
         const fullText = extractTextFromRichContent(post.content);
-        const preview = post.excerpt || getPreviewText(fullText, 150);
+        const preview = post.excerpt || getPreviewText(fullText, 160);
         const date = post.datePublished
           ? new Date(post.datePublished).toLocaleDateString()
           : '';
 
         return `
-          <div class="post-card">
+          <article class="card">
             <h3>${post.title || 'Untitled Post'}</h3>
             <p class="date">${date}</p>
             <p>${preview}</p>
             <a href="/blog/${post.slug || ''}">Read More</a>
-          </div>
+          </article>
         `;
       })
       .join('');
@@ -115,18 +117,23 @@ async function fetchCaseStudies() {
     const html = studies
       .map((study) => {
         const descriptionText = extractTextFromRichContent(study.description);
-        const preview = getPreviewText(descriptionText, 150);
+        const preview = getPreviewText(descriptionText, 160);
 
         const toolsList = extractListItemsFromRichContent(study.tools);
         const toolsText = toolsList.length > 0 ? toolsList.join(', ') : 'N/A';
 
+        const date = study.datePublished
+          ? new Date(study.datePublished).toLocaleDateString()
+          : '';
+
         return `
-          <div class="study-card">
+          <article class="card">
             <h3>${study.title || 'Untitled Case Study'}</h3>
+            <p class="date">${date}</p>
             <p>${preview}</p>
             <p><strong>Tools:</strong> ${toolsText}</p>
             <a href="/work/${study.slug || ''}">View Case Study</a>
-          </div>
+          </article>
         `;
       })
       .join('');
