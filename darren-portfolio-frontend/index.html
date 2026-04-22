@@ -1,64 +1,153 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darren Sorrels - UX Designer</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <h1>Darren Sorrels</h1>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Darren Sorrels - UX Designer</title>
+		<link
+			rel="stylesheet"
+			href="css/main.css" />
+	</head>
+	<body>
+		<header>
+			<nav>
+				<div>Darren Sorrels Design</div>
+				<ul>
+					<li><a href="#home">Home</a></li>
+					<li><a href="#blog">Blog</a></li>
+					<li><a href="#work">Work</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+		</header>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <h2>UX Designer & Design Thinker</h2>
-            <p>Creating thoughtful digital experiences</p>
-        </section>
+		<main>
+			<!-- Hero Section -->
+			<section
+				id="home"
+				class="hero">
+				<h2>UX Designer & Design Thinker</h2>
+				<p>Creating thoughtful digital experiences</p>
+				<p class="intro-heading-large">I am Darren Sorrels, User Experience & Interaction Designer.</p>
+			</section>
+			<section id="services">
+				<h2>My Services</h2>
+				<hr />
 
-        <!-- Blog Section -->
-        <section id="blog" class="blog">
-            <h2>Latest Blog Posts</h2>
-            <div id="blog-posts" class="posts-grid">
-                <!-- Posts will load here -->
-            </div>
-        </section>
+				<article class="grid-item">
+					<h3 class="intro-list-header">UX Design Strategy</h3>
+					<p class="text-large">
+						I work smart with you to discover the problems that really need to be solved for your target users. Once we
+						discover the issues I help you to implement the best solution to solve that problem.
+					</p>
+				</article>
 
-        <!-- Work/Case Studies Section -->
-        <section id="work" class="case-studies">
-            <h2>Featured Work</h2>
-            <div id="case-studies" class="studies-grid">
-                <!-- Case studies will load here -->
-            </div>
-        </section>
+				<article class="grid-item">
+					<h3 class="intro-list-header">Interaction Design</h3>
+					<p class="text-large">
+						I craft beautiful interfaces that will make your products work smoothly and provide delightful experiences
+						the power of aesthetics and function combined.
+					</p>
+				</article>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <h2>Get In Touch</h2>
-            <form id="contact-form">
-                <input type="text" id="name" placeholder="Your Name" required>
-                <input type="email" id="email" placeholder="Your Email" required>
-                <textarea id="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-            <p id="form-status"></p>
-        </section>
-    </main>
+				<article class="grid-item">
+					<h3 class="intro-list-header">Front-End Development</h3>
+					<p class="text-large">I bring the designs to life with code utilizing my skills with HTML/CSS/JS.</p>
+				</article>
 
-    <footer>
-        <p>&copy; 2026 Darren Sorrels. All rights reserved.</p>
-    </footer>
+				<article class="grid-item">
+					<h3 class="intro-list-header">Identity Design</h3>
+					<p class="text-large">
+						I provide design services necessary to communicate your brand identity to your customers which include logo
+						design along with the collaterals the logo design would be used on.
+					</p>
+				</article>
+			</section>
+			<section id="designProcess">
+				<h3>Understand</h3>
+				<p>
+					By conducting user research I can understand your customers needs and help you provide the optimal experience
+					for them with your product
+				</p>
+				<h3>Define</h3>
+				<p>
+					I work with you to combine the research gathered to really hone in the key pain points that your customers are
+					facing so we can improve that experience
+				</p>
+				<h3>Ideate</h3>
+				<p>This is where the magic happens I will work on generating ideas with you.</p>
 
-    <script src="js/index.js"></script>
-</body>
+				<h3>Prototype</h3>
+				<p>We'll build out the ideas that we identify are the most likely to improve the experience your users have.</p>
+
+				<h3>Testing</h3>
+				<p>
+					Those ideas we worked out together need to be tested to prove whether or not they will achieve your business
+					needs and the users needs (C'mon people it is science after all)
+				</p>
+
+				<h3>Implement</h3>
+				<p>
+					Once we have determined the winner through testing we will begin the implementation for shipping the product
+					out to the customers
+				</p>
+			</section>
+			<!-- Blog Section -->
+			<section
+				id="blog"
+				class="blog">
+				<h2>Latest Blog Posts</h2>
+				<div
+					id="blog-posts"
+					class="posts-grid">
+					<!-- Posts will load here -->
+				</div>
+			</section>
+
+			<!-- Work/Case Studies Section -->
+			<section
+				id="work"
+				class="case-studies">
+				<h2>Featured Work</h2>
+				<div
+					id="case-studies"
+					class="studies-grid">
+					<!-- Case studies will load here -->
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section
+				id="contact"
+				class="contact">
+				<h2>Get In Touch</h2>
+				<form id="contact-form">
+					<input
+						type="text"
+						id="name"
+						placeholder="Your Name"
+						required />
+					<input
+						type="email"
+						id="email"
+						placeholder="Your Email"
+						required />
+					<textarea
+						id="message"
+						placeholder="Your Message"
+						required></textarea>
+					<button type="submit">Send Message</button>
+				</form>
+				<p id="form-status"></p>
+			</section>
+		</main>
+
+		<footer>
+			<p>&copy; 2026 Darren Sorrels Design . All rights reserved.</p>
+		</footer>
+
+		<script src="js/index.js"></script>
+	</body>
 </html>

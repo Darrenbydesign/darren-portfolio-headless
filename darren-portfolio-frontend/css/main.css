@@ -1,188 +1,250 @@
+/* ================================================================
+TABLE OF CONTENTS
+================================================================
+1.  VARIABLES & DESIGN TOKENS
+2.  BASE STYLES & RESET
+3.  LAYOUT WRAPPERS (Header, Main, Footer)
+4.  COMPONENTS (Hero, Cards, Forms)
+5.  UTILITIES / STATUS STATES
+================================================================
+*/
+
+/* -------------------------------------------------------------
+   1. VARIABLES & DESIGN TOKENS
+   ------------------------------------------------------------- */
+:root {
+	/* Color Palette */
+	--clr-primary: #2c3e50;
+	--clr-secondary: #3498db;
+	--clr-accent: #667eea;
+	--clr-accent-dark: #764ba2;
+	--clr-bg: #f9f9f9;
+	--clr-white: #ffffff;
+	--clr-text-main: #333;
+	--clr-text-muted: #666;
+	--clr-text-light: #999;
+
+	/* Spacing & Layout */
+	--max-width: 1200px;
+	--section-spacing: 3rem;
+
+	/* Borders & Shadows */
+	--radius-md: 8px;
+	--radius-sm: 4px;
+	--shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+	--shadow-md: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+	/* Animation */
+	--transition: 0.3s ease;
+}
+
+/* -------------------------------------------------------------
+   2. BASE STYLES & RESET
+   ------------------------------------------------------------- */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
-}
-
-header {
-    background: #2c3e50;
-    color: white;
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-header nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header h1 {
-    font-size: 1.8rem;
-}
-
-header nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-}
-
-header nav a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-header nav a:hover {
-    color: #3498db;
-}
-
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-section {
-    margin: 3rem 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	line-height: 1.6;
+	color: var(--clr-text-main);
+	background-color: var(--clr-bg);
 }
 
 h2 {
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    color: #2c3e50;
+	margin-bottom: 2rem;
+	font-size: 2rem;
+	color: var(--clr-primary);
 }
 
-.hero {
-    text-align: center;
-    padding: 4rem 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 8px;
+/* -------------------------------------------------------------
+   3. LAYOUT WRAPPERS
+   ------------------------------------------------------------- */
+header {
+	background: var(--clr-primary);
+	color: var(--clr-white);
+	padding: 1rem 2rem;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	box-shadow: var(--shadow-sm);
+
+	& nav {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		& ul {
+			list-style: none;
+			display: flex;
+			gap: 2rem;
+
+			@media (max-width: 768px) {
+				flex-direction: column;
+				gap: 0.5rem;
+				text-align: center;
+			}
+		}
+
+		& a {
+			color: var(--clr-white);
+			text-decoration: none;
+			transition: color var(--transition);
+
+			&:hover {
+				color: var(--clr-secondary);
+			}
+		}
+	}
 }
 
-.hero h2 {
-    font-size: 2.5rem;
-    color: white;
+main {
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 2rem;
 }
 
-.posts-grid, .studies-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.post-card, .study-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.post-card:hover, .study-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.post-card h3, .study-card h3 {
-    margin-bottom: 0.5rem;
-    color: #2c3e50;
-}
-
-.post-card p, .study-card p {
-    color: #666;
-    margin-bottom: 1rem;
-}
-
-.post-card .date {
-    font-size: 0.9rem;
-    color: #999;
-}
-
-.contact form {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    max-width: 600px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.contact input,
-.contact textarea {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-family: inherit;
-}
-
-.contact button {
-    background: #667eea;
-    color: white;
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s;
-}
-
-.contact button:hover {
-    background: #764ba2;
-}
-
-#form-status {
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 4px;
-    display: none;
-}
-
-#form-status.success {
-    background: #d4edda;
-    color: #155724;
-    display: block;
-}
-
-#form-status.error {
-    background: #f8d7da;
-    color: #721c24;
-    display: block;
+section {
+	margin: var(--section-spacing) 0;
 }
 
 footer {
-    text-align: center;
-    padding: 2rem;
-    background: #2c3e50;
-    color: white;
-    margin-top: 3rem;
+	text-align: center;
+	padding: 2rem;
+	background: var(--clr-primary);
+	color: var(--clr-white);
+	margin-top: var(--section-spacing);
 }
 
-@media (max-width: 768px) {
-    header nav {
-        flex-direction: column;
-        gap: 1rem;
-    }
+/* -------------------------------------------------------------
+   4. COMPONENTS
+   ------------------------------------------------------------- */
 
-    header nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+/* Hero Section */
+.hero {
+	text-align: center;
+	padding: 4rem 2rem;
+	background: linear-gradient(135deg, var(--clr-accent) 0%, var(--clr-accent-dark) 100%);
+	color: var(--clr-white);
+	border-radius: var(--radius-md);
 
-    .posts-grid, .studies-grid {
-        grid-template-columns: 1fr;
-    }
+	& h2 {
+		font-size: 2.5rem;
+		color: var(--clr-white);
+	}
+}
+
+/* Card Grid System */
+.posts-grid,
+.studies-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 2rem;
+	container-type: inline-size; /* Enabling Container Queries */
+}
+
+/* Shared Card Component */
+.card {
+	background: var(--clr-white);
+	padding: 1.5rem;
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+	transition:
+		transform var(--transition),
+		box-shadow var(--transition);
+
+	&:hover {
+		transform: translateY(-5px);
+		box-shadow: var(--shadow-md);
+	}
+
+	& h3 {
+		margin-bottom: 0.5rem;
+		color: var(--clr-primary);
+	}
+
+	& p {
+		color: var(--clr-text-muted);
+		margin-bottom: 1rem;
+	}
+
+	& .date {
+		font-size: 0.9rem;
+		color: var(--clr-text-light);
+	}
+
+	/* Adjusting card internally based on its own width */
+	@container (max-width: 350px) {
+		padding: 1rem;
+		& h3 {
+			font-size: 1.1rem;
+		}
+	}
+}
+
+/* Contact Form Component */
+.contact {
+	& form {
+		background: var(--clr-white);
+		padding: 2rem;
+		border-radius: var(--radius-md);
+		max-width: 600px;
+		box-shadow: var(--shadow-sm);
+	}
+
+	& input,
+	& textarea {
+		width: 100%;
+		padding: 0.8rem;
+		margin-bottom: 1rem;
+		border: 1px solid #ddd;
+		border-radius: var(--radius-sm);
+		font-family: inherit;
+	}
+
+	& button {
+		background: var(--clr-accent);
+		color: var(--clr-white);
+		padding: 0.8rem 2rem;
+		border: none;
+		border-radius: var(--radius-sm);
+		cursor: pointer;
+		transition: background var(--transition);
+
+		&:hover {
+			background: var(--clr-accent-dark);
+		}
+	}
+}
+
+/* -------------------------------------------------------------
+   5. UTILITIES / STATUS STATES
+   ------------------------------------------------------------- */
+#form-status {
+	margin-top: 1rem;
+	padding: 1rem;
+	border-radius: var(--radius-sm);
+	display: none;
+
+	&.success {
+		background: #d4edda;
+		color: #155724;
+		display: block;
+	}
+
+	&.error {
+		background: #f8d7da;
+		color: #721c24;
+		display: block;
+	}
 }
