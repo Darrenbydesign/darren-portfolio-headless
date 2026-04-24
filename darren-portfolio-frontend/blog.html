@@ -1,40 +1,41 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0" />
-		<title>Darren Sorrels - UX Designer</title>
-		<link
-			rel="stylesheet"
-			href="css/main.css" />
-	</head>
-	<body>
-		<header>
-			<nav>
-				<div>Darren Sorrels Design</div>
-				<ul>
-					<li><a href="/">Home</a></li>
-					<li><a href="./blog.html">Blog</a></li>
-					<li><a href="./work.html">Work</a></li>
-					<li><a href="/#contact">Contact</a></li>
-				</ul>
-			</nav>
-		</header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Darren Sorrels - UX Designer</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div>Darren Sorrels Design</div>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="./blog.html">Blog</a></li>
+          <li><a href="./work.html">Work</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
-		<main>
-			<section class="blog-page">
-				<h2>Journal</h2>
-				<div
-					id="blog-posts"
-					class="posts-grid"></div>
-			</section>
-		</main>
-		<footer>
-			<p>&copy; 2026 Darren Sorrels Design . All rights reserved.</p>
-		</footer>
-
-		<script src="js/index.js"></script>
-	</body>
+    <main>
+      <section class="blog-page">
+        <h2>Journal</h2>
+        <div id="blog-posts" class="posts-grid"></div>
+        <template id="blog-card-template">
+          <article class="card">
+            <h3 data-blog-title></h3>
+            <p class="date" data-blog-date></p>
+            <p data-blog-preview></p>
+            <a data-blog-link>Read More</a>
+          </article>
+        </template>
+      </section>
+    </main>
+    <script type="module" src="js/blog.js"></script>
+    <footer>
+      <p>&copy; 2026 Darren Sorrels Design . All rights reserved.</p>
+    </footer>
+  </body>
 </html>

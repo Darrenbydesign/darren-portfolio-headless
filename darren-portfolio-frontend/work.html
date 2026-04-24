@@ -1,40 +1,43 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0" />
-		<title>Darren Sorrels - UX Designer</title>
-		<link
-			rel="stylesheet"
-			href="css/main.css" />
-	</head>
-	<body>
-		<header>
-			<nav>
-				<div>Darren Sorrels Design</div>
-				<ul>
-					<li><a href="/">Home</a></li>
-					<li><a href="./blog.html">Blog</a></li>
-					<li><a href="./work.html">Work</a></li>
-					<li><a href="/#contact">Contact</a></li>
-				</ul>
-			</nav>
-		</header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Darren Sorrels - UX Designer</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div>Darren Sorrels Design</div>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="./blog.html">Blog</a></li>
+          <li><a href="./work.html">Work</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
-		<main>
-			<section class="work-page">
-				<h2>Work</h2>
-				<div
-					id="case-studies"
-					class="studies-grid"></div>
-			</section>
-		</main>
-		<footer>
-			<p>&copy; 2026 Darren Sorrels Design . All rights reserved.</p>
-		</footer>
+    <main>
+      <section class="work-page">
+        <h2>Work</h2>
+        <div id="case-studies" class="studies-grid"></div>
+      </section>
+      <template id="case-study-card-template">
+        <article class="card">
+          <h3 data-study-title></h3>
+          <p class="date" data-study-date></p>
+          <p data-study-preview></p>
+          <p><strong>Tools:</strong> <span data-study-tools></span></p>
+          <a data-study-link>View Case Study</a>
+        </article>
+      </template>
+    </main>
+    <footer>
+      <p>&copy; 2026 Darren Sorrels Design . All rights reserved.</p>
+    </footer>
 
-		<script src="js/index.js"></script>
-	</body>
+    <script src="js/index.js"></script>
+  </body>
 </html>
