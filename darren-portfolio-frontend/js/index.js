@@ -1,7 +1,8 @@
-import './api'
-import './blog'
-import './blogDetail'
-import './richText'
-import './utils'
-import './work'
-import './workDetail'
+import "./api.js";
+import "./blog.js";
+import "./blogDetail.js";
+import "./richText.js";
+import "./utils.js";
+import "./work.js";
+import "./workDetail.js";
+import "./contact.js";
