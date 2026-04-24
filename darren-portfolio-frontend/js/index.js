@@ -1,4 +1,3 @@
-const API_URL = 'http://localhost:1337/api';
 import './api'
 import './blog'
 import './blogDetail'
