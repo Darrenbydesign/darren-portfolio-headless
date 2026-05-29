@@ -1,0 +1,17 @@
+{
+  "name": "darren-portfolio-headless",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:web",
+    "dev:web": "npm run dev --workspace @darren-portfolio/web",
+    "dev:cms": "npm run dev --workspace darren-portfolio-cms",
+    "build": "npm run build:web && npm run build:cms",
+    "build:web": "npm run build --workspace @darren-portfolio/web",
+    "build:cms": "npm run build --workspace darren-portfolio-cms",
+    "preview:web": "npm run preview --workspace @darren-portfolio/web",
+    "strapi": "npm run strapi --workspace darren-portfolio-cms"
+  }
+}

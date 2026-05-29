@@ -1,0 +1,38 @@
+---
+const { title = 'darren-portfolio-headless' } = Astro.props;
+const strapiApiUrl =
+  import.meta.env.PUBLIC_STRAPI_API_URL || 'http://localhost:1337/api';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div>Darren Sorrels Design</div>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/work">Work</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <slot />
+
+    <footer>
+      <p>&copy; 2026 Darren Sorrels Design. All rights reserved.</p>
+    </footer>
+
+    <script define:vars={{ strapiApiUrl }}>
+      window.DARREN_STRAPI_API_URL = strapiApiUrl;
+    </script>
+    <script type="module" src="/js/index.js"></script>
+  </body>
+</html>

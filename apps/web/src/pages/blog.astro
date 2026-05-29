@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Journal - Darren Sorrels Design">
+  <main>
+    <section class="blog-page">
+      <h2>Journal</h2>
+      <div id="blog-posts" class="posts-grid"></div>
+      <template id="blog-card-template">
+        <article class="card">
+          <h3 data-blog-title></h3>
+          <p class="date" data-blog-date></p>
+          <p data-blog-preview></p>
+          <a data-blog-link>Read More</a>
+        </article>
+      </template>
+    </section>
+  </main>
+</BaseLayout>
