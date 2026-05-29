@@ -46,13 +46,13 @@ export function renderRichContent(content) {
 		.map((block) => {
 			if (block.type === 'paragraph') {
 				const text = extractTextFromRichContent([block]);
-				return text ? `<p>${text}</p>` : '';
+				return text ? `<p class="rich-paragraph">${text}</p>` : '';
 			}
 
 			if (block.type === 'heading') {
 				const level = block.level || 2;
 				const text = extractTextFromRichContent([block]);
-				return text ? `<h${level}>${text}</h${level}>` : '';
+				return text ? `<h${level} class="rich-heading">${text}</h${level}>` : '';
 			}
 
 			if (block.type === 'list') {
@@ -64,11 +64,11 @@ export function renderRichContent(content) {
 							.map((child) => child.text || '')
 							.join('');
 
-						return `<li>${itemText}</li>`;
+						return `<li class="rich-list-item">${itemText}</li>`;
 					})
 					.join('');
 
-				return `<${tag}>${items}</${tag}>`;
+				return `<${tag} class="rich-list">${items}</${tag}>`;
 			}
 
 			return '';

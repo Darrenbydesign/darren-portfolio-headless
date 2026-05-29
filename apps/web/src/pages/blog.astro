@@ -3,16 +3,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Journal - Darren Sorrels Design">
   <main>
-    <section class="blog-page manga-panel">
-      <p class="eyebrow">Notes and Process</p>
+    <section class="blog-page panel" panel-type="page" panel-style="halftone">
+      <p class="tag">Notes and Process</p>
       <h2>Journal</h2>
       <div id="blog-posts" class="posts-grid"></div>
       <template id="blog-card-template">
-        <article class="card manga-card">
-          <h3 data-blog-title></h3>
+        <article class="card" card-style="halftone" card-interactive="true">
+          <h3 class="card-heading" data-blog-title></h3>
           <p class="date" data-blog-date></p>
-          <p data-blog-preview></p>
-          <a class="hard-offset-button" data-blog-link>Read More</a>
+          <p class="card-text" data-blog-preview></p>
+          <a class="button" data-blog-link>Read More</a>
         </article>
       </template>
     </section>

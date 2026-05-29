@@ -1,8 +1,9 @@
 ---
-const { title = 'darren-portfolio-headless' } = Astro.props;
+const { title = "darren-portfolio-headless" } = Astro.props;
 const strapiApiUrl =
-  import.meta.env.PUBLIC_STRAPI_API_URL || 'http://localhost:1337/api';
+  import.meta.env.PUBLIC_STRAPI_API_URL || "http://localhost:1337/api";
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,12 +22,12 @@ const strapiApiUrl =
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary navigation">
         <a class="brand-mark" href="/">Darren Sorrels Design</a>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/work">Work</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/#contact">Contact</a></li>
+        <ul class="site-nav-list">
+          <li class="site-nav-item"><a class="site-nav-link" href="/">Home</a></li>
+          <li class="site-nav-item"><a class="site-nav-link" href="/blog">Blog</a></li>
+          <li class="site-nav-item"><a class="site-nav-link" href="/work">Work</a></li>
+          <li class="site-nav-item"><a class="site-nav-link" href="/about">About</a></li>
+          <li class="site-nav-item"><a class="site-nav-link" href="/#contact">Contact</a></li>
         </ul>
       </nav>
     </header>
@@ -37,11 +38,11 @@ const strapiApiUrl =
       <div class="footer-inner">
         <div>
           <p class="footer-brand">Darren Sorrels Design</p>
-          <p class="footer-meta">&copy; 2026 - Crafted with ink & code</p>
+          <p class="footer-meta">&copy; 2026 - Crafted with Art & Science</p>
         </div>
         <ul class="footer-links" aria-label="Footer navigation">
-          <li><a href="/about">About</a></li>
-          <li><a href="/#contact">Contact</a></li>
+          <li><a class="footer-link" href="/about">About</a></li>
+          <li><a class="footer-link" href="/#contact">Contact</a></li>
         </ul>
       </div>
     </footer>
