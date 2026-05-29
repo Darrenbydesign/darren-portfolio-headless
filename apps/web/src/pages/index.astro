@@ -1,143 +1,156 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
+
 <BaseLayout title="Darren Sorrels - UX Designer">
   <main class="portfolio-shell">
-    <section id="home" class="hero case-hero speed-line-panel">
+    <section
+      id="home"
+      class="panel hero"
+      hero-layout="split"
+      panel-style="halftone"
+    >
       <div class="hero-copy">
-        <p class="eyebrow eyebrow-dark">Chapter 01: Portfolio System</p>
-        <h1>UX Designer & Design Thinker</h1>
-        <p class="body-lg">
+        <p class="tag" tag-style="inverse">Chapter 01: Portfolio System</p>
+        <h1 class="hero-title">UX Designer & Design Thinker</h1>
+        <p class="hero-text text-lead">
           I am Darren Sorrels, User Experience & Interaction Designer crafting
           thoughtful digital experiences with research, interface design, and
           front-end polish.
         </p>
-        <div class="hero-meta-row" aria-label="Portfolio highlights">
+        <div class="hero-meta" aria-label="Portfolio highlights">
           <span class="chip chip-bordered">Kansas City</span>
           <span class="chip chip-bordered">UX / UI / Code</span>
         </div>
       </div>
-      <div class="hero-art manga-panel" aria-hidden="true">
-        <div class="hero-art-inner">
-          <span class="art-glyph">DS</span>
+      <div class="panel hero-media" aria-hidden="true">
+        <div class="hero-media-inner">
+          <span class="monogram">DS</span>
         </div>
       </div>
     </section>
 
     <section class="stats-section" aria-label="Portfolio impact stats">
-      <article class="stat-card manga-panel">
-        <p class="eyebrow">Experience Lens</p>
-        <strong>UX</strong>
+      <article class="card" card-size="stat" card-style="halftone">
+        <p class="tag">Experience Lens</p>
+        <strong class="card-value">UX</strong>
       </article>
-      <article class="stat-card manga-panel">
-        <p class="eyebrow">Build Fluency</p>
-        <strong>HTML</strong>
+      <article class="card" card-size="stat" card-style="halftone">
+        <p class="tag">Build Fluency</p>
+        <strong class="card-value">HTML</strong>
       </article>
-      <article class="stat-card manga-panel">
-        <p class="eyebrow">Creative Range</p>
-        <strong>4x</strong>
+      <article class="card" card-size="stat" card-style="halftone">
+        <p class="tag">Creative Range</p>
+        <strong class="card-value">4x</strong>
       </article>
-      <article class="stat-card stat-card-inverse manga-panel">
-        <p class="eyebrow">Design Mode</p>
-        <strong>Ink</strong>
+      <article
+        class="card"
+        card-size="stat"
+        card-style="halftone"
+        tag-style="inverse"
+      >
+        <p class="tag">Design Mode</p>
+        <strong class="card-value">Ink</strong>
       </article>
     </section>
 
     <div class="case-layout">
       <div class="case-main">
-        <section id="services" class="panel-grid services-grid">
+        <section id="services" class="section-grid" grid-columns="two">
           <header class="section-heading">
             <span class="section-number">01.</span>
-            <h2>My Services</h2>
+            <h2 class="section-title">My Services</h2>
           </header>
           <hr />
 
-          <article class="grid-item manga-panel">
-            <h3 class="intro-list-header">UX Design Strategy</h3>
-            <p class="body-lg">
+          <article class="card" card-size="feature">
+            <h3 class="card-heading intro-list-header">UX Design Strategy</h3>
+            <p class="card-text text-lead">
               I work smart with you to discover the problems that really need to
-              be solved for your target users. Once we discover the issues I help
-              you to implement the best solution to solve that problem.
+              be solved for your target users. Once we discover the issues I
+              help you to implement the best solution to solve that problem.
             </p>
           </article>
 
-          <article class="grid-item manga-panel">
-            <h3 class="intro-list-header">Interaction Design</h3>
-            <p class="body-lg">
+          <article class="card" card-size="feature">
+            <h3 class="card-heading intro-list-header">Interaction Design</h3>
+            <p class="card-text text-lead">
               I craft beautiful interfaces that will make your products work
-              smoothly and provide delightful experiences the power of aesthetics
-              and function combined.
+              smoothly and provide delightful experiences the power of
+              aesthetics and function combined.
             </p>
           </article>
 
-          <article class="grid-item manga-panel">
-            <h3 class="intro-list-header">Front-End Development</h3>
-            <p class="body-lg">
+          <article class="card" card-size="feature">
+            <h3 class="card-heading intro-list-header">
+              Front-End Development
+            </h3>
+            <p class="card-text text-lead">
               I bring the designs to life with code utilizing my skills with
               HTML/CSS/JS.
             </p>
           </article>
 
-          <article class="grid-item manga-panel">
-            <h3 class="intro-list-header">Identity Design</h3>
-            <p class="body-lg">
+          <article class="card" card-size="feature">
+            <h3 class="card-heading intro-list-header">Identity Design</h3>
+            <p class="card-text text-lead">
               I provide design services necessary to communicate your brand
-              identity to your customers which include logo design along with the
-              collaterals the logo design would be used on.
+              identity to your customers which include logo design along with
+              the collaterals the logo design would be used on.
             </p>
           </article>
         </section>
 
-        <section id="designProcess" class="process-feature manga-panel">
+        <section id="designProcess" class="panel" panel-type="process">
           <header class="section-heading">
             <span class="section-number">02.</span>
-            <h2>The Approach</h2>
+            <h2 class="section-title">The Approach</h2>
           </header>
-          <p class="body-lg">
+          <p class="text-lead">
             The work moves like a sequence of panels: research creates the
             scene, strategy gives it structure, and interaction design turns the
             moment into something people can feel.
           </p>
-          <div class="process-grid">
-            <article class="process-panel">
-              <h3>Understand</h3>
-              <p>
+          <div class="section-grid" grid-columns="three">
+            <article class="card" card-size="compact">
+              <h3 class="card-heading">Understand</h3>
+              <p class="card-text">
                 By conducting user research I can understand your customers
                 needs and help you provide the optimal experience for them with
                 your product.
               </p>
             </article>
-            <article class="process-panel">
-              <h3>Define</h3>
-              <p>
+            <article class="card" card-size="compact">
+              <h3 class="card-heading">Define</h3>
+              <p class="card-text">
                 I combine the research gathered to hone in the key pain points
                 your customers are facing.
               </p>
             </article>
-            <article class="process-panel">
-              <h3>Ideate</h3>
-              <p>
+            <article class="card" card-size="compact">
+              <h3 class="card-heading">Ideate</h3>
+              <p class="card-text">
                 This is where the magic happens. I generate ideas with you and
                 shape them into clear product directions.
               </p>
             </article>
-            <article class="process-panel">
-              <h3>Prototype</h3>
-              <p>
+            <article class="card" card-size="compact">
+              <h3 class="card-heading">Prototype</h3>
+              <p class="card-text">
                 We'll build out the ideas most likely to improve the experience
                 your users have.
               </p>
             </article>
-            <article class="process-panel">
-              <h3>Testing</h3>
-              <p>
+            <article class="card" card-size="compact">
+              <h3 class="card-heading">Testing</h3>
+              <p class="card-text">
                 Those ideas need to be tested to prove whether they will achieve
                 the business needs and the users needs.
               </p>
             </article>
-            <article class="process-panel">
-              <h3>Implement</h3>
-              <p>
+            <article class="card" card-size="compact">
+              <h3 class="card-heading">Implement</h3>
+              <p class="card-text">
                 Once we determine the winner through testing, we begin shipping
                 the product out to customers.
               </p>
@@ -145,35 +158,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </section>
 
-        <section class="image-showcase manga-panel" aria-label="Interface design system preview">
+        <section
+          class="panel"
+          panel-type="showcase"
+          aria-label="Interface design system preview"
+        >
           <div class="showcase-screen">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span class="showcase-line"></span>
+            <span class="showcase-line"></span>
+            <span class="showcase-line"></span>
           </div>
         </section>
       </div>
 
       <aside class="case-sidebar" aria-label="Portfolio sidebar">
-        <section class="sidebar-panel manga-panel">
-          <h2>Deliverables</h2>
+        <section class="panel" panel-type="sidebar">
+          <h2 class="panel-heading">Deliverables</h2>
           <div class="progress-list">
             <div class="progress-item">
               <span>Product Strategy</span><span>100%</span>
-              <i></i>
+              <i class="progress-bar"></i>
             </div>
             <div class="progress-item">
               <span>UX Research</span><span>100%</span>
-              <i></i>
+              <i class="progress-bar"></i>
             </div>
             <div class="progress-item">
               <span>Visual Design</span><span>100%</span>
-              <i></i>
+              <i class="progress-bar"></i>
             </div>
           </div>
         </section>
-        <section class="sidebar-panel manga-panel">
-          <h2>Stack</h2>
+        <section class="panel" panel-type="sidebar">
+          <h2 class="panel-heading">Stack</h2>
           <div class="chip-list">
             <span class="chip">Figma</span>
             <span class="chip">Astro</span>
@@ -181,10 +198,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="chip">JavaScript</span>
           </div>
         </section>
-        <section class="focused-cta manga-panel">
-          <h2>Work With Me</h2>
-          <p>Let's build something as impactful as this.</p>
-          <a class="hard-offset-button" href="#contact">Hire Me Now</a>
+        <section class="panel" panel-type="cta">
+          <h2 class="panel-heading">Work With Me</h2>
+          <p class="panel-text">Let's build something as impactful as this.</p>
+          <a class="button" href="#contact">Hire Me Now</a>
         </section>
       </aside>
     </div>
@@ -193,11 +210,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2>Latest Blog Posts</h2>
       <div id="blog-posts" class="posts-grid"></div>
       <template id="blog-card-template">
-        <article class="card manga-card">
-          <h3 data-blog-title></h3>
+        <article class="card" card-style="halftone" card-interactive="true">
+          <h3 class="card-heading" data-blog-title></h3>
           <p class="date" data-blog-date></p>
-          <p data-blog-preview></p>
-          <a class="hard-offset-button" data-blog-link>Read More</a>
+          <p class="card-text" data-blog-preview></p>
+          <a class="button" data-blog-link>Read More</a>
         </article>
       </template>
     </section>
@@ -206,32 +223,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2>Featured Work</h2>
       <div id="case-studies" class="studies-grid"></div>
       <template id="case-study-card-template">
-        <article class="card manga-card">
-          <h3 data-study-title></h3>
+        <article class="card" card-style="halftone" card-interactive="true">
+          <h3 class="card-heading" data-study-title></h3>
           <p class="date" data-study-date></p>
-          <p data-study-preview></p>
-          <p class="meta-line"><strong>Tools:</strong> <span data-study-tools></span></p>
-          <a class="hard-offset-button" data-study-link>View Case Study</a>
+          <p class="card-text" data-study-preview></p>
+          <p class="meta-line">
+            <strong>Tools:</strong>
+            <span data-study-tools></span>
+          </p>
+          <a class="button" data-study-link>View Case Study</a>
         </article>
       </template>
     </section>
 
-    <section id="contact" class="contact manga-panel">
+    <section id="contact" class="panel contact" panel-style="halftone">
       <h2>Get In Touch</h2>
       <form id="contact-form">
         <label class="field">
           <span>Name</span>
-          <input type="text" id="name" placeholder="Your Name" required />
+          <input
+            class="field-control"
+            type="text"
+            id="name"
+            placeholder="Your Name"
+            required
+          />
         </label>
         <label class="field">
           <span>Email</span>
-          <input type="email" id="email" placeholder="Your Email" required />
+          <input
+            class="field-control"
+            type="email"
+            id="email"
+            placeholder="Your Email"
+            required
+          />
         </label>
         <label class="field">
           <span>Message</span>
-          <textarea id="message" placeholder="Your Message" required></textarea>
+          <textarea
+            class="field-control"
+            control-type="multiline"
+            id="message"
+            placeholder="Your Message"
+            required></textarea>
         </label>
-        <button class="hard-offset-button" type="submit">Send Message</button>
+        <button class="button" type="submit">Send Message</button>
       </form>
       <p id="form-status"></p>
     </section>

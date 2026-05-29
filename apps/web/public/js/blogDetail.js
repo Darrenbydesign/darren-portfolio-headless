@@ -35,10 +35,10 @@ async function loadBlogPostDetail() {
 		}
 
 		container.innerHTML = `
-			<a class="hard-offset-button" href="/blog">Back to Journal</a>
+			<a class="button" href="/blog">Back to Journal</a>
 
 			<header class="detail-header">
-				<p class="eyebrow">Journal Entry</p>
+				<p class="tag">Journal Entry</p>
 				<p class="date">${formatDate(post.datePublished)}</p>
 				<h1>${escapeHtml(post.title || 'Untitled Post')}</h1>
 				${post.excerpt ? `<p class="detail-excerpt">${escapeHtml(post.excerpt)}</p>` : ''}
