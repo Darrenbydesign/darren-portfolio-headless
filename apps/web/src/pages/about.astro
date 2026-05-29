@@ -2,21 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="About Darren Sorrels">
-  <main class="blk-lg-12">
-    <header class="page-header mb-0">
+  <main class="about-layout">
+    <header class="page-header manga-panel">
+      <p class="eyebrow">About Darren</p>
       <h1>A little more about me</h1>
     </header>
 
-    <article class="bio-container">
+    <article class="bio-container manga-panel">
       <h2>Hi I'm Darren, and I'm a UX & Interaction designer.</h2>
 
-      <p class="text-large">
+      <p class="body-lg">
         I'm originally from New Orleans, but living and working in Kansas City,
         Missouri. I was previously at <s>Valorem Consulting</s> and am currently
         looking for new opportunities.
       </p>
 
-      <p class="text-large">
+      <p class="body-lg">
         I really enjoy side projects and work that makes the world a better
         place. Take a look at my <a href="/work">work</a> or say hello to me on
         <a href="https://twitter.com/Darrenbydesign" target="_blank" rel="noopener">Twitter</a>
@@ -26,7 +27,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <section aria-labelledby="skills-heading">
         <h3 id="skills-heading">Design Skills and Achievements</h3>
-        <ul class="list-unstyled text-large">
+        <ul class="list-unstyled chip-list">
           <li>Journey Mapping</li>
           <li>Empathy Mapping</li>
           <li>Design Sprints</li>

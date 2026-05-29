@@ -3,17 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Work - Darren Sorrels Design">
   <main>
-    <section class="work-page">
+    <section class="work-page manga-panel">
+      <p class="eyebrow">Selected Case Studies</p>
       <h2>Work</h2>
       <div id="case-studies" class="studies-grid"></div>
     </section>
     <template id="case-study-card-template">
-      <article class="card">
+      <article class="card manga-card">
         <h3 data-study-title></h3>
         <p class="date" data-study-date></p>
         <p data-study-preview></p>
-        <p><strong>Tools:</strong> <span data-study-tools></span></p>
-        <a data-study-link>View Case Study</a>
+        <p class="meta-line"><strong>Tools:</strong> <span data-study-tools></span></p>
+        <a class="hard-offset-button" data-study-link>View Case Study</a>
       </article>
     </template>
   </main>

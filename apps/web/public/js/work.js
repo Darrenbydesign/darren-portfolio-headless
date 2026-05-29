@@ -39,7 +39,20 @@ async function loadCaseStudies() {
 			);
 
 			clone.querySelector('[data-study-preview]').textContent = preview;
-			clone.querySelector('[data-study-tools]').textContent = toolsText;
+			const toolsContainer = clone.querySelector('[data-study-tools]');
+			toolsContainer.textContent = '';
+			toolsContainer.classList.add('chip-list');
+
+			if (toolsList.length > 0) {
+				toolsList.forEach((tool) => {
+					const chip = document.createElement('span');
+					chip.className = 'chip';
+					chip.textContent = tool;
+					toolsContainer.appendChild(chip);
+				});
+			} else {
+				toolsContainer.textContent = toolsText;
+			}
 
 			const link = clone.querySelector('[data-study-link]');
 			link.href = `/work-detail?slug=${study.slug || ''}`;

@@ -9,12 +9,18 @@ const strapiApiUrl =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Space+Grotesk:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="/">Darren Sorrels Design</a>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="brand-mark" href="/">Darren Sorrels Design</a>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/blog">Blog</a></li>
@@ -26,8 +32,18 @@ const strapiApiUrl =
 
     <slot />
 
-    <footer>
-      <p>&copy; 2026 Darren Sorrels Design. All rights reserved.</p>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <p class="footer-brand">Darren Sorrels Design</p>
+          <p class="footer-meta">&copy; 2026 - Crafted with ink & code</p>
+        </div>
+        <ul class="footer-links" aria-label="Footer navigation">
+          <li><a href="/work">Archive</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </div>
     </footer>
 
     <script define:vars={{ strapiApiUrl }}>
