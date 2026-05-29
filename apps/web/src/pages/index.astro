@@ -2,124 +2,236 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Darren Sorrels - UX Designer">
-  <main>
-    <section id="home" class="hero">
-      <h2>UX Designer & Design Thinker</h2>
-      <p>Creating thoughtful digital experiences</p>
-      <p class="intro-heading-large">
-        I am Darren Sorrels, User Experience & Interaction Designer.
-      </p>
+  <main class="portfolio-shell">
+    <section id="home" class="hero case-hero speed-line-panel">
+      <div class="hero-copy">
+        <p class="eyebrow eyebrow-dark">Chapter 01: Portfolio System</p>
+        <h1>UX Designer & Design Thinker</h1>
+        <p class="body-lg">
+          I am Darren Sorrels, User Experience & Interaction Designer crafting
+          thoughtful digital experiences with research, interface design, and
+          front-end polish.
+        </p>
+        <div class="hero-meta-row" aria-label="Portfolio highlights">
+          <span class="chip chip-bordered">Kansas City</span>
+          <span class="chip chip-bordered">UX / UI / Code</span>
+        </div>
+      </div>
+      <div class="hero-art manga-panel" aria-hidden="true">
+        <div class="hero-art-inner">
+          <span class="art-glyph">DS</span>
+        </div>
+      </div>
     </section>
 
-    <section id="services">
-      <h2>My Services</h2>
-      <hr />
-
-      <article class="grid-item">
-        <h3 class="intro-list-header">UX Design Strategy</h3>
-        <p class="text-large">
-          I work smart with you to discover the problems that really need to be
-          solved for your target users. Once we discover the issues I help you
-          to implement the best solution to solve that problem.
-        </p>
+    <section class="stats-section" aria-label="Portfolio impact stats">
+      <article class="stat-card manga-panel">
+        <p class="eyebrow">Experience Lens</p>
+        <strong>UX</strong>
       </article>
-
-      <article class="grid-item">
-        <h3 class="intro-list-header">Interaction Design</h3>
-        <p class="text-large">
-          I craft beautiful interfaces that will make your products work
-          smoothly and provide delightful experiences the power of aesthetics
-          and function combined.
-        </p>
+      <article class="stat-card manga-panel">
+        <p class="eyebrow">Build Fluency</p>
+        <strong>HTML</strong>
       </article>
-
-      <article class="grid-item">
-        <h3 class="intro-list-header">Front-End Development</h3>
-        <p class="text-large">
-          I bring the designs to life with code utilizing my skills with
-          HTML/CSS/JS.
-        </p>
+      <article class="stat-card manga-panel">
+        <p class="eyebrow">Creative Range</p>
+        <strong>4x</strong>
       </article>
-
-      <article class="grid-item">
-        <h3 class="intro-list-header">Identity Design</h3>
-        <p class="text-large">
-          I provide design services necessary to communicate your brand identity
-          to your customers which include logo design along with the collaterals
-          the logo design would be used on.
-        </p>
+      <article class="stat-card stat-card-inverse manga-panel">
+        <p class="eyebrow">Design Mode</p>
+        <strong>Ink</strong>
       </article>
     </section>
 
-    <section id="designProcess">
-      <h3>Understand</h3>
-      <p>
-        By conducting user research I can understand your customers needs and
-        help you provide the optimal experience for them with your product
-      </p>
-      <h3>Define</h3>
-      <p>
-        I work with you to combine the research gathered to really hone in the
-        key pain points that your customers are facing so we can improve that
-        experience
-      </p>
-      <h3>Ideate</h3>
-      <p>
-        This is where the magic happens I will work on generating ideas with
-        you.
-      </p>
-      <h3>Prototype</h3>
-      <p>
-        We'll build out the ideas that we identify are the most likely to
-        improve the experience your users have.
-      </p>
-      <h3>Testing</h3>
-      <p>
-        Those ideas we worked out together need to be tested to prove whether or
-        not they will achieve your business needs and the users needs (C'mon
-        people it is science after all)
-      </p>
-      <h3>Implement</h3>
-      <p>
-        Once we have determined the winner through testing we will begin the
-        implementation for shipping the product out to the customers
-      </p>
-    </section>
+    <div class="case-layout">
+      <div class="case-main">
+        <section id="services" class="panel-grid services-grid">
+          <header class="section-heading">
+            <span class="section-number">01.</span>
+            <h2>My Services</h2>
+          </header>
+          <hr />
 
-    <section id="blog" class="blog">
+          <article class="grid-item manga-panel">
+            <h3 class="intro-list-header">UX Design Strategy</h3>
+            <p class="body-lg">
+              I work smart with you to discover the problems that really need to
+              be solved for your target users. Once we discover the issues I help
+              you to implement the best solution to solve that problem.
+            </p>
+          </article>
+
+          <article class="grid-item manga-panel">
+            <h3 class="intro-list-header">Interaction Design</h3>
+            <p class="body-lg">
+              I craft beautiful interfaces that will make your products work
+              smoothly and provide delightful experiences the power of aesthetics
+              and function combined.
+            </p>
+          </article>
+
+          <article class="grid-item manga-panel">
+            <h3 class="intro-list-header">Front-End Development</h3>
+            <p class="body-lg">
+              I bring the designs to life with code utilizing my skills with
+              HTML/CSS/JS.
+            </p>
+          </article>
+
+          <article class="grid-item manga-panel">
+            <h3 class="intro-list-header">Identity Design</h3>
+            <p class="body-lg">
+              I provide design services necessary to communicate your brand
+              identity to your customers which include logo design along with the
+              collaterals the logo design would be used on.
+            </p>
+          </article>
+        </section>
+
+        <section id="designProcess" class="process-feature manga-panel">
+          <header class="section-heading">
+            <span class="section-number">02.</span>
+            <h2>The Approach</h2>
+          </header>
+          <p class="body-lg">
+            The work moves like a sequence of panels: research creates the
+            scene, strategy gives it structure, and interaction design turns the
+            moment into something people can feel.
+          </p>
+          <div class="process-grid">
+            <article class="process-panel">
+              <h3>Understand</h3>
+              <p>
+                By conducting user research I can understand your customers
+                needs and help you provide the optimal experience for them with
+                your product.
+              </p>
+            </article>
+            <article class="process-panel">
+              <h3>Define</h3>
+              <p>
+                I combine the research gathered to hone in the key pain points
+                your customers are facing.
+              </p>
+            </article>
+            <article class="process-panel">
+              <h3>Ideate</h3>
+              <p>
+                This is where the magic happens. I generate ideas with you and
+                shape them into clear product directions.
+              </p>
+            </article>
+            <article class="process-panel">
+              <h3>Prototype</h3>
+              <p>
+                We'll build out the ideas most likely to improve the experience
+                your users have.
+              </p>
+            </article>
+            <article class="process-panel">
+              <h3>Testing</h3>
+              <p>
+                Those ideas need to be tested to prove whether they will achieve
+                the business needs and the users needs.
+              </p>
+            </article>
+            <article class="process-panel">
+              <h3>Implement</h3>
+              <p>
+                Once we determine the winner through testing, we begin shipping
+                the product out to customers.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="image-showcase manga-panel" aria-label="Interface design system preview">
+          <div class="showcase-screen">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </section>
+      </div>
+
+      <aside class="case-sidebar" aria-label="Portfolio sidebar">
+        <section class="sidebar-panel manga-panel">
+          <h2>Deliverables</h2>
+          <div class="progress-list">
+            <div class="progress-item">
+              <span>Product Strategy</span><span>100%</span>
+              <i></i>
+            </div>
+            <div class="progress-item">
+              <span>UX Research</span><span>100%</span>
+              <i></i>
+            </div>
+            <div class="progress-item">
+              <span>Visual Design</span><span>100%</span>
+              <i></i>
+            </div>
+          </div>
+        </section>
+        <section class="sidebar-panel manga-panel">
+          <h2>Stack</h2>
+          <div class="chip-list">
+            <span class="chip">Figma</span>
+            <span class="chip">Astro</span>
+            <span class="chip">CSS</span>
+            <span class="chip">JavaScript</span>
+          </div>
+        </section>
+        <section class="focused-cta manga-panel">
+          <h2>Work With Me</h2>
+          <p>Let's build something as impactful as this.</p>
+          <a class="hard-offset-button" href="#contact">Hire Me Now</a>
+        </section>
+      </aside>
+    </div>
+
+    <section id="blog" class="content-section blog">
       <h2>Latest Blog Posts</h2>
       <div id="blog-posts" class="posts-grid"></div>
       <template id="blog-card-template">
-        <article class="card">
+        <article class="card manga-card">
           <h3 data-blog-title></h3>
           <p class="date" data-blog-date></p>
           <p data-blog-preview></p>
-          <a data-blog-link>Read More</a>
+          <a class="hard-offset-button" data-blog-link>Read More</a>
         </article>
       </template>
     </section>
 
-    <section id="work" class="case-studies">
+    <section id="work" class="content-section case-studies">
       <h2>Featured Work</h2>
       <div id="case-studies" class="studies-grid"></div>
       <template id="case-study-card-template">
-        <article class="card">
+        <article class="card manga-card">
           <h3 data-study-title></h3>
           <p class="date" data-study-date></p>
           <p data-study-preview></p>
-          <p><strong>Tools:</strong> <span data-study-tools></span></p>
-          <a data-study-link>View Case Study</a>
+          <p class="meta-line"><strong>Tools:</strong> <span data-study-tools></span></p>
+          <a class="hard-offset-button" data-study-link>View Case Study</a>
         </article>
       </template>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="contact" class="contact manga-panel">
       <h2>Get In Touch</h2>
       <form id="contact-form">
-        <input type="text" id="name" placeholder="Your Name" required />
-        <input type="email" id="email" placeholder="Your Email" required />
-        <textarea id="message" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
+        <label class="field">
+          <span>Name</span>
+          <input type="text" id="name" placeholder="Your Name" required />
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" id="email" placeholder="Your Email" required />
+        </label>
+        <label class="field">
+          <span>Message</span>
+          <textarea id="message" placeholder="Your Message" required></textarea>
+        </label>
+        <button class="hard-offset-button" type="submit">Send Message</button>
       </form>
       <p id="form-status"></p>
     </section>
