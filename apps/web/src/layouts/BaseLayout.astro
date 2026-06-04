@@ -21,7 +21,16 @@ const strapiApiUrl =
   <body>
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary navigation">
-        <a class="brand-mark" href="/">Darren Sorrels Design</a>
+        <a class="brand-mark" href="/" aria-label="Darren Sorrels Design">
+          <img
+            class="brand-logo"
+            src="/assets/header_logo.svg"
+            alt=""
+            width="40"
+            height="40"
+          />
+          <span class="visually-hidden">Darren Sorrels Design</span>
+        </a>
         <ul class="site-nav-list">
           <li class="site-nav-item"><a class="site-nav-link" href="/">Home</a></li>
           <li class="site-nav-item"><a class="site-nav-link" href="/blog">Blog</a></li>

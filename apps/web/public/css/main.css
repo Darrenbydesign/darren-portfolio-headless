@@ -293,6 +293,15 @@ hr {
   outline-offset: 3px;
 }
 
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* -------------------------------------------------------------
    3. LAYOUT WRAPPERS
    ------------------------------------------------------------- */
@@ -318,7 +327,6 @@ hr {
 .brand-mark {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
   color: var(--on-surface);
   font-family: var(--font-heading);
   font-size: 18px;
@@ -326,14 +334,10 @@ hr {
   text-decoration: none;
 }
 
-.brand-mark::before {
-  content: "";
-  /* width: 18px; */
-  aspect-ratio: 1;
-  border: var(--border-ink);
-  border-radius: var(--radius-sm);
-  background: var(--halftone), var(--primary-fixed);
-  box-shadow: var(--offset-hard);
+.brand-logo {
+  inline-size: 40px;
+  block-size: 40px;
+  object-fit: contain;
 }
 
 .site-nav-list {
@@ -842,7 +846,7 @@ label {
 .monogram {
   display: grid;
   place-items: center;
-  inline-size: 96px;
+  inline-size: min(72%, 320px);
   aspect-ratio: 1;
   border: var(--border-ink-heavy);
   border-radius: var(--radius);
@@ -853,6 +857,12 @@ label {
   font-style: italic;
   font-weight: 800;
   box-shadow: var(--offset-hard);
+}
+
+.logo-image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
 }
 
 .media {
@@ -911,6 +921,10 @@ label {
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
+  }
+
+  & .logo-image {
+    object-fit: contain;
   }
 
   & audio,
