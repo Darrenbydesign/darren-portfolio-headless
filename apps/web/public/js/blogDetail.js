@@ -1,25 +1,17 @@
 import { fetchFromStrapi } from './api.js';
-import { renderCoverMediaFigure } from './media.js';
-import { renderRichContent } from './richText.js';
+import { applyCoverMedia } from './media.js';
+import { renderRichContentInto } from './richText.js';
 import { formatDate, getSlugFromUrl } from './utils.js';
-
-function escapeHtml(value) {
-	return String(value)
-		.replaceAll('&', '&amp;')
-		.replaceAll('<', '&lt;')
-		.replaceAll('>', '&gt;')
-		.replaceAll('"', '&quot;')
-		.replaceAll("'", '&#39;');
-}
 
 async function loadBlogPostDetail() {
 	const container = document.getElementById('blog-post-detail');
-	if (!container) return;
+	const template = document.getElementById('blog-detail-template');
+	if (!container || !template) return;
 
 	const slug = getSlugFromUrl();
 
 	if (!slug) {
-		container.innerHTML = '<p>No blog post selected.</p>';
+		showDetailMessage(container, 'No blog post selected.');
 		return;
 	}
 
@@ -31,34 +23,41 @@ async function loadBlogPostDetail() {
 		const post = result.data?.[0];
 
 		if (!post) {
-			container.innerHTML = '<p>Blog post not found.</p>';
+			showDetailMessage(container, 'Blog post not found.');
 			return;
 		}
 
-		const coverMarkup = renderCoverMediaFigure(post.blogPostCover, post, {
+		const fragment = template.content.cloneNode(true);
+		const excerpt = fragment.querySelector('[data-blog-excerpt]');
+		const content = fragment.querySelector('[data-blog-content]');
+
+		fragment.querySelector('[data-blog-date]').textContent = formatDate(
+			post.datePublished
+		);
+		fragment.querySelector('[data-blog-title]').textContent =
+			post.title || 'Untitled Post';
+
+		if (post.excerpt) {
+			excerpt.textContent = post.excerpt;
+			excerpt.hidden = false;
+		}
+
+		applyCoverMedia(fragment.querySelector('[data-blog-cover-media]'), post.blogPostCover, post, {
 			alt: post.title || 'Blog post cover',
-			className: 'detail-cover-media',
 		});
 
-		container.innerHTML = `
-			<a class="button" href="/blog">Back to Journal</a>
-
-			<header class="detail-header">
-				<p class="tag">Journal Entry</p>
-				<p class="date">${formatDate(post.datePublished)}</p>
-				<h1>${escapeHtml(post.title || 'Untitled Post')}</h1>
-				${post.excerpt ? `<p class="detail-excerpt">${escapeHtml(post.excerpt)}</p>` : ''}
-				${coverMarkup}
-			</header>
-
-			<div class="detail-content">
-				${renderRichContent(post.content)}
-			</div>
-		`;
+		renderRichContentInto(content, post.content);
+		container.replaceChildren(fragment);
 	} catch (error) {
 		console.error('Error loading blog post detail:', error);
-		container.innerHTML = '<p>Unable to load this blog post right now.</p>';
+		showDetailMessage(container, 'Unable to load this blog post right now.');
 	}
+}
+
+function showDetailMessage(container, message) {
+	const paragraph = document.createElement('p');
+	paragraph.textContent = message;
+	container.replaceChildren(paragraph);
 }
 
 document.addEventListener('DOMContentLoaded', loadBlogPostDetail);

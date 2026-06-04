@@ -22,31 +22,46 @@ export function getMediaUrl(media) {
   return `${STRAPI_ORIGIN}${url}`;
 }
 
-export function renderMediaElement(media, options = {}) {
+export function createMediaElement(media, options = {}) {
   const attributes = getMediaAttributes(media);
   const src = getMediaUrl(media);
 
-  if (!src) return "";
+  if (!src) return null;
 
   const alternativeText =
     options.alt || attributes.alternativeText || attributes.caption || "";
   const mime = attributes.mime || "";
-  const escapedAlt = escapeHtml(alternativeText);
-  const escapedSrc = escapeHtml(src);
 
   if (mime.startsWith("video/")) {
-    return `<video src="${escapedSrc}" controls playsinline muted preload="metadata"></video>`;
+    const video = document.createElement("video");
+    video.src = src;
+    video.controls = true;
+    video.playsInline = true;
+    video.muted = true;
+    video.preload = "metadata";
+    return video;
   }
 
   if (mime.startsWith("audio/")) {
-    return `<audio src="${escapedSrc}" controls></audio>`;
+    const audio = document.createElement("audio");
+    audio.src = src;
+    audio.controls = true;
+    return audio;
   }
 
   if (mime && !mime.startsWith("image/")) {
-    return `<a class="media-link" href="${escapedSrc}">${escapedAlt || "Open media"}</a>`;
+    const link = document.createElement("a");
+    link.className = "media-link";
+    link.href = src;
+    link.textContent = alternativeText || "Open media";
+    return link;
   }
 
-  return `<img src="${escapedSrc}" alt="${escapedAlt}" loading="lazy" />`;
+  const image = document.createElement("img");
+  image.src = src;
+  image.alt = alternativeText;
+  image.loading = "lazy";
+  return image;
 }
 
 export function getCoverSize(entry) {
@@ -56,33 +71,15 @@ export function getCoverSize(entry) {
 export function applyCoverMedia(container, media, entry, options = {}) {
   if (!container) return false;
 
-  const mediaMarkup = renderMediaElement(media, options);
+  const mediaElement = createMediaElement(media, options);
 
-  if (!mediaMarkup) {
+  if (!mediaElement) {
     container.remove();
     return false;
   }
 
-  container.innerHTML = mediaMarkup;
+  container.replaceChildren(mediaElement);
   container.dataset.coverSize = getCoverSize(entry);
+  container.hidden = false;
   return true;
-}
-
-export function renderCoverMediaFigure(media, entry, options = {}) {
-  const mediaMarkup = renderMediaElement(media, options);
-
-  if (!mediaMarkup) return "";
-
-  const className = ["cover-media", options.className].filter(Boolean).join(" ");
-
-  return `<figure class="${className}" data-cover-size="${getCoverSize(entry)}">${mediaMarkup}</figure>`;
-}
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
 }

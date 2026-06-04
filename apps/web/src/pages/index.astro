@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogCardTemplate from "../components/BlogCardTemplate.astro";
+import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
 ---
 
 <BaseLayout title="Darren Sorrels - UX Designer">
@@ -132,43 +134,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <section id="blog" class="content-section blog">
       <h2>Latest Blog Posts</h2>
       <div id="blog-posts" class="posts-grid"></div>
-      <template id="blog-card-template">
-        <article class="card" card-style="halftone" card-interactive="true">
-          <figure
-            class="cover-media"
-            data-blog-cover-media
-            data-cover-size="medium"
-          >
-          </figure>
-          <h3 class="card-heading" data-blog-title></h3>
-          <p class="date" data-blog-date></p>
-          <p class="card-text" data-blog-preview></p>
-          <a class="button" data-blog-link>Read More</a>
-        </article>
-      </template>
+      <BlogCardTemplate />
     </section>
 
     <section id="work" class="content-section case-studies">
       <h2>Featured Work</h2>
       <div id="case-studies" class="studies-grid"></div>
-      <template id="case-study-card-template">
-        <article class="card" card-style="halftone" card-interactive="true">
-          <figure
-            class="cover-media"
-            data-study-cover-media
-            data-cover-size="medium"
-          >
-          </figure>
-          <h3 class="card-heading" data-study-title></h3>
-          <p class="date" data-study-date></p>
-          <p class="card-text" data-study-preview></p>
-          <p class="meta-line">
-            <strong>Tools:</strong>
-            <span data-study-tools></span>
-          </p>
-          <a class="button" data-study-link>View Case Study</a>
-        </article>
-      </template>
+      <CaseStudyCardTemplate />
     </section>
 
     <section id="contact" class="panel contact" panel-style="halftone">
@@ -208,4 +180,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <p id="form-status"></p>
     </section>
   </main>
+  <script type="module" src="/js/blog.js"></script>
+  <script type="module" src="/js/work.js"></script>
+  <script type="module" src="/js/contact.js"></script>
 </BaseLayout>

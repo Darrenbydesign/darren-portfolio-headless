@@ -1,28 +1,20 @@
 import { fetchFromStrapi } from "./api.js";
 import {
   extractListItemsFromRichContent,
-  renderRichContent,
+  createRichContentFragment,
 } from "./richText.js";
 import { formatDate, getSlugFromUrl } from "./utils.js";
-import { getCoverSize, renderMediaElement } from "./media.js";
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
+import { createMediaElement, getCoverSize } from "./media.js";
 
 async function loadCaseStudyDetail() {
   const container = document.getElementById("case-study-detail");
-  if (!container) return;
+  const template = document.getElementById("case-study-detail-template");
+  if (!container || !template) return;
 
   const slug = getSlugFromUrl();
 
   if (!slug) {
-    container.innerHTML = "<p>No case study selected.</p>";
+    showDetailMessage(container, "No case study selected.");
     return;
   }
 
@@ -34,114 +26,93 @@ async function loadCaseStudyDetail() {
     const study = result.data?.[0];
 
     if (!study) {
-      container.innerHTML = "<p>Case study not found.</p>";
+      showDetailMessage(container, "Case study not found.");
       return;
     }
 
+    const fragment = template.content.cloneNode(true);
     const toolsList = extractListItemsFromRichContent(study.tools);
-    const safeTitle = escapeHtml(study.title || "Untitled Case Study");
-    const coverMarkup = renderMediaElement(study.caseStudyCover, {
-      alt: study.title || "Case study cover",
-    });
-    const coverSize = getCoverSize(study);
-    const heroMediaMarkup = coverMarkup
-      ? `<div class="panel hero-media" data-cover-size="${coverSize}">
-					<div class="hero-media-inner">${coverMarkup}</div>
-				</div>`
-      : `<div class="panel hero-media" aria-hidden="true">
-					<div class="hero-media-inner">
-						<span class="monogram">${escapeHtml((study.title || "DS").slice(0, 2).toUpperCase())}</span>
-					</div>
-				</div>`;
-    const toolsMarkup =
-      toolsList.length ?
-        `
-				<div class="meta-line">
-					<strong>Tools:</strong>
-					<span class="chip-list">
-						${toolsList
-              .map((tool) => `<span class="chip">${escapeHtml(tool)}</span>`)
-              .join("")}
-					</span>
-				</div>
-			`
-      : "";
-    const stackMarkup =
-      toolsList.length ?
-        toolsList
-          .map((tool) => `<span class="chip">${escapeHtml(tool)}</span>`)
-          .join("")
-      : '<span class="chip">Strategy</span><span class="chip">UX</span><span class="chip">UI</span>';
 
-    container.innerHTML = `
-			<a class="button back-link" href="/work">Back to Work</a>
+    fragment.querySelector("[data-study-title]").textContent =
+      study.title || "Untitled Case Study";
+    fragment.querySelector("[data-study-date]").textContent = formatDate(
+      study.datePublished,
+    );
 
-			<header class="panel hero detail-hero" hero-layout="split">
-				<div class="hero-copy">
-					<p class="tag" tag-style="inverse">Case Study</p>
-					<h1 class="hero-title">${safeTitle}</h1>
-					<p class="hero-text text-lead">${formatDate(study.datePublished)}</p>
-					${toolsMarkup}
-				</div>
-				${heroMediaMarkup}
-			</header>
+    renderTools(fragment, toolsList);
+    renderHeroMedia(fragment, study);
 
-			<section class="stats-section detail-stats" aria-label="Case study snapshot">
-				<article class="card" card-size="stat" card-style="halftone">
-					<p class="tag">Role</p>
-					<strong class="card-value">UX</strong>
-				</article>
-				<article class="card" card-size="stat" card-style="halftone">
-					<p class="tag">Mode</p>
-					<strong class="card-value">UI</strong>
-				</article>
-				<article class="card" card-size="stat" card-style="halftone">
-					<p class="tag">System</p>
-					<strong class="card-value">DS</strong>
-				</article>
-				<article class="card" card-size="stat" card-style="halftone" tag-style="inverse">
-					<p class="tag">Launch</p>
-					<strong class="card-value">01</strong>
-				</article>
-			</section>
+    renderCaseStudyContent(fragment, study);
 
-			<div class="case-layout detail-layout">
-				<div class="case-main">
-					<section class="detail-content">
-						${renderRichContent(study.description)}
-						${renderRichContent(study.challenge)}
-						${renderRichContent(study.solution)}
-						${renderRichContent(study.results)}
-					</section>
-				</div>
-
-				<aside class="case-sidebar">
-				// TODO: update this entry to use the HTML5 Progress elements instead and also provide a dynamic entry of 
-				// what types of deliverbles were used and what percentage was estimated for each.
-					<section class="panel" panel-type="sidebar">
-						<h2 class="panel-heading">Deliverables</h2>
-						<div class="progress-list">
-							<div class="progress-item"><span>Product Strategy</span><span>100%</span><i class="progress-bar"></i></div>
-							<div class="progress-item"><span>UX Research</span><span>100%</span><i class="progress-bar"></i></div>
-							<div class="progress-item"><span>Visual Design</span><span>100%</span><i class="progress-bar"></i></div>
-						</div>
-					</section>
-					<section class="panel" panel-type="sidebar">
-						<h2 class="panel-heading">Stack</h2>
-						<div class="chip-list">${stackMarkup}</div>
-					</section>
-					<section class="panel" panel-type="cta">
-						<h2 class="panel-heading">Work With Me</h2>
-						<p class="panel-text">Let's build something as impactful as this.</p>
-						<a class="button" href="/#contact">Hire Me Now</a>
-					</section>
-				</aside>
-			</div>
-		`;
+    container.replaceChildren(fragment);
   } catch (error) {
     console.error("Error loading case study detail:", error);
-    container.innerHTML = "<p>Unable to load this case study right now.</p>";
+    showDetailMessage(container, "Unable to load this case study right now.");
   }
+}
+
+function renderCaseStudyContent(fragment, study) {
+  const content = fragment.querySelector("[data-study-content]");
+
+  content.replaceChildren(
+    createRichContentFragment(study.description),
+    createRichContentFragment(study.challenge),
+    createRichContentFragment(study.solution),
+    createRichContentFragment(study.results),
+  );
+}
+
+function renderHeroMedia(fragment, study) {
+  const coverShell = fragment.querySelector("[data-study-cover-shell]");
+  const coverContainer = fragment.querySelector("[data-study-cover-media]");
+  const mediaElement = createMediaElement(study.caseStudyCover, {
+    alt: study.title || "Case study cover",
+  });
+
+  coverShell.dataset.coverSize = getCoverSize(study);
+
+  if (mediaElement) {
+    coverContainer.replaceChildren(mediaElement);
+    return;
+  }
+
+  fragment.querySelector("[data-study-monogram]").textContent = (
+    study.title || "DS"
+  )
+    .slice(0, 2)
+    .toUpperCase();
+  coverShell.setAttribute("aria-hidden", "true");
+}
+
+function renderTools(fragment, toolsList) {
+  const toolsRow = fragment.querySelector("[data-study-tools-row]");
+  const toolsContainer = fragment.querySelector("[data-study-tools]");
+  const stackContainer = fragment.querySelector("[data-study-stack]");
+  const stackItems = toolsList.length ? toolsList : ["Strategy", "UX", "UI"];
+
+  if (toolsList.length) {
+    appendChips(toolsContainer, toolsList);
+    toolsRow.hidden = false;
+  }
+
+  appendChips(stackContainer, stackItems);
+}
+
+function appendChips(container, items) {
+  container.replaceChildren(
+    ...items.map((item) => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = item;
+      return chip;
+    }),
+  );
+}
+
+function showDetailMessage(container, message) {
+  const paragraph = document.createElement("p");
+  paragraph.textContent = message;
+  container.replaceChildren(paragraph);
 }
 
 document.addEventListener("DOMContentLoaded", loadCaseStudyDetail);

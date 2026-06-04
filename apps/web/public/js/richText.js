@@ -39,39 +39,69 @@ export function extractListItemsFromRichContent(content) {
 		.filter(Boolean);
 }
 
-export function renderRichContent(content) {
-	if (!Array.isArray(content)) return '';
+export function renderRichContentInto(container, content) {
+	if (!container) return;
 
-	return content
-		.map((block) => {
-			if (block.type === 'paragraph') {
-				const text = extractTextFromRichContent([block]);
-				return text ? `<p class="rich-paragraph">${text}</p>` : '';
-			}
+	container.replaceChildren(createRichContentFragment(content));
+}
 
-			if (block.type === 'heading') {
-				const level = block.level || 2;
-				const text = extractTextFromRichContent([block]);
-				return text ? `<h${level} class="rich-heading">${text}</h${level}>` : '';
-			}
+export function createRichContentFragment(content) {
+	const fragment = document.createDocumentFragment();
 
-			if (block.type === 'list') {
-				const tag = block.format === 'ordered' ? 'ol' : 'ul';
+	if (!Array.isArray(content)) return fragment;
 
-				const items = block.children
-					.map((item) => {
-						const itemText = item.children
-							.map((child) => child.text || '')
-							.join('');
+	content.forEach((block) => {
+		const element = createRichContentBlock(block);
 
-						return `<li class="rich-list-item">${itemText}</li>`;
-					})
-					.join('');
+		if (element) {
+			fragment.appendChild(element);
+		}
+	});
 
-				return `<${tag} class="rich-list">${items}</${tag}>`;
-			}
+	return fragment;
+}
 
-			return '';
-		})
-		.join('');
+function createRichContentBlock(block) {
+	if (block.type === 'paragraph') {
+		const text = extractTextFromRichContent([block]);
+		if (!text) return null;
+
+		const paragraph = document.createElement('p');
+		paragraph.className = 'rich-paragraph';
+		paragraph.textContent = text;
+		return paragraph;
+	}
+
+	if (block.type === 'heading') {
+		const level = Math.min(Math.max(Number(block.level) || 2, 1), 6);
+		const text = extractTextFromRichContent([block]);
+		if (!text) return null;
+
+		const heading = document.createElement(`h${level}`);
+		heading.className = 'rich-heading';
+		heading.textContent = text;
+		return heading;
+	}
+
+	if (block.type === 'list') {
+		const list = document.createElement(block.format === 'ordered' ? 'ol' : 'ul');
+		list.className = 'rich-list';
+
+		block.children?.forEach((item) => {
+			const itemText = Array.isArray(item.children)
+				? item.children.map((child) => child.text || '').join('')
+				: '';
+
+			if (!itemText) return;
+
+			const listItem = document.createElement('li');
+			listItem.className = 'rich-list-item';
+			listItem.textContent = itemText;
+			list.appendChild(listItem);
+		});
+
+		return list.children.length ? list : null;
+	}
+
+	return null;
 }

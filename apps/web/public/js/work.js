@@ -16,10 +16,10 @@ async function loadCaseStudies() {
     const result = await fetchFromStrapi("/case-studies?populate=*");
     const studies = result.data || [];
 
-    container.innerHTML = "";
+    container.replaceChildren();
 
     if (studies.length === 0) {
-      container.innerHTML = "<p>No case studies yet. Check back soon!</p>";
+      showListMessage(container, "No case studies yet. Check back soon!");
       return;
     }
 
@@ -62,14 +62,20 @@ async function loadCaseStudies() {
       }
 
       const link = clone.querySelector("[data-study-link]");
-      link.href = `/work-detail?slug=${study.slug || ""}`;
+      link.href = `/work/detail?slug=${study.slug || ""}`;
 
       container.appendChild(clone);
     });
   } catch (error) {
     console.error("Error loading case studies:", error);
-    container.innerHTML = "<p>Unable to load case studies right now.</p>";
+    showListMessage(container, "Unable to load case studies right now.");
   }
+}
+
+function showListMessage(container, message) {
+  const paragraph = document.createElement("p");
+  paragraph.textContent = message;
+  container.replaceChildren(paragraph);
 }
 
 document.addEventListener("DOMContentLoaded", loadCaseStudies);

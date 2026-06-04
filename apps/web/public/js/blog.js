@@ -13,10 +13,10 @@ async function loadBlogPosts() {
 		const result = await fetchFromStrapi('/blog-posts?populate=*');
 		const posts = result.data || [];
 
-		container.innerHTML = '';
+		container.replaceChildren();
 
 		if (posts.length === 0) {
-			container.innerHTML = '<p>No blog posts yet. Check back soon!</p>';
+			showListMessage(container, 'No blog posts yet. Check back soon!');
 			return;
 		}
 
@@ -41,14 +41,20 @@ async function loadBlogPosts() {
 			clone.querySelector('[data-blog-preview]').textContent = preview;
 
 			const link = clone.querySelector('[data-blog-link]');
-			link.href = `/blog-detail?slug=${post.slug || ''}`;
+			link.href = `/blog/detail?slug=${post.slug || ''}`;
 
 			container.appendChild(clone);
 		});
 	} catch (error) {
 		console.error('Error loading blog posts:', error);
-		container.innerHTML = '<p>Unable to load blog posts right now.</p>';
+		showListMessage(container, 'Unable to load blog posts right now.');
 	}
+}
+
+function showListMessage(container, message) {
+	const paragraph = document.createElement('p');
+	paragraph.textContent = message;
+	container.replaceChildren(paragraph);
 }
 
 document.addEventListener('DOMContentLoaded', loadBlogPosts);
