@@ -4,12 +4,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout title="About Darren Sorrels">
   <main class="about-layout">
-    <header class="page-header panel" panel-type="page" panel-style="halftone">
-      <p class="tag">About Darren</p>
+    <header>
+      <p class="chip" chip-type="tag">About Darren</p>
       <h1>A little more about me</h1>
     </header>
 
-    <article class="bio-container panel" panel-type="page" panel-style="halftone">
+    <article class="bio-container">
       <h2>Hi I'm Darren, I'm a User Experience & Product designer.</h2>
 
       <p class="text-lead">
@@ -39,13 +39,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <section aria-labelledby="skills-heading">
       <h3 id="skills-heading">Design Skills and Achievements</h3>
-      <ul class="list-unstyled chip-list">
-        <li class="list-item">Journey Mapping</li>
-        <li class="list-item">Empathy Mapping</li>
-        <li class="list-item">Design Sprints</li>
-        <li class="list-item">User Research</li>
-        <li class="list-item">Prototyping</li>
-        <li class="list-item">UX Strategy</li>
+      <ul class="chip-group" role="list">
+        <li class="chip">Journey Mapping</li>
+        <li class="chip">Empathy Mapping</li>
+        <li class="chip">Design Sprints</li>
+        <li class="chip">User Research</li>
+        <li class="chip">Prototyping</li>
+        <li class="chip">UX Strategy</li>
       </ul>
     </section>
   </main>

@@ -48,7 +48,7 @@ async function loadCaseStudies() {
       clone.querySelector("[data-study-preview]").textContent = preview;
       const toolsContainer = clone.querySelector("[data-study-tools]");
       toolsContainer.textContent = "";
-      toolsContainer.classList.add("chip-list");
+      toolsContainer.classList.add("chip-group");
 
       if (toolsList.length > 0) {
         toolsList.forEach((tool) => {

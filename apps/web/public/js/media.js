@@ -1,7 +1,7 @@
 import { API_URL } from "./api.js";
 
 const STRAPI_ORIGIN = new URL(API_URL).origin;
-const COVER_SIZES = ["small", "medium", "large", "full"];
+const COVER_SIZES = ["small", "medium", "large", "full", "zen"];
 
 function getMediaAttributes(media) {
   if (!media) return null;
@@ -65,7 +65,9 @@ export function createMediaElement(media, options = {}) {
 }
 
 export function getCoverSize(entry) {
-  return COVER_SIZES.includes(entry?.coverSize) ? entry.coverSize : "medium";
+  if (!COVER_SIZES.includes(entry?.coverSize)) return "medium";
+
+  return entry.coverSize === "full" ? "zen" : entry.coverSize;
 }
 
 export function applyCoverMedia(container, media, entry, options = {}) {
@@ -79,7 +81,7 @@ export function applyCoverMedia(container, media, entry, options = {}) {
   }
 
   container.replaceChildren(mediaElement);
-  container.dataset.coverSize = getCoverSize(entry);
+  container.setAttribute("media-density", getCoverSize(entry));
   container.hidden = false;
   return true;
 }

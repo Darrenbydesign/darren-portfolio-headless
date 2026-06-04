@@ -584,7 +584,7 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     >;
     content: Schema.Attribute.Blocks & Schema.Attribute.Required;
     coverSize: Schema.Attribute.Enumeration<
-      ['small', 'medium', 'large', 'full']
+      ['small', 'medium', 'large', 'zen']
     > &
       Schema.Attribute.DefaultTo<'medium'>;
     createdAt: Schema.Attribute.DateTime;
@@ -632,7 +632,7 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
     >;
     challenge: Schema.Attribute.Blocks;
     coverSize: Schema.Attribute.Enumeration<
-      ['small', 'medium', 'large', 'full']
+      ['small', 'medium', 'large', 'zen']
     > &
       Schema.Attribute.DefaultTo<'medium'>;
     createdAt: Schema.Attribute.DateTime;

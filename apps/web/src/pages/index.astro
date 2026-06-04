@@ -10,10 +10,15 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
       id="home"
       class="panel hero"
       hero-layout="split"
-      panel-style="halftone"
+      panel-effect="halftone"
+      panel-density="zen"
+      panel-shape="none"
+      hero-density="zen"
     >
       <div class="hero-copy">
-        <p class="tag" tag-style="inverse">Chapter 01: Portfolio System</p>
+        <p class="chip" chip-type="tag" chip-tone="inverse">
+          Chapter 01: Portfolio System
+        </p>
         <h1 class="hero-title">UX Designer & Design Thinker</h1>
         <p class="hero-text text-lead">
           I am Darren Sorrels, User Experience & Interaction Designer crafting
@@ -21,10 +26,10 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
           front-end polish.
         </p>
         <div class="hero-meta" aria-label="Portfolio highlights">
-          <span class="chip chip-bordered">Product Design</span>
-          <span class="chip chip-bordered">User Experience</span>
-          <span class="chip chip-bordered">UX Strategy</span>
-          <span class="chip chip-bordered">UI Development</span>
+          <span class="chip" chip-style="outline">Product Design</span>
+          <span class="chip" chip-style="outline">User Experience</span>
+          <span class="chip" chip-style="outline">UX Strategy</span>
+          <span class="chip" chip-style="outline">UI Development</span>
         </div>
       </div>
       <div class="panel hero-media" aria-hidden="true">
@@ -34,14 +39,18 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
       </div>
     </section>
 
-    <section id="services" class="section-grid" grid-columns="two">
+    <section
+      id="services"
+      class="section-grid counter-list"
+      grid-columns="two"
+    >
       <header class="section-heading">
         <h2 class="section-title">My Services</h2>
       </header>
       <hr />
 
-      <article class="card" card-size="feature">
-        <h3 class="card-heading intro-list-header">UX Design Strategy</h3>
+      <article class="card counter-item" card-type="feature" card-density="large">
+        <h3 class="card-heading counter-label">UX Design Strategy</h3>
         <p class="card-text text-lead">
           I work smart with you to discover the problems that really need to be
           solved for your target users. Once we discover the issues I help you
@@ -49,8 +58,8 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
         </p>
       </article>
 
-      <article class="card" card-size="feature">
-        <h3 class="card-heading intro-list-header">Interaction Design</h3>
+      <article class="card counter-item" card-type="feature" card-density="large">
+        <h3 class="card-heading counter-label">Interaction Design</h3>
         <p class="card-text text-lead">
           I craft beautiful interfaces that will make your products work
           smoothly and provide delightful experiences the power of aesthetics
@@ -58,16 +67,16 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
         </p>
       </article>
 
-      <article class="card" card-size="feature">
-        <h3 class="card-heading intro-list-header">UI Development</h3>
+      <article class="card counter-item" card-type="feature" card-density="large">
+        <h3 class="card-heading counter-label">UI Development</h3>
         <p class="card-text text-lead">
           I bring the designs to life with code utilizing my skills with
           HTML/CSS/JS.
         </p>
       </article>
 
-      <article class="card" card-size="feature">
-        <h3 class="card-heading intro-list-header">Identity Design</h3>
+      <article class="card counter-item" card-type="feature" card-density="large">
+        <h3 class="card-heading counter-label">Identity Design</h3>
         <p class="card-text text-lead">
           I provide design services necessary to communicate your brand identity
           to your customers which include logo design along with the collaterals
@@ -85,7 +94,7 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
         into something people can feel.
       </p>
       <div class="section-grid" grid-columns="three">
-        <article class="card" card-size="compact">
+        <article class="card" card-style="outline" card-density="small">
           <h3 class="card-heading">Understand</h3>
           <p class="card-text">
             By conducting user research I can understand your customers needs
@@ -93,35 +102,35 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
             product.
           </p>
         </article>
-        <article class="card" card-size="compact">
+        <article class="card" card-style="outline" card-density="small">
           <h3 class="card-heading">Define</h3>
           <p class="card-text">
             I combine the research gathered to hone in the key pain points your
             customers are facing.
           </p>
         </article>
-        <article class="card" card-size="compact">
+        <article class="card" card-style="outline" card-density="small">
           <h3 class="card-heading">Ideate</h3>
           <p class="card-text">
             This is where the magic happens. I generate ideas with you and shape
             them into clear product directions.
           </p>
         </article>
-        <article class="card" card-size="compact">
+        <article class="card" card-style="outline" card-density="small">
           <h3 class="card-heading">Prototype</h3>
           <p class="card-text">
             We'll build out the ideas most likely to improve the experience your
             users have.
           </p>
         </article>
-        <article class="card" card-size="compact">
+        <article class="card" card-style="outline" card-density="small">
           <h3 class="card-heading">Testing</h3>
           <p class="card-text">
             Those ideas need to be tested to prove whether they will achieve the
             business needs and the users needs.
           </p>
         </article>
-        <article class="card" card-size="compact">
+        <article class="card" card-style="outline" card-density="small">
           <h3 class="card-heading">Implement</h3>
           <p class="card-text">
             Once we determine the winner through testing, we begin shipping the
@@ -143,7 +152,7 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
       <CaseStudyCardTemplate />
     </section>
 
-    <section id="contact" class="panel contact" panel-style="halftone">
+    <section id="contact" class="panel contact" panel-effect="halftone">
       <h2>Get In Touch</h2>
       <form id="contact-form">
         <label class="field">
@@ -170,7 +179,7 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
           <span>Message</span>
           <textarea
             class="field-control"
-            control-type="multiline"
+            field-variant="multiline"
             id="message"
             placeholder="Your Message"
             required></textarea>

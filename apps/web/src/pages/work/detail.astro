@@ -8,45 +8,49 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </article>
 
     <template id="case-study-detail-template">
-      <a class="button back-link" href="/work">Back to Work</a>
+      <a class="button back-link" button-style="outline" href="/work">Back to Work</a>
 
-      <header class="panel hero detail-hero" hero-layout="split">
+      <header class="panel hero detail-hero" panel-density="zen" hero-layout="split" hero-density="zen">
         <div class="hero-copy">
-          <p class="tag" tag-style="inverse">Case Study</p>
+          <p class="chip" chip-type="tag" chip-tone="inverse">Case Study</p>
           <h1 class="hero-title" data-study-title></h1>
           <p class="hero-text text-lead" data-study-date></p>
-          <div class="meta-line" data-study-tools-row hidden>
+          <div class="chip-group" chip-group-type="meta" data-study-tools-row hidden>
             <strong>Tools:</strong>
-            <span class="chip-list" data-study-tools></span>
+            <span class="chip-group" data-study-tools></span>
           </div>
         </div>
-        <div class="panel hero-media" data-study-cover-shell data-cover-size="medium">
+        <div class="panel hero-media" data-study-cover-shell media-density="medium">
           <div class="hero-media-inner" data-study-cover-media>
             <span class="monogram" data-study-monogram></span>
           </div>
         </div>
       </header>
 
-      <section class="stats-section detail-stats" aria-label="Case study snapshot">
-        <article class="card" card-size="stat" card-style="halftone">
-          <p class="tag">Role</p>
+      <section
+        class="stats-section detail-stats counter-list"
+        aria-label="Case study snapshot"
+      >
+        <article class="card counter-item" card-type="stat" card-density="large" card-effect="halftone">
+          <p class="chip counter-label" chip-type="tag">Role</p>
           <strong class="card-value">UX</strong>
         </article>
-        <article class="card" card-size="stat" card-style="halftone">
-          <p class="tag">Mode</p>
+        <article class="card counter-item" card-type="stat" card-density="large" card-effect="halftone">
+          <p class="chip counter-label" chip-type="tag">Mode</p>
           <strong class="card-value">UI</strong>
         </article>
-        <article class="card" card-size="stat" card-style="halftone">
-          <p class="tag">System</p>
+        <article class="card counter-item" card-type="stat" card-density="large" card-effect="halftone">
+          <p class="chip counter-label" chip-type="tag">System</p>
           <strong class="card-value">DS</strong>
         </article>
         <article
-          class="card"
-          card-size="stat"
-          card-style="halftone"
-          tag-style="inverse"
+          class="card counter-item"
+          card-type="stat"
+          card-density="large"
+          card-effect="halftone"
+          chip-tone="inverse"
         >
-          <p class="tag">Launch</p>
+          <p class="chip counter-label" chip-type="tag">Launch</p>
           <strong class="card-value">01</strong>
         </article>
       </section>
@@ -76,12 +80,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           </section>
           <section class="panel" panel-type="sidebar">
             <h2 class="panel-heading">Stack</h2>
-            <div class="chip-list" data-study-stack></div>
+            <div class="chip-group" data-study-stack></div>
           </section>
           <section class="panel" panel-type="cta">
             <h2 class="panel-heading">Work With Me</h2>
             <p class="panel-text">Let's build something as impactful as this.</p>
-            <a class="button" href="/#contact">Hire Me Now</a>
+            <a class="button" button-style="filled" href="/#contact">Hire Me Now</a>
           </section>
         </aside>
       </div>

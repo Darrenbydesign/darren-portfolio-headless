@@ -8,17 +8,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </article>
 
     <template id="blog-detail-template">
-      <a class="button" href="/blog">Back to Journal</a>
+      <a class="button" button-style="outline" href="/blog">Back to Journal</a>
 
       <header class="detail-header">
-        <p class="tag">Journal Entry</p>
-        <p class="date" data-blog-date></p>
+        <p class="chip" chip-type="tag">Journal Entry</p>
+        <p class="chip" chip-type="date" data-blog-date></p>
         <h1 data-blog-title></h1>
         <p class="detail-excerpt" data-blog-excerpt hidden></p>
         <figure
-          class="cover-media detail-cover-media"
+          class="media detail-cover-media"
+          media-variant="cover"
+          media-density="medium"
           data-blog-cover-media
-          data-cover-size="medium"
           hidden
         >
         </figure>

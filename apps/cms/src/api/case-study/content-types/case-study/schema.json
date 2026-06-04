@@ -37,7 +37,7 @@
         "small",
         "medium",
         "large",
-        "full"
+        "zen"
       ],
       "default": "medium"
     },

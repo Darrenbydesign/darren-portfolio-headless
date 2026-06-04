@@ -69,7 +69,7 @@ function renderHeroMedia(fragment, study) {
     alt: study.title || "Case study cover",
   });
 
-  coverShell.dataset.coverSize = getCoverSize(study);
+  coverShell.setAttribute("media-density", getCoverSize(study));
 
   if (mediaElement) {
     coverContainer.replaceChildren(mediaElement);
