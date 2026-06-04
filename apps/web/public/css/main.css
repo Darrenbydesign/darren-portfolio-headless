@@ -14,7 +14,9 @@ TABLE OF CONTENTS
    1. DESIGN TOKENS
    ------------------------------------------------------------- */
 :root {
-  /* Darren Sorrels Design System color roles */
+  color-scheme: light;
+
+  /* Light mode mirrors the shared design.md color roles. */
   --color-surface: #f8f9fc;
   --color-surface-dim: #d9dadd;
   --color-surface-bright: #f8f9fc;
@@ -111,9 +113,9 @@ TABLE OF CONTENTS
   --surface-variant: var(--color-surface-variant);
 
   /* Brand aliases */
-  --brand-primary: #5895b9;
+  --brand-primary: #216487;
   --brand-secondary: #0b6c95;
-  --brand-ink: #1c1917;
+  --brand-ink: #404041;
   --clr-primary: var(--brand-primary);
   --clr-secondary: var(--brand-secondary);
   --clr-ink: var(--brand-ink);
@@ -122,6 +124,18 @@ TABLE OF CONTENTS
   --clr-text-main: var(--on-surface);
   --clr-text-muted: var(--on-surface-variant);
   --clr-text-light: var(--outline);
+  --site-header-background: rgba(248, 249, 252, 0.94);
+  --site-backdrop-background: rgba(25, 28, 30, 0.32);
+  --site-footer-background: #404041;
+  --site-footer-border-color: #191c1e;
+  --site-footer-foreground: #ffffff;
+  --site-footer-meta-color: #e1e2e5;
+  --site-footer-link-color: #ffffff;
+  --brand-logo-color: var(--primary);
+  --floating-actions-background: rgba(255, 255, 255, 0.86);
+  --floating-actions-border-color: var(--outline-variant);
+  --success-background: #d4edda;
+  --success-foreground: #155724;
 
   /* Typography */
   --typography-heading-font-family: "Epilogue", system-ui, sans-serif;
@@ -169,7 +183,7 @@ TABLE OF CONTENTS
   --transition: 180ms ease;
   --halftone: radial-gradient(
       circle at 1px 1px,
-      rgba(64, 64, 65, 0.26) 1px,
+      var(--pattern-dot-color) 1px,
       transparent 1.5px
     )
     0 0 / 10px 10px;
@@ -177,11 +191,133 @@ TABLE OF CONTENTS
     115deg,
     transparent 0,
     transparent 14px,
-    rgba(64, 64, 65, 0.18) 15px,
-    rgba(64, 64, 65, 0.18) 17px,
+    var(--pattern-line-color) 15px,
+    var(--pattern-line-color) 17px,
     transparent 18px,
     transparent 30px
   );
+  --pattern-dot-color: rgba(64, 64, 65, 0.26);
+  --pattern-line-color: rgba(64, 64, 65, 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Dark mode preserves the design.md roles with inverted surfaces and brightened blue accents. */
+    color-scheme: dark;
+    --color-surface: #111416;
+    --color-surface-dim: #0d1113;
+    --color-surface-bright: #373a3d;
+    --color-surface-container-lowest: #0b0f11;
+    --color-surface-container-low: #191c1f;
+    --color-surface-container: #1d2023;
+    --color-surface-container-high: #282b2e;
+    --color-surface-container-highest: #333639;
+    --color-on-surface: #e1e2e5;
+    --color-on-surface-variant: #c0c7ce;
+    --color-inverse-surface: #e1e2e5;
+    --color-inverse-on-surface: #191c1e;
+    --color-outline: #8a9299;
+    --color-outline-variant: #40484d;
+    --color-surface-tint: #92cef4;
+    --color-primary: #92cef4;
+    --color-on-primary: #001e2d;
+    --color-primary-container: #004a68;
+    --color-on-primary-container: #c6e7ff;
+    --color-inverse-primary: #216487;
+    --color-secondary: #88cffc;
+    --color-on-secondary: #001e2d;
+    --color-secondary-container: #004c6b;
+    --color-on-secondary-container: #c6e7ff;
+    --color-tertiary: #c7c6c7;
+    --color-on-tertiary: #1b1c1d;
+    --color-tertiary-container: #444546;
+    --color-on-tertiary-container: #e4e2e3;
+    --color-error: #ffb4ab;
+    --color-on-error: #690005;
+    --color-error-container: #93000a;
+    --color-on-error-container: #ffdad6;
+    --color-background: #111416;
+    --color-on-background: #e1e2e5;
+    --color-surface-variant: #40484d;
+    --brand-primary: #92cef4;
+    --brand-secondary: #88cffc;
+    --brand-ink: #f0f1f4;
+    --site-header-background: rgba(17, 20, 22, 0.94);
+    --site-backdrop-background: rgba(0, 0, 0, 0.48);
+    --site-footer-background: #0b0f11;
+    --site-footer-border-color: #92cef4;
+    --site-footer-foreground: #e1e2e5;
+    --site-footer-meta-color: #c0c7ce;
+    --site-footer-link-color: #ffffff;
+    --brand-logo-color: #92cef4;
+    --floating-actions-background: rgba(25, 28, 31, 0.86);
+    --floating-actions-border-color: #40484d;
+    --success-background: #12351f;
+    --success-foreground: #a7f3c4;
+    --pattern-dot-color: rgba(198, 231, 255, 0.24);
+    --pattern-line-color: rgba(198, 231, 255, 0.16);
+  }
+}
+
+:root:where([data-theme="dark"]) {
+  /* Explicit user selection uses the same dark role mapping as prefers-color-scheme. */
+  color-scheme: dark;
+  --color-surface: #111416;
+  --color-surface-dim: #0d1113;
+  --color-surface-bright: #373a3d;
+  --color-surface-container-lowest: #0b0f11;
+  --color-surface-container-low: #191c1f;
+  --color-surface-container: #1d2023;
+  --color-surface-container-high: #282b2e;
+  --color-surface-container-highest: #333639;
+  --color-on-surface: #e1e2e5;
+  --color-on-surface-variant: #c0c7ce;
+  --color-inverse-surface: #e1e2e5;
+  --color-inverse-on-surface: #191c1e;
+  --color-outline: #8a9299;
+  --color-outline-variant: #40484d;
+  --color-surface-tint: #92cef4;
+  --color-primary: #92cef4;
+  --color-on-primary: #001e2d;
+  --color-primary-container: #004a68;
+  --color-on-primary-container: #c6e7ff;
+  --color-inverse-primary: #216487;
+  --color-secondary: #88cffc;
+  --color-on-secondary: #001e2d;
+  --color-secondary-container: #004c6b;
+  --color-on-secondary-container: #c6e7ff;
+  --color-tertiary: #c7c6c7;
+  --color-on-tertiary: #1b1c1d;
+  --color-tertiary-container: #444546;
+  --color-on-tertiary-container: #e4e2e3;
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-background: #111416;
+  --color-on-background: #e1e2e5;
+  --color-surface-variant: #40484d;
+  --brand-primary: #92cef4;
+  --brand-secondary: #88cffc;
+  --brand-ink: #f0f1f4;
+  --site-header-background: rgba(17, 20, 22, 0.94);
+  --site-backdrop-background: rgba(0, 0, 0, 0.48);
+  --site-footer-background: #0b0f11;
+  --site-footer-border-color: #92cef4;
+  --site-footer-foreground: #e1e2e5;
+  --site-footer-meta-color: #c0c7ce;
+  --site-footer-link-color: #ffffff;
+  --brand-logo-color: #92cef4;
+  --floating-actions-background: rgba(25, 28, 31, 0.86);
+  --floating-actions-border-color: #40484d;
+  --success-background: #12351f;
+  --success-foreground: #a7f3c4;
+  --pattern-dot-color: rgba(198, 231, 255, 0.24);
+  --pattern-line-color: rgba(198, 231, 255, 0.16);
+}
+
+:root:where([data-theme="light"]) {
+  color-scheme: light;
 }
 
 /* -------------------------------------------------------------
@@ -898,7 +1034,7 @@ button {
   top: 0;
   z-index: 100;
   border-bottom: var(--border-ink);
-  background: rgba(248, 249, 252, 0.94);
+  background: var(--site-header-background);
   backdrop-filter: blur(16px);
 }
 
@@ -934,7 +1070,8 @@ button {
 .brand-logo {
   inline-size: 40px;
   block-size: 40px;
-  object-fit: contain;
+  color: var(--brand-logo-color);
+  transition: color var(--transition);
 }
 
 .site-nav-list {
@@ -1060,7 +1197,7 @@ button {
   }
 
   .site-menu-popover::backdrop {
-    background: rgba(25, 28, 30, 0.32);
+    background: var(--site-backdrop-background);
   }
 
   .site-nav-close {
@@ -1094,10 +1231,90 @@ section {
   margin-block: var(--section-spacing);
 }
 
+.floating-actions {
+  position: fixed;
+  z-index: 90;
+  inset-block-end: max(var(--space-lg), env(safe-area-inset-bottom));
+  inset-inline-end: max(var(--space-lg), env(safe-area-inset-right));
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-xs);
+  border: 1px solid var(--floating-actions-border-color);
+  border-radius: var(--radius-full);
+  background: var(--floating-actions-background);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(16px);
+}
+
+.theme-toggle {
+  --button-background: var(--surface-container-lowest);
+  --button-color: var(--on-surface);
+  flex: 0 0 auto;
+  box-shadow: none;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  --button-background: var(--secondary);
+  --button-color: var(--on-secondary);
+}
+
+.theme-toggle-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 18px;
+  aspect-ratio: 1;
+}
+
+.theme-toggle-icon::before,
+.theme-toggle-icon::after {
+  content: "";
+  grid-area: 1 / 1;
+  border-radius: var(--radius-full);
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+}
+
+.theme-toggle-icon::before {
+  inline-size: 18px;
+  aspect-ratio: 1;
+  background: currentColor;
+  box-shadow:
+    0 -13px 0 -6px currentColor,
+    9px -9px 0 -6px currentColor,
+    13px 0 0 -6px currentColor,
+    9px 9px 0 -6px currentColor,
+    0 13px 0 -6px currentColor,
+    -9px 9px 0 -6px currentColor,
+    -13px 0 0 -6px currentColor,
+    -9px -9px 0 -6px currentColor;
+}
+
+.theme-toggle-icon::after {
+  inline-size: 16px;
+  aspect-ratio: 1;
+  background: var(--button-background);
+  box-shadow: 6px -2px 0 0 currentColor;
+  opacity: 0;
+  transform: translateX(-4px) scale(0.72);
+}
+
+:root:where([data-active-theme="dark"]) .theme-toggle-icon::before {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.72);
+}
+
+:root:where([data-active-theme="dark"]) .theme-toggle-icon::after {
+  opacity: 1;
+  transform: translateX(-3px) scale(1);
+}
+
 .site-footer {
-  border-top: var(--border-ink-heavy);
-  background: var(--clr-ink);
-  color: var(--inverse-on-surface);
+  border-top: 4px solid var(--site-footer-border-color);
+  background: var(--site-footer-background);
+  color: var(--site-footer-foreground);
 }
 
 .footer-inner {
@@ -1120,9 +1337,9 @@ section {
 
 .footer-meta {
   margin-top: var(--space-xs);
-  color: #a8a29e;
+  color: var(--site-footer-meta-color);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: var(--type-caption-size);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1135,9 +1352,9 @@ section {
 }
 
 .footer-link {
-  color: var(--inverse-on-surface);
+  color: var(--site-footer-link-color);
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: var(--type-caption-size);
   letter-spacing: 0.1em;
   text-decoration: none;
   text-transform: uppercase;
@@ -1958,8 +2175,8 @@ label {
 
 #form-status.success {
   display: block;
-  background: #d4edda;
-  color: #155724;
+  background: var(--success-background);
+  color: var(--success-foreground);
 }
 
 #form-status.error {
