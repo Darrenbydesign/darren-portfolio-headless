@@ -19,9 +19,12 @@ const strapiApiUrl =
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">
+      Skip to main content
+    </a>
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary navigation">
-        <a class="brand-mark" href="/" aria-label="Darren Sorrels Design">
+        <a class="brand-mark" href="/">
           <img
             class="brand-logo"
             src="/assets/header_logo.svg"
@@ -29,7 +32,7 @@ const strapiApiUrl =
             width="40"
             height="40"
           />
-          <span class="visually-hidden">Darren Sorrels Design</span>
+          <span class="sr-only">Darren Sorrels Design</span>
         </a>
         <ul class="site-nav-list">
           <li class="site-nav-item"><a class="site-nav-link" href="/">Home</a></li>
@@ -41,7 +44,11 @@ const strapiApiUrl =
       </nav>
     </header>
 
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <slot name="after-main" />
 
     <footer class="site-footer">
       <div class="footer-inner">

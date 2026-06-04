@@ -2,10 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 <BaseLayout title="Case Study - Darren Sorrels Design">
-  <main>
-    <article id="case-study-detail" class="detail-page panel" panel-type="detail">
-      <p>Loading case study...</p>
-    </article>
+  <article id="case-study-detail" class="detail-page panel" panel-type="detail">
+    <p>Loading case study...</p>
+  </article>
 
     <template id="case-study-detail-template">
       <a class="button back-link" button-style="outline" href="/work">Back to Work</a>
@@ -90,6 +89,5 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         </aside>
       </div>
     </template>
-  </main>
-  <script type="module" src="/js/workDetail.js"></script>
+  <script slot="after-main" type="module" src="/js/workDetail.js"></script>
 </BaseLayout>
