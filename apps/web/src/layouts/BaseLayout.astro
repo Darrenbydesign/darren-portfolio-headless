@@ -10,6 +10,29 @@ const strapiApiUrl =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const storageKey = "darren-theme";
+        const storedTheme = (() => {
+          try {
+            return localStorage.getItem(storageKey);
+          } catch {
+            return null;
+          }
+        })();
+
+        if (storedTheme === "light" || storedTheme === "dark") {
+          document.documentElement.dataset.theme = storedTheme;
+        }
+
+        document.documentElement.dataset.activeTheme =
+          storedTheme === "light" || storedTheme === "dark"
+            ? storedTheme
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,13 +46,16 @@ const strapiApiUrl =
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary navigation">
         <a class="brand-mark" href="/">
-          <img
+          <svg
             class="brand-logo"
-            src="/assets/header_logo.svg"
-            alt=""
             width="40"
             height="40"
-          />
+            viewBox="0 0 200 200"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <use href="/assets/logo-symbol.svg#brand-logo"></use>
+          </svg>
           <span class="sr-only">Darren Sorrels Design</span>
         </a>
         <button
@@ -87,6 +113,20 @@ const strapiApiUrl =
 
     <slot name="after-main" />
 
+    <div class="floating-actions" role="group" aria-label="Display settings">
+      <button
+        class="button theme-toggle"
+        type="button"
+        button-style="outline"
+        button-shape="circle"
+        aria-label="Switch color theme"
+        aria-pressed="false"
+        data-theme-toggle
+      >
+        <span class="theme-toggle-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+
     <footer class="site-footer">
       <div class="footer-inner">
         <div>
@@ -104,6 +144,67 @@ const strapiApiUrl =
       window.DARREN_STRAPI_API_URL = strapiApiUrl;
     </script>
     <script>
+      const themeStorageKey = "darren-theme";
+      const themeToggle = document.querySelector("[data-theme-toggle]");
+      const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
+
+      const readStoredTheme = () => {
+        try {
+          const theme = localStorage.getItem(themeStorageKey);
+          return theme === "light" || theme === "dark" ? theme : null;
+        } catch {
+          return null;
+        }
+      };
+
+      const writeStoredTheme = (theme) => {
+        try {
+          localStorage.setItem(themeStorageKey, theme);
+        } catch {
+          return;
+        }
+      };
+
+      const getSystemTheme = () => (themeMedia.matches ? "dark" : "light");
+      const getActiveTheme = () => readStoredTheme() || getSystemTheme();
+
+      const syncThemeToggle = () => {
+        const activeTheme = getActiveTheme();
+        const nextTheme = activeTheme === "dark" ? "light" : "dark";
+
+        document.documentElement.dataset.activeTheme = activeTheme;
+
+        if (themeToggle instanceof HTMLButtonElement) {
+          themeToggle.setAttribute(
+            "aria-label",
+            `Switch to ${nextTheme} mode`,
+          );
+          themeToggle.setAttribute(
+            "aria-pressed",
+            activeTheme === "dark" ? "true" : "false",
+          );
+          themeToggle.title = `Switch to ${nextTheme} mode`;
+        }
+      };
+
+      if (themeToggle instanceof HTMLButtonElement) {
+        themeToggle.addEventListener("click", () => {
+          const nextTheme = getActiveTheme() === "dark" ? "light" : "dark";
+
+          document.documentElement.dataset.theme = nextTheme;
+          writeStoredTheme(nextTheme);
+          syncThemeToggle();
+        });
+      }
+
+      themeMedia.addEventListener("change", () => {
+        if (!readStoredTheme()) {
+          syncThemeToggle();
+        }
+      });
+
+      syncThemeToggle();
+
       const siteMenuButton = document.querySelector(".site-menu-button");
       const siteMenuPopover = document.querySelector("#site-menu-popover");
 
