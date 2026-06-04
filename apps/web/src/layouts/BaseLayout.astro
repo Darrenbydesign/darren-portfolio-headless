@@ -19,9 +19,7 @@ const strapiApiUrl =
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <a class="skip-link" href="#main-content">
-      Skip to main content
-    </a>
+    <a class="skip-link" href="#main-content"> Skip to main content </a>
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary navigation">
         <a class="brand-mark" href="/">
@@ -34,13 +32,52 @@ const strapiApiUrl =
           />
           <span class="sr-only">Darren Sorrels Design</span>
         </a>
-        <ul class="site-nav-list">
-          <li class="site-nav-item"><a class="site-nav-link" href="/">Home</a></li>
-          <li class="site-nav-item"><a class="site-nav-link" href="/blog">Blog</a></li>
-          <li class="site-nav-item"><a class="site-nav-link" href="/work">Work</a></li>
-          <li class="site-nav-item"><a class="site-nav-link" href="/about">About</a></li>
-          <li class="site-nav-item"><a class="site-nav-link" href="/#contact">Contact</a></li>
-        </ul>
+        <button
+          class="button site-menu-button"
+          type="button"
+          button-style="outline"
+          popovertarget="site-menu-popover"
+          popovertargetaction="toggle"
+          aria-controls="site-menu-popover"
+          aria-expanded="false"
+          aria-label="Open primary navigation menu"
+        >
+          <span class="site-menu-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span>Menu</span>
+        </button>
+        <div class="site-menu-popover" id="site-menu-popover">
+          <button
+            class="button site-nav-close"
+            type="button"
+            button-style="text"
+            popovertarget="site-menu-popover"
+            popovertargetaction="hide"
+          >
+            Close<span class="sr-only"> mobile navigation menu</span>
+          </button>
+          <ul class="site-nav-list">
+            <li class="site-nav-item">
+              <a class="site-nav-link" href="/" data-menu-close>Home</a>
+            </li>
+            <li class="site-nav-item">
+              <a class="site-nav-link" href="/blog" data-menu-close>Blog</a>
+            </li>
+            <li class="site-nav-item">
+              <a class="site-nav-link" href="/work" data-menu-close>Work</a>
+            </li>
+            <li class="site-nav-item">
+              <a class="site-nav-link" href="/about" data-menu-close>About</a>
+            </li>
+            <li class="site-nav-item">
+              <a class="site-nav-link" href="/#contact" data-menu-close>Contact</a
+              >
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
 
@@ -65,6 +102,54 @@ const strapiApiUrl =
 
     <script define:vars={{ strapiApiUrl }}>
       window.DARREN_STRAPI_API_URL = strapiApiUrl;
+    </script>
+    <script>
+      const siteMenuButton = document.querySelector(".site-menu-button");
+      const siteMenuPopover = document.querySelector("#site-menu-popover");
+
+      if (
+        siteMenuButton instanceof HTMLButtonElement &&
+        siteMenuPopover instanceof HTMLElement
+      ) {
+        const menuMedia = window.matchMedia("(width <= 768px)");
+        const syncMenuMode = ({ matches: isPopoverMode } = menuMedia) => {
+          if (isPopoverMode && !siteMenuPopover.hasAttribute("popover")) {
+            siteMenuPopover.setAttribute("popover", "auto");
+            return;
+          }
+
+          if (isPopoverMode) {
+            return;
+          }
+
+          if (siteMenuPopover.matches(":popover-open")) {
+            siteMenuPopover.hidePopover();
+          }
+
+          siteMenuPopover.removeAttribute("popover");
+          siteMenuButton.setAttribute("aria-expanded", "false");
+        };
+
+        siteMenuPopover.addEventListener("toggle", () => {
+          siteMenuButton.setAttribute(
+            "aria-expanded",
+            siteMenuPopover.matches(":popover-open") ? "true" : "false",
+          );
+        });
+
+        siteMenuPopover
+          .querySelectorAll("[data-menu-close]")
+          .forEach((link) => {
+            link.addEventListener("click", () => {
+              if ("hidePopover" in siteMenuPopover) {
+                siteMenuPopover.hidePopover();
+              }
+            });
+          });
+
+        syncMenuMode();
+        menuMedia.addEventListener("change", syncMenuMode);
+      }
     </script>
   </body>
 </html>

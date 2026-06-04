@@ -3,9 +3,10 @@ TABLE OF CONTENTS
 ================================================================
 1.  DESIGN TOKENS
 2.  BASE STYLES & RESET
-3.  LAYOUT WRAPPERS
-4.  COMPONENTS
-5.  UTILITIES / STATUS STATES
+3.  COMPONENT PRIMITIVES
+4.  LAYOUT WRAPPERS
+5.  COMPONENTS
+6.  UTILITIES / STATUS STATES
 ================================================================
 */
 
@@ -332,150 +333,10 @@ hr {
 }
 
 /* -------------------------------------------------------------
-   3. LAYOUT WRAPPERS
-   ------------------------------------------------------------- */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: var(--border-ink);
-  background: rgba(248, 249, 252, 0.94);
-  backdrop-filter: blur(16px);
-}
-
-.site-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-md) var(--space-lg);
-}
-
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-  color: var(--on-surface);
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.brand-logo {
-  inline-size: 40px;
-  block-size: 40px;
-  object-fit: contain;
-}
-
-.site-nav-list {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-sm);
-  list-style: none;
-}
-
-.site-nav-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: var(--space-sm) var(--space-md);
-  border: var(--border-ink);
-  border-radius: var(--radius);
-  background: var(--surface-container-lowest);
-  color: var(--on-surface);
-  font-family: var(--font-label);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition:
-    background-color var(--transition),
-    color var(--transition),
-    transform var(--transition),
-    box-shadow var(--transition);
-}
-
-.site-nav-link:hover,
-.site-nav-link:focus-visible {
-  background: var(--secondary);
-  color: var(--on-secondary);
-  box-shadow: var(--offset-hard);
-  transform: translate(-2px, -2px);
-}
-
-main {
-  width: min(100%, var(--max-width));
-  margin-inline: auto;
-}
-
-section {
-  margin-block: var(--section-spacing);
-}
-
-section:first-child {
-  margin-block: 0;
-}
-
-.site-footer {
-  border-top: var(--border-ink-heavy);
-  background: var(--clr-ink);
-  color: var(--inverse-on-surface);
-}
-
-.footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-xl);
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 52px var(--space-lg) 48px;
-}
-
-.footer-brand {
-  font-family: var(--font-label);
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.footer-meta {
-  margin-top: var(--space-xs);
-  color: #a8a29e;
-  font-family: var(--font-label);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.footer-links {
-  display: flex;
-  gap: var(--space-xl);
-  list-style: none;
-}
-
-.footer-link {
-  color: var(--inverse-on-surface);
-  font-family: var(--font-label);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-/* -------------------------------------------------------------
-   4. COMPONENTS
+   3. COMPONENT PRIMITIVES
    ------------------------------------------------------------- */
 
-/* 4.1 Component primitives: panels, cards, and buttons
-   Base classes define structure. Attributes define visual variants,
+/* Base classes define structure. Attributes define visual variants,
    sizing, tone, and behavior with low-specificity :where() selectors. */
 .panel {
   --panel-padding: var(--space-lg);
@@ -774,7 +635,262 @@ button {
   }
 }
 
-/* 4.2 Text primitives and small repeated UI */
+/* -------------------------------------------------------------
+   4. LAYOUT WRAPPERS
+   ------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: var(--border-ink);
+  background: rgba(248, 249, 252, 0.94);
+  backdrop-filter: blur(16px);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.site-nav .site-menu-button,
+.site-nav-close {
+  display: none;
+}
+
+.site-menu-popover {
+  display: contents;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  color: var(--on-surface);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.brand-logo {
+  inline-size: 40px;
+  block-size: 40px;
+  object-fit: contain;
+}
+
+.site-nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  list-style: none;
+}
+
+.site-nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: var(--space-sm) var(--space-md);
+  border: var(--border-ink);
+  border-radius: var(--radius);
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font-family: var(--font-label);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.site-nav-link:hover,
+.site-nav-link:focus-visible {
+  background: var(--secondary);
+  color: var(--on-secondary);
+  box-shadow: var(--offset-hard);
+  transform: translate(-2px, -2px);
+}
+
+@media (width <= 768px) {
+  .site-nav {
+    padding: var(--space-sm) var(--space-md);
+  }
+  .site-nav .site-menu-button {
+    display: revert;
+    gap: var(--space-xs);
+    --button-background: var(--surface-container-lowest);
+    --button-color: var(--on-surface);
+  }
+
+  .site-nav:has(.site-menu-popover:popover-open) .site-menu-button {
+    --button-background: var(--secondary);
+    --button-color: var(--on-secondary);
+    box-shadow: var(--offset-hard);
+    transform: translate(-2px, -2px);
+  }
+
+  .site-menu-icon {
+    display: grid;
+    gap: 4px;
+    inline-size: 18px;
+  }
+
+  .site-menu-icon span {
+    display: block;
+    block-size: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition:
+      opacity var(--transition),
+      transform var(--transition);
+  }
+
+  .site-nav:has(.site-menu-popover:popover-open) .site-menu-icon span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .site-nav:has(.site-menu-popover:popover-open) .site-menu-icon span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-nav:has(.site-menu-popover:popover-open) .site-menu-icon span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .site-menu-popover {
+    display: none;
+    inset: auto;
+    margin: 0;
+    overflow: hidden auto;
+  }
+
+  .site-menu-popover:popover-open {
+    position: fixed;
+    inset-block: 0;
+    inset-inline: auto 0;
+    display: grid;
+    align-items: stretch;
+    align-content: start;
+    box-sizing: border-box;
+    block-size: 100dvh;
+    inline-size: min(84vw, 360px);
+    max-block-size: 100dvh;
+    padding: calc(var(--space-xl) + var(--space-sm)) var(--space-md)
+      var(--space-md);
+    border: var(--border-ink);
+    border-block: 0;
+    border-inline-end: 0;
+    border-radius: var(--radius);
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    background: var(--surface-container-lowest);
+    box-shadow: var(--offset-hard);
+    gap: var(--space-sm);
+  }
+
+  .site-menu-popover::backdrop {
+    background: rgba(25, 28, 30, 0.32);
+  }
+
+  .site-nav-close {
+    display: inline-flex;
+    justify-self: end;
+  }
+
+  .site-menu-popover .site-nav-list {
+    display: grid;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+
+  .site-nav-item,
+  .site-nav-link {
+    width: 100%;
+  }
+
+  .site-nav-link {
+    justify-content: space-between;
+    min-height: 44px;
+  }
+}
+
+main {
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
+}
+
+section {
+  margin-block: var(--section-spacing);
+}
+
+section:first-child {
+  margin-block: 0;
+}
+
+.site-footer {
+  border-top: var(--border-ink-heavy);
+  background: var(--clr-ink);
+  color: var(--inverse-on-surface);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 52px var(--space-lg) 48px;
+}
+
+.footer-brand {
+  font-family: var(--font-label);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.footer-meta {
+  margin-top: var(--space-xs);
+  color: #a8a29e;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-xl);
+  list-style: none;
+}
+
+.footer-link {
+  color: var(--inverse-on-surface);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------
+   5. COMPONENTS
+   ------------------------------------------------------------- */
+
+/* 5.1 Text primitives and small repeated UI */
 .chip,
 .chip-group,
 label {
@@ -1612,25 +1728,7 @@ label {
   color: var(--on-error-container);
 }
 
-@media (max-width: 860px) {
-  .site-nav {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .site-nav-list {
-    width: 100%;
-  }
-
-  .site-nav-item,
-  .site-nav-link {
-    flex: 1 1 140px;
-  }
-
-  .site-nav-link {
-    width: 100%;
-  }
-
+@media (width <= 860px) {
   .section-grid,
   .hero:where([hero-layout="split"]),
   .case-layout,
@@ -1657,7 +1755,7 @@ label {
   }
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
   :root {
     --type-h1-size: 40px;
     --type-h2-size: 28px;
