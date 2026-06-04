@@ -5,211 +5,187 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
 ---
 
 <BaseLayout title="Darren Sorrels - UX Designer">
-  <main class="portfolio-shell">
-    <section
-      id="home"
-      class="panel hero"
-      hero-layout="split"
-      panel-effect="halftone"
-      panel-density="zen"
-      panel-shape="none"
-      hero-density="zen"
-    >
-      <div class="hero-copy">
-        <p class="chip" chip-type="tag" chip-tone="inverse">
-          Chapter 01: Portfolio System
-        </p>
-        <h1 class="hero-title">UX Designer & Design Thinker</h1>
-        <p class="hero-text text-lead">
-          I am Darren Sorrels, User Experience & Interaction Designer crafting
-          thoughtful digital experiences with research, interface design, and
-          front-end polish.
-        </p>
-        <div class="hero-meta" aria-label="Portfolio highlights">
-          <span class="chip" chip-style="outline">Product Design</span>
-          <span class="chip" chip-style="outline">User Experience</span>
-          <span class="chip" chip-style="outline">UX Strategy</span>
-          <span class="chip" chip-style="outline">UI Development</span>
-        </div>
-      </div>
-      <div class="panel hero-media" aria-hidden="true">
-        <div class="hero-media-inner">
-          <figure class="monogram">
-            <img
-              class="logo-image"
-              src="/assets/header_logo.svg"
-              alt="Darren Sorrels Logo"
-              width="200"
-              height="200"
-            />
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="section-grid counter-list" grid-columns="two">
-      <header class="section-heading">
-        <h2 class="section-title">My Services</h2>
-      </header>
-      <hr />
-
-      <article
-        class="card counter-item"
-        card-type="feature"
-        card-density="large"
-      >
-        <h3 class="card-heading counter-label">UX Design Strategy</h3>
-        <p class="card-text text-lead">
-          I work smart with you to discover the problems that really need to be
-          solved for your target users. Once we discover the issues I help you
-          to implement the best solution to solve that problem.
-        </p>
-      </article>
-
-      <article
-        class="card counter-item"
-        card-type="feature"
-        card-density="large"
-      >
-        <h3 class="card-heading counter-label">Interaction Design</h3>
-        <p class="card-text text-lead">
-          I craft beautiful interfaces that will make your products work
-          smoothly and provide delightful experiences the power of aesthetics
-          and function combined.
-        </p>
-      </article>
-
-      <article
-        class="card counter-item"
-        card-type="feature"
-        card-density="large"
-      >
-        <h3 class="card-heading counter-label">UI Development</h3>
-        <p class="card-text text-lead">
-          I bring the designs to life with code utilizing my skills with
-          HTML/CSS/JS.
-        </p>
-      </article>
-
-      <article
-        class="card counter-item"
-        card-type="feature"
-        card-density="large"
-      >
-        <h3 class="card-heading counter-label">Identity Design</h3>
-        <p class="card-text text-lead">
-          I provide design services necessary to communicate your brand identity
-          to your customers which include logo design along with the collaterals
-          the logo design would be used on.
-        </p>
-      </article>
-    </section>
-    <section id="designProcess" class="panel" panel-type="process">
-      <header class="section-heading">
-        <h2 class="section-title">The Approach</h2>
-      </header>
-      <p class="text-lead">
-        The work moves like a sequence of panels: research creates the scene,
-        strategy gives it structure, and interaction design turns the moment
-        into something people can feel.
+  <section
+    id="home"
+    class="panel hero"
+    hero-layout="split"
+    panel-effect="halftone"
+    panel-density="zen"
+    panel-shape="none"
+    hero-density="zen"
+  >
+    <div class="hero-copy">
+      <h1 class="hero-title">UX Designer & Design Thinker</h1>
+      <p class="hero-text text-lead">
+        I am Darren Sorrels, User Experience & Interaction Designer crafting
+        thoughtful digital experiences with research, interface design, and
+        front-end polish.
       </p>
-      <div class="section-grid" grid-columns="three">
-        <article class="card" card-style="outline" card-density="small">
-          <h3 class="card-heading">Understand</h3>
-          <p class="card-text">
-            By conducting user research I can understand your customers needs
-            and help you provide the optimal experience for them with your
-            product.
-          </p>
-        </article>
-        <article class="card" card-style="outline" card-density="small">
-          <h3 class="card-heading">Define</h3>
-          <p class="card-text">
-            I combine the research gathered to hone in the key pain points your
-            customers are facing.
-          </p>
-        </article>
-        <article class="card" card-style="outline" card-density="small">
-          <h3 class="card-heading">Ideate</h3>
-          <p class="card-text">
-            This is where the magic happens. I generate ideas with you and shape
-            them into clear product directions.
-          </p>
-        </article>
-        <article class="card" card-style="outline" card-density="small">
-          <h3 class="card-heading">Prototype</h3>
-          <p class="card-text">
-            We'll build out the ideas most likely to improve the experience your
-            users have.
-          </p>
-        </article>
-        <article class="card" card-style="outline" card-density="small">
-          <h3 class="card-heading">Testing</h3>
-          <p class="card-text">
-            Those ideas need to be tested to prove whether they will achieve the
-            business needs and the users needs.
-          </p>
-        </article>
-        <article class="card" card-style="outline" card-density="small">
-          <h3 class="card-heading">Implement</h3>
-          <p class="card-text">
-            Once we determine the winner through testing, we begin shipping the
-            product out to customers.
-          </p>
-        </article>
+      <div class="hero-meta" aria-label="Portfolio highlights">
+        <span class="chip" chip-style="outline">Product Design</span>
+        <span class="chip" chip-style="outline">User Experience</span>
+        <span class="chip" chip-style="outline">UX Strategy</span>
+        <span class="chip" chip-style="outline">UI Development</span>
       </div>
-    </section>
-
-    <section id="blog" class="content-section blog">
-      <h2>Latest Blog Posts</h2>
-      <div id="blog-posts" class="posts-grid"></div>
-      <BlogCardTemplate />
-    </section>
-
-    <section id="work" class="content-section case-studies">
-      <h2>Featured Work</h2>
-      <div id="case-studies" class="studies-grid"></div>
-      <CaseStudyCardTemplate />
-    </section>
-
-    <section id="contact" class="panel contact" panel-effect="halftone">
-      <h2>Get In Touch</h2>
-      <form id="contact-form">
-        <label class="field">
-          <span>Name</span>
-          <input
-            class="field-control"
-            type="text"
-            id="name"
-            placeholder="Your Name"
-            required
+    </div>
+    <div class="panel hero-media" aria-hidden="true">
+      <div class="hero-media-inner">
+        <figure class="monogram">
+          <img
+            class="logo-image"
+            src="/assets/header_logo.svg"
+            alt="Darren Sorrels Logo"
+            width="200"
+            height="200"
           />
-        </label>
-        <label class="field">
-          <span>Email</span>
-          <input
-            class="field-control"
-            type="email"
-            id="email"
-            placeholder="Your Email"
-            required
-          />
-        </label>
-        <label class="field">
-          <span>Message</span>
-          <textarea
-            class="field-control"
-            field-variant="multiline"
-            id="message"
-            placeholder="Your Message"
-            required></textarea>
-        </label>
-        <button class="button" type="submit">Send Message</button>
-      </form>
-      <p id="form-status"></p>
-    </section>
-  </main>
-  <script type="module" src="/js/blog.js"></script>
-  <script type="module" src="/js/work.js"></script>
-  <script type="module" src="/js/contact.js"></script>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section-grid counter-list" grid-columns="two">
+    <header class="section-heading">
+      <h2 class="section-title">My Services</h2>
+    </header>
+    <hr />
+
+    <article class="card counter-item" card-type="feature" card-density="large">
+      <h3 class="card-heading counter-label">UX Design Strategy</h3>
+      <p class="card-text text-lead">
+        I work smart with you to discover the problems that really need to be
+        solved for your target users. Once we discover the issues I help you to
+        implement the best solution to solve that problem.
+      </p>
+    </article>
+
+    <article class="card counter-item" card-type="feature" card-density="large">
+      <h3 class="card-heading counter-label">Interaction Design</h3>
+      <p class="card-text text-lead">
+        I craft beautiful interfaces that will make your products work smoothly
+        and provide delightful experiences the power of aesthetics and function
+        combined.
+      </p>
+    </article>
+
+    <article class="card counter-item" card-type="feature" card-density="large">
+      <h3 class="card-heading counter-label">UI Development</h3>
+      <p class="card-text text-lead">
+        I bring the designs to life with code utilizing my skills with
+        HTML/CSS/JS.
+      </p>
+    </article>
+
+    <article class="card counter-item" card-type="feature" card-density="large">
+      <h3 class="card-heading counter-label">Identity Design</h3>
+      <p class="card-text text-lead">
+        I provide design services necessary to communicate your brand identity
+        to your customers which include logo design along with the collaterals
+        the logo design would be used on.
+      </p>
+    </article>
+  </section>
+  <section id="designProcess" class="panel" panel-type="process">
+    <header class="section-heading">
+      <h2 class="section-title">The Approach</h2>
+    </header>
+    <p class="text-lead">
+      The work moves like a sequence of panels: research creates the scene,
+      strategy gives it structure, and interaction design turns the moment into
+      something people can feel.
+    </p>
+    <div class="section-grid" grid-columns="three">
+      <article class="card" card-style="outline" card-density="small">
+        <h3 class="card-heading">Understand</h3>
+        <p class="card-text">
+          By conducting user research I can understand your customers needs and
+          help you provide the optimal experience for them with your product.
+        </p>
+      </article>
+      <article class="card" card-style="outline" card-density="small">
+        <h3 class="card-heading">Define</h3>
+        <p class="card-text">
+          I combine the research gathered to hone in the key pain points your
+          customers are facing.
+        </p>
+      </article>
+      <article class="card" card-style="outline" card-density="small">
+        <h3 class="card-heading">Ideate</h3>
+        <p class="card-text">
+          This is where the magic happens. I generate ideas with you and shape
+          them into clear product directions.
+        </p>
+      </article>
+      <article class="card" card-style="outline" card-density="small">
+        <h3 class="card-heading">Prototype</h3>
+        <p class="card-text">
+          We'll build out the ideas most likely to improve the experience your
+          users have.
+        </p>
+      </article>
+      <article class="card" card-style="outline" card-density="small">
+        <h3 class="card-heading">Testing</h3>
+        <p class="card-text">
+          Those ideas need to be tested to prove whether they will achieve the
+          business needs and the users needs.
+        </p>
+      </article>
+      <article class="card" card-style="outline" card-density="small">
+        <h3 class="card-heading">Implement</h3>
+        <p class="card-text">
+          Once we determine the winner through testing, we begin shipping the
+          product out to customers.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="blog" class="content-section blog">
+    <h2>Latest Blog Posts</h2>
+    <div id="blog-posts" class="posts-grid"></div>
+    <BlogCardTemplate />
+  </section>
+
+  <section id="work" class="content-section case-studies">
+    <h2>Featured Work</h2>
+    <div id="case-studies" class="studies-grid"></div>
+    <CaseStudyCardTemplate />
+  </section>
+
+  <section id="contact" class="panel contact" panel-effect="halftone">
+    <h2>Get In Touch</h2>
+    <form id="contact-form">
+      <label class="field">
+        <span>Name</span>
+        <input
+          class="field-control"
+          type="text"
+          id="name"
+          placeholder="Your Name"
+          required
+        />
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input
+          class="field-control"
+          type="email"
+          id="email"
+          placeholder="Your Email"
+          required
+        />
+      </label>
+      <label class="field">
+        <span>Message</span>
+        <textarea
+          class="field-control"
+          field-variant="multiline"
+          id="message"
+          placeholder="Your Message"
+          required></textarea>
+      </label>
+      <button class="button" type="submit">Send Message</button>
+    </form>
+    <p id="form-status"></p>
+  </section>
+  <script slot="after-main" type="module" src="/js/index.js"></script>
 </BaseLayout>

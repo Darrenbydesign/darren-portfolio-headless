@@ -293,13 +293,42 @@ hr {
   outline-offset: 3px;
 }
 
-.visually-hidden {
+.sr-only {
   position: absolute;
   inline-size: 1px;
   block-size: 1px;
+  margin: -1px;
+  padding: 0;
   overflow: hidden;
+  clip: rect(0 0 0 0);
   clip-path: inset(50%);
+  border: 0;
   white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  inset-block-start: var(--space-md);
+  inset-inline-start: var(--space-md);
+  z-index: 200;
+  padding: var(--space-sm) var(--space-md);
+  border: var(--border-ink);
+  border-radius: var(--radius);
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font-family: var(--font-label);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: var(--offset-hard);
+  transform: translateY(calc(-100% - var(--space-xl)));
+  transition: transform var(--transition);
+
+  &:where(:focus, :focus-visible) {
+    transform: translateY(0);
+  }
 }
 
 /* -------------------------------------------------------------
@@ -849,7 +878,7 @@ label {
   inline-size: min(72%, 320px);
   aspect-ratio: 1;
   border: var(--border-ink-heavy);
-  border-radius: var(--radius);
+  border-radius: var(--radius-full);
   background: var(--surface-container-lowest);
   color: var(--primary);
   font-family: var(--font-heading);
@@ -953,11 +982,6 @@ label {
 }
 
 /* 4.3 Page shells and hero composition */
-.portfolio-shell {
-  display: grid;
-  gap: 0;
-}
-
 .hero {
   --hero-padding: clamp(48px, 7vw, 80px) var(--space-lg);
   --hero-gap: var(--space-xxl);

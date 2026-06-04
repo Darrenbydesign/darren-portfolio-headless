@@ -4,13 +4,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Journal - Darren Sorrels Design">
-  <main>
-    <section class="blog-page">
-      <p class="chip" chip-type="tag">Notes and Process</p>
-      <h2>Journal</h2>
-      <div id="blog-posts" class="posts-grid"></div>
-      <BlogCardTemplate />
-    </section>
-  </main>
-  <script type="module" src="/js/blog.js"></script>
+  <section class="blog-page">
+    <p class="chip" chip-type="tag">Notes and Process</p>
+    <h2>Journal</h2>
+    <div id="blog-posts" class="posts-grid"></div>
+    <BlogCardTemplate />
+  </section>
+  <script slot="after-main" type="module" src="/js/blog.js"></script>
 </BaseLayout>
