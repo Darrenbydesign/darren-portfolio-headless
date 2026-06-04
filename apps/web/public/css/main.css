@@ -635,6 +635,261 @@ button {
   }
 }
 
+/* Layout primitives */
+.layout-grid {
+  --layout-column-count: 12;
+}
+
+.section-grid,
+.stats-section,
+.case-layout,
+.posts-grid,
+.studies-grid {
+  --layout-column-count: 1;
+}
+
+.layout-grid,
+.section-grid,
+.stats-section,
+.case-layout,
+.posts-grid,
+.studies-grid {
+  --layout-gap: var(--space-lg);
+  --layout-template: repeat(var(--layout-column-count), minmax(0, 1fr));
+  display: grid;
+  align-items: var(--layout-align, stretch);
+  gap: var(--layout-gap);
+  grid-template-columns: var(--layout-template);
+}
+
+.layout-grid:where([layout-gap="none"]),
+.layout-flex:where([layout-gap="none"]) {
+  --layout-gap: 0;
+}
+
+.layout-grid:where([layout-gap="small"]),
+.layout-flex:where([layout-gap="small"]) {
+  --layout-gap: var(--space-sm);
+}
+
+.layout-grid:where([layout-gap="medium"]),
+.layout-flex:where([layout-gap="medium"]) {
+  --layout-gap: var(--space-md);
+}
+
+.layout-grid:where([layout-gap="large"]),
+.layout-flex:where([layout-gap="large"]) {
+  --layout-gap: var(--space-lg);
+}
+
+.layout-grid:where([layout-gap="xlarge"]),
+.layout-flex:where([layout-gap="xlarge"]) {
+  --layout-gap: var(--space-xl);
+}
+
+.layout-grid:where([layout-align="start"]),
+.layout-flex:where([layout-align="start"]) {
+  --layout-align: start;
+}
+
+.layout-grid:where([layout-align="center"]),
+.layout-flex:where([layout-align="center"]) {
+  --layout-align: center;
+}
+
+.layout-grid:where([grid-columns="one"], [grid-columns="1"]),
+.section-grid:where([grid-columns="one"], [grid-columns="1"]) {
+  --layout-column-count: 1;
+}
+
+.layout-grid:where([grid-columns="two"], [grid-columns="2"]),
+.section-grid:where([grid-columns="two"], [grid-columns="2"]) {
+  --layout-column-count: 2;
+}
+
+.layout-grid:where([grid-columns="three"], [grid-columns="3"]),
+.section-grid:where([grid-columns="three"], [grid-columns="3"]) {
+  --layout-column-count: 3;
+}
+
+.layout-grid:where([grid-columns="four"], [grid-columns="4"]),
+.section-grid:where([grid-columns="four"], [grid-columns="4"]) {
+  --layout-column-count: 4;
+}
+
+.layout-grid:where([grid-columns="six"], [grid-columns="6"]),
+.section-grid:where([grid-columns="six"], [grid-columns="6"]) {
+  --layout-column-count: 6;
+}
+
+.layout-grid:where([grid-columns="twelve"], [grid-columns="12"]) {
+  --layout-column-count: 12;
+}
+
+.layout-grid:where([grid-columns="auto"], [grid-mode="auto"]) {
+  --layout-template: repeat(
+    auto-fit,
+    minmax(min(100%, var(--layout-min, 280px)), 1fr)
+  );
+}
+
+.layout-grid:where([grid-mode="stack"]) {
+  --layout-template: 1fr;
+}
+
+.layout-grid:where([grid-layout="split-8-4"]) {
+  --layout-template: minmax(0, 8fr) minmax(280px, 4fr);
+}
+
+.layout-grid:where([grid-layout="split-7-5"]) {
+  --layout-template: minmax(0, 7fr) minmax(280px, 5fr);
+}
+
+.layout-grid > :where([grid-span="full"]),
+.section-grid > :where(.section-title, .section-heading, hr) {
+  grid-column: 1 / -1;
+}
+
+.layout-grid > :where([grid-span="1"]) {
+  --grid-span: 1;
+  grid-column: span 1;
+}
+
+.layout-grid > :where([grid-span="2"]) {
+  --grid-span: 2;
+  grid-column: span 2;
+}
+
+.layout-grid > :where([grid-span="3"]) {
+  --grid-span: 3;
+  grid-column: span 3;
+}
+
+.layout-grid > :where([grid-span="4"]) {
+  --grid-span: 4;
+  grid-column: span 4;
+}
+
+.layout-grid > :where([grid-span="5"]) {
+  --grid-span: 5;
+  grid-column: span 5;
+}
+
+.layout-grid > :where([grid-span="6"]) {
+  --grid-span: 6;
+  grid-column: span 6;
+}
+
+.layout-grid > :where([grid-span="7"]) {
+  --grid-span: 7;
+  grid-column: span 7;
+}
+
+.layout-grid > :where([grid-span="8"]) {
+  --grid-span: 8;
+  grid-column: span 8;
+}
+
+.layout-grid > :where([grid-span="9"]) {
+  --grid-span: 9;
+  grid-column: span 9;
+}
+
+.layout-grid > :where([grid-span="10"]) {
+  --grid-span: 10;
+  grid-column: span 10;
+}
+
+.layout-grid > :where([grid-span="11"]) {
+  --grid-span: 11;
+  grid-column: span 11;
+}
+
+.layout-grid > :where([grid-span="12"]) {
+  --grid-span: 12;
+  grid-column: span 12;
+}
+
+.layout-flex {
+  --layout-column-count: 12;
+  --layout-gap: var(--space-lg);
+  --layout-min: 280px;
+  display: flex;
+  flex-wrap: var(--layout-wrap, wrap);
+  align-items: var(--layout-align, stretch);
+  gap: var(--layout-gap);
+}
+
+.layout-flex > * {
+  flex: var(--layout-item-flex, 1 1 min(100%, var(--layout-min)));
+}
+
+.layout-flex:where([flex-grid="columns"]) > * {
+  --grid-span: 12;
+  --grid-gap-count: calc(var(--layout-column-count) - 1);
+  --grid-span-gap-count: calc(var(--grid-span) - 1);
+  flex: 0 1
+    calc(
+      (
+          (100% - (var(--layout-gap) * var(--grid-gap-count))) /
+            var(--layout-column-count)
+        ) * var(--grid-span) + (var(--layout-gap) * var(--grid-span-gap-count))
+    );
+}
+
+.layout-flex > :where([grid-span="1"]) {
+  --grid-span: 1;
+}
+
+.layout-flex > :where([grid-span="2"]) {
+  --grid-span: 2;
+}
+
+.layout-flex > :where([grid-span="3"]) {
+  --grid-span: 3;
+}
+
+.layout-flex > :where([grid-span="4"]) {
+  --grid-span: 4;
+}
+
+.layout-flex > :where([grid-span="5"]) {
+  --grid-span: 5;
+}
+
+.layout-flex > :where([grid-span="6"]) {
+  --grid-span: 6;
+}
+
+.layout-flex > :where([grid-span="7"]) {
+  --grid-span: 7;
+}
+
+.layout-flex > :where([grid-span="8"]) {
+  --grid-span: 8;
+}
+
+.layout-flex > :where([grid-span="9"]) {
+  --grid-span: 9;
+}
+
+.layout-flex > :where([grid-span="10"]) {
+  --grid-span: 10;
+}
+
+.layout-flex > :where([grid-span="11"]) {
+  --grid-span: 11;
+}
+
+.layout-flex > :where([grid-span="12"]) {
+  --grid-span: 12;
+}
+
+.layout-flex > :where([grid-span="full"]) {
+  --grid-span: var(--layout-column-count);
+  flex-basis: 100%;
+}
+
 /* -------------------------------------------------------------
    4. LAYOUT WRAPPERS
    ------------------------------------------------------------- */
@@ -755,15 +1010,21 @@ button {
       transform var(--transition);
   }
 
-  .site-nav:has(.site-menu-popover:popover-open) .site-menu-icon span:nth-child(1) {
+  .site-nav:has(.site-menu-popover:popover-open)
+    .site-menu-icon
+    span:nth-child(1) {
     transform: translateY(6px) rotate(45deg);
   }
 
-  .site-nav:has(.site-menu-popover:popover-open) .site-menu-icon span:nth-child(2) {
+  .site-nav:has(.site-menu-popover:popover-open)
+    .site-menu-icon
+    span:nth-child(2) {
     opacity: 0;
   }
 
-  .site-nav:has(.site-menu-popover:popover-open) .site-menu-icon span:nth-child(3) {
+  .site-nav:has(.site-menu-popover:popover-open)
+    .site-menu-icon
+    span:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
   }
 
@@ -831,10 +1092,6 @@ main {
 
 section {
   margin-block: var(--section-spacing);
-}
-
-section:first-child {
-  margin-block: 0;
 }
 
 .site-footer {
@@ -1097,7 +1354,7 @@ label {
   --cover-block-size: min(78vh, 900px);
 }
 
-/* 4.3 Page shells and hero composition */
+/* 5.3 Page shells and hero composition */
 .hero {
   --hero-padding: clamp(48px, 7vw, 80px) var(--space-lg);
   --hero-gap: var(--space-xxl);
@@ -1211,11 +1468,9 @@ label {
   }
 }
 
-/* 4.4 Layout systems */
+/* 5.4 Layout systems */
 .stats-section {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-lg);
+  --layout-column-count: 4;
   margin-block: calc(var(--space-xxl) * -0.5) var(--space-huge);
   margin-inline: 0;
   position: relative;
@@ -1223,9 +1478,9 @@ label {
 }
 
 .case-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 8fr) minmax(280px, 4fr);
-  gap: 64px;
+  --layout-align: start;
+  --layout-gap: 64px;
+  --layout-template: minmax(0, 8fr) minmax(280px, 4fr);
   align-items: start;
 }
 
@@ -1245,22 +1500,7 @@ label {
 }
 
 .section-grid {
-  display: grid;
-  gap: var(--space-lg);
-
-  &:where([grid-columns="two"]) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  &:where([grid-columns="three"]) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  & > .section-title,
-  & > .section-heading,
-  & > hr {
-    grid-column: 1 / -1;
-  }
+  --layout-gap: var(--space-lg);
 }
 
 .section-heading {
@@ -1288,7 +1528,7 @@ label {
   text-transform: uppercase;
 }
 
-/* 4.5 Panel compositions */
+/* 5.5 Panel compositions */
 .panel:where([panel-type="process"]) {
   display: grid;
   gap: var(--space-lg);
@@ -1331,12 +1571,12 @@ label {
   }
 }
 
-/* 4.6 Repeating content lists and showcase mockups */
+/* 5.6 Repeating content lists and showcase mockups */
 .posts-grid,
 .studies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: var(--space-xl);
+  --layout-gap: var(--space-xl);
+  --layout-min: 280px;
+  --layout-template: repeat(auto-fit, minmax(min(100%, var(--layout-min)), 1fr));
   container-type: inline-size;
 }
 
@@ -1500,7 +1740,7 @@ label {
   }
 }
 
-/* 4.7 Container queries */
+/* 5.7 Container queries */
 @container (min-width: 520px) {
   .card {
     grid-template-columns: 1fr auto;
@@ -1520,7 +1760,7 @@ label {
   }
 }
 
-/* 4.8 Forms, page content, and detail pages */
+/* 5.8 Forms, page content, and detail pages */
 .contact {
   padding: clamp(24px, 5vw, 48px);
 
@@ -1684,7 +1924,7 @@ label {
 }
 
 /* -------------------------------------------------------------
-   5. UTILITIES / STATUS STATES
+   6. UTILITIES / STATUS STATES
    ------------------------------------------------------------- */
 .speed-line {
   min-height: 28px;
@@ -1729,11 +1969,21 @@ label {
 }
 
 @media (width <= 860px) {
+  .layout-grid:where([grid-collapse="tablet"]),
   .section-grid,
   .hero:where([hero-layout="split"]),
   .case-layout,
   .panel:where([panel-type="process"]) {
+    --layout-template: 1fr;
     grid-template-columns: 1fr;
+  }
+
+  .layout-grid:where([grid-collapse="tablet"]) > :where([grid-span]) {
+    grid-column: auto;
+  }
+
+  .layout-flex:where([grid-collapse="tablet"]) > * {
+    flex-basis: 100%;
   }
 
   .case-sidebar {
@@ -1741,7 +1991,7 @@ label {
   }
 
   .stats-section {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    --layout-column-count: 2;
     margin-block-start: var(--space-xl);
   }
 
@@ -1773,7 +2023,20 @@ label {
   }
 
   .stats-section {
+    --layout-column-count: 1;
+  }
+
+  .layout-grid:where([grid-collapse="mobile"]) {
+    --layout-template: 1fr;
     grid-template-columns: 1fr;
+  }
+
+  .layout-grid:where([grid-collapse="mobile"]) > :where([grid-span]) {
+    grid-column: auto;
+  }
+
+  .layout-flex:where([grid-collapse="mobile"]) > * {
+    flex-basis: 100%;
   }
 
   .card:where([card-type="stat"]) {
