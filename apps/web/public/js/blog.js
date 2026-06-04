@@ -1,4 +1,5 @@
 import { fetchFromStrapi } from './api.js';
+import { applyCoverMedia } from './media.js';
 import { extractTextFromRichContent } from './richText.js';
 import { formatDate, getPreviewText } from './utils.js';
 
@@ -24,6 +25,11 @@ async function loadBlogPosts() {
 
 			const fullText = extractTextFromRichContent(post.content);
 			const preview = post.excerpt || getPreviewText(fullText, 160);
+			const coverContainer = clone.querySelector('[data-blog-cover-media]');
+
+			applyCoverMedia(coverContainer, post.blogPostCover, post, {
+				alt: post.title || 'Blog post cover',
+			});
 
 			clone.querySelector('[data-blog-title]').textContent =
 				post.title || 'Untitled Post';

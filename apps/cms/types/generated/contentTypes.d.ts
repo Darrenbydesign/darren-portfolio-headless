@@ -579,7 +579,14 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    blogPostCover: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     content: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    coverSize: Schema.Attribute.Enumeration<
+      ['small', 'medium', 'large', 'full']
+    > &
+      Schema.Attribute.DefaultTo<'medium'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -620,7 +627,14 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    caseStudyCover: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     challenge: Schema.Attribute.Blocks;
+    coverSize: Schema.Attribute.Enumeration<
+      ['small', 'medium', 'large', 'full']
+    > &
+      Schema.Attribute.DefaultTo<'medium'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

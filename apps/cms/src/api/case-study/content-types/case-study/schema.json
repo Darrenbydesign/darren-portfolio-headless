@@ -21,6 +21,26 @@
       "required": true,
       "unique": true
     },
+    "caseStudyCover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "coverSize": {
+      "type": "enumeration",
+      "enum": [
+        "small",
+        "medium",
+        "large",
+        "full"
+      ],
+      "default": "medium"
+    },
     "description": {
       "type": "blocks"
     },

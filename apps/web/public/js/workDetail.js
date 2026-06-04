@@ -4,6 +4,7 @@ import {
   renderRichContent,
 } from "./richText.js";
 import { formatDate, getSlugFromUrl } from "./utils.js";
+import { getCoverSize, renderMediaElement } from "./media.js";
 
 function escapeHtml(value) {
   return String(value)
@@ -39,6 +40,19 @@ async function loadCaseStudyDetail() {
 
     const toolsList = extractListItemsFromRichContent(study.tools);
     const safeTitle = escapeHtml(study.title || "Untitled Case Study");
+    const coverMarkup = renderMediaElement(study.caseStudyCover, {
+      alt: study.title || "Case study cover",
+    });
+    const coverSize = getCoverSize(study);
+    const heroMediaMarkup = coverMarkup
+      ? `<div class="panel hero-media" data-cover-size="${coverSize}">
+					<div class="hero-media-inner">${coverMarkup}</div>
+				</div>`
+      : `<div class="panel hero-media" aria-hidden="true">
+					<div class="hero-media-inner">
+						<span class="monogram">${escapeHtml((study.title || "DS").slice(0, 2).toUpperCase())}</span>
+					</div>
+				</div>`;
     const toolsMarkup =
       toolsList.length ?
         `
@@ -69,11 +83,7 @@ async function loadCaseStudyDetail() {
 					<p class="hero-text text-lead">${formatDate(study.datePublished)}</p>
 					${toolsMarkup}
 				</div>
-				<div class="panel hero-media" aria-hidden="true">
-					<div class="hero-media-inner">
-						<span class="monogram">${escapeHtml((study.title || "DS").slice(0, 2).toUpperCase())}</span>
-					</div>
-				</div>
+				${heroMediaMarkup}
 			</header>
 
 			<section class="stats-section detail-stats" aria-label="Case study snapshot">
@@ -98,36 +108,16 @@ async function loadCaseStudyDetail() {
 			<div class="case-layout detail-layout">
 				<div class="case-main">
 					<section class="detail-content">
-						<span class="section-number">01.</span>
 						${renderRichContent(study.description)}
 						${renderRichContent(study.challenge)}
 						${renderRichContent(study.solution)}
 						${renderRichContent(study.results)}
 					</section>
-					<section class="stats-section" aria-label="Portfolio impact stats">
-						<article class="card" card-size="stat" card-style="halftone">
-							<p class="tag">Experience Lens</p>
-							<strong class="card-value">UX</strong>
-						</article>
-						<article class="card" card-size="stat" card-style="halftone">
-							<p class="tag">Build Fluency</p>
-							<strong class="card-value">HTML</strong>
-						</article>
-						<article class="card" card-size="stat" card-style="halftone">
-							<p class="tag">Creative Range</p>
-							<strong class="card-value">4x</strong>
-						</article>
-					</section>
-					<section class="panel" panel-type="showcase" aria-label="Case study visual system preview">
-						<div class="showcase-screen">
-							<span class="showcase-line"></span>
-							<span class="showcase-line"></span>
-							<span class="showcase-line"></span>
-						</div>
-					</section>
 				</div>
 
 				<aside class="case-sidebar">
+				// TODO: update this entry to use the HTML5 Progress elements instead and also provide a dynamic entry of 
+				// what types of deliverbles were used and what percentage was estimated for each.
 					<section class="panel" panel-type="sidebar">
 						<h2 class="panel-heading">Deliverables</h2>
 						<div class="progress-list">

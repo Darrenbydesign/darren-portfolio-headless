@@ -1,4 +1,5 @@
 import { fetchFromStrapi } from './api.js';
+import { renderCoverMediaFigure } from './media.js';
 import { renderRichContent } from './richText.js';
 import { formatDate, getSlugFromUrl } from './utils.js';
 
@@ -34,6 +35,11 @@ async function loadBlogPostDetail() {
 			return;
 		}
 
+		const coverMarkup = renderCoverMediaFigure(post.blogPostCover, post, {
+			alt: post.title || 'Blog post cover',
+			className: 'detail-cover-media',
+		});
+
 		container.innerHTML = `
 			<a class="button" href="/blog">Back to Journal</a>
 
@@ -42,6 +48,7 @@ async function loadBlogPostDetail() {
 				<p class="date">${formatDate(post.datePublished)}</p>
 				<h1>${escapeHtml(post.title || 'Untitled Post')}</h1>
 				${post.excerpt ? `<p class="detail-excerpt">${escapeHtml(post.excerpt)}</p>` : ''}
+				${coverMarkup}
 			</header>
 
 			<div class="detail-content">
