@@ -1768,13 +1768,16 @@ label {
 
 .counter-list {
   counter-reset: counter-list-item;
+  list-style: none;
 
   & > .counter-item {
     counter-increment: counter-list-item;
+    list-style: none;
   }
 
-  & .counter-label::before {
+  & > .counter-item > .counter-label::before {
     content: counter(counter-list-item, decimal-leading-zero);
+    display: block;
     color: var(--outline);
     font-family: var(--font-label);
     font-size: var(--type-caption-size);
@@ -1783,7 +1786,7 @@ label {
     letter-spacing: 0.1em;
   }
 
-  & .chip.counter-label {
+  & > .counter-item > .chip.counter-label {
     display: inline-grid;
   }
 }
@@ -1904,17 +1907,26 @@ label {
 
 .progress-bar {
   grid-column: 1 / -1;
+  inline-size: 100%;
   height: 6px;
   border-radius: var(--radius-full);
   background: var(--clr-ink);
   box-shadow: inset 0 0 0 999px var(--surface-container-low);
+  overflow: hidden;
+  appearance: none;
 }
 
-.progress-bar::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
+.progress-bar::-webkit-progress-bar {
+  border-radius: inherit;
+  background: var(--surface-container-low);
+}
+
+.progress-bar::-webkit-progress-value {
+  border-radius: inherit;
+  background: var(--clr-ink);
+}
+
+.progress-bar::-moz-progress-bar {
   border-radius: inherit;
   background: var(--clr-ink);
 }
@@ -2102,24 +2114,38 @@ label {
   max-inline-size: 780px;
 }
 
-.rich-heading {
-  display: flex;
-  align-items: baseline;
+.detail-section {
+  display: grid;
   gap: var(--space-md);
+}
+
+.detail-media {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.detail-media-list {
+  display: grid;
+  gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-media .media {
+  margin-block-start: 0;
+}
+
+.rich-media {
+  margin-block: var(--space-lg);
+}
+
+.rich-heading {
   margin-block-start: var(--space-lg);
   color: var(--clr-ink);
   font-style: italic;
   letter-spacing: -0.05em;
   text-transform: uppercase;
-}
-
-.rich-heading::before {
-  content: "";
-  inline-size: 0.45em;
-  aspect-ratio: 1;
-  border-radius: var(--radius-full);
-  background: var(--secondary);
-  flex: 0 0 auto;
 }
 
 .rich-paragraph:first-child {
@@ -2133,6 +2159,11 @@ label {
   display: grid;
   gap: var(--space-sm);
   padding-inline-start: var(--space-lg);
+}
+
+.detail-content .rich-list {
+  padding-inline-start: 0;
+  list-style: none;
 }
 
 .rich-list-item::marker {

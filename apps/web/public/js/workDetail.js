@@ -39,8 +39,10 @@ async function loadCaseStudyDetail() {
       study.datePublished,
     );
 
-    renderTools(fragment, toolsList);
+    renderStack(fragment, toolsList);
+    renderProgress(fragment, study.deliverableProgress);
     renderHeroMedia(fragment, study);
+    renderMediaGallery(fragment, study.media);
 
     renderCaseStudyContent(fragment, study);
 
@@ -52,14 +54,16 @@ async function loadCaseStudyDetail() {
 }
 
 function renderCaseStudyContent(fragment, study) {
-  const content = fragment.querySelector("[data-study-content]");
+  renderRichField(fragment, "[data-study-description]", study.description);
+  renderRichField(fragment, "[data-study-challenge]", study.challenge);
+  renderRichField(fragment, "[data-study-solution]", study.solution);
+  renderRichField(fragment, "[data-study-results]", study.results);
+}
 
-  content.replaceChildren(
-    createRichContentFragment(study.description),
-    createRichContentFragment(study.challenge),
-    createRichContentFragment(study.solution),
-    createRichContentFragment(study.results),
-  );
+function renderRichField(fragment, selector, content) {
+  fragment
+    .querySelector(selector)
+    .replaceChildren(createRichContentFragment(content));
 }
 
 function renderHeroMedia(fragment, study) {
@@ -84,18 +88,104 @@ function renderHeroMedia(fragment, study) {
   coverShell.setAttribute("aria-hidden", "true");
 }
 
-function renderTools(fragment, toolsList) {
-  const toolsRow = fragment.querySelector("[data-study-tools-row]");
-  const toolsContainer = fragment.querySelector("[data-study-tools]");
+function renderMediaGallery(fragment, mediaItems = []) {
+  const mediaSection = fragment.querySelector("[data-study-media-section]");
+  const mediaList = fragment.querySelector("[data-study-media-list]");
+  const mediaTemplate = fragment.querySelector("[data-study-media-template]");
+
+  renderMediaList(mediaList, mediaTemplate, mediaItems);
+  mediaSection.hidden = mediaList.hidden;
+}
+
+function renderMediaList(mediaList, mediaTemplate, mediaItems = []) {
+  const renderedItems = normalizeMediaItems(mediaItems)
+    .map((media) => createMediaItem(mediaTemplate, media))
+    .filter(Boolean);
+
+  if (!renderedItems.length) return;
+
+  mediaList.replaceChildren(...renderedItems);
+  mediaList.hidden = false;
+}
+
+function createMediaItem(template, media) {
+  const mediaElement = createMediaElement(media);
+
+  if (!mediaElement) return null;
+
+  const item = template.content.firstElementChild.cloneNode(true);
+  item.querySelector("[data-study-media-frame]").replaceChildren(mediaElement);
+  return item;
+}
+
+function normalizeMediaItems(mediaItems) {
+  if (Array.isArray(mediaItems)) return mediaItems;
+
+  if (Array.isArray(mediaItems?.data)) return mediaItems.data;
+
+  return [];
+}
+
+function renderStack(fragment, toolsList) {
   const stackContainer = fragment.querySelector("[data-study-stack]");
   const stackItems = toolsList.length ? toolsList : ["Strategy", "UX", "UI"];
 
-  if (toolsList.length) {
-    appendChips(toolsContainer, toolsList);
-    toolsRow.hidden = false;
-  }
-
   appendChips(stackContainer, stackItems);
+}
+
+function renderProgress(fragment, progressItems = []) {
+  const progressContainer = fragment.querySelector("[data-study-progress]");
+  const progressTemplate = fragment.querySelector(
+    "[data-study-progress-template]",
+  );
+  const items = normalizeProgressItems(progressItems);
+
+  progressContainer.replaceChildren(
+    ...items.map((item) => createProgressItem(progressTemplate, item)),
+  );
+}
+
+function createProgressItem(template, { label, percentage }) {
+  const item = template.content.firstElementChild.cloneNode(true);
+  const percentageText = `${percentage}%`;
+
+  item.querySelector("[data-study-progress-label]").textContent = label;
+
+  const value = item.querySelector("[data-study-progress-value]");
+  value.value = percentageText;
+  value.textContent = percentageText;
+
+  const bar = item.querySelector("[data-study-progress-bar]");
+  bar.value = percentage;
+  bar.setAttribute("aria-label", `${label}: ${percentageText}`);
+
+  return item;
+}
+
+function normalizeProgressItems(progressItems) {
+  const items = Array.isArray(progressItems) ? progressItems : [];
+  const normalizedItems = items
+    .map((item) => ({
+      label: typeof item?.label === "string" ? item.label.trim() : "",
+      percentage: clampPercentage(item?.percentage),
+    }))
+    .filter((item) => item.label);
+
+  return normalizedItems.length
+    ? normalizedItems
+    : [
+        { label: "Product Strategy", percentage: 100 },
+        { label: "UX Research", percentage: 100 },
+        { label: "Visual Design", percentage: 100 },
+      ];
+}
+
+function clampPercentage(value) {
+  const percentage = Number(value);
+
+  if (!Number.isFinite(percentage)) return 100;
+
+  return Math.min(Math.max(Math.round(percentage), 0), 100);
 }
 
 function appendChips(container, items) {

@@ -1,3 +1,5 @@
+import { createMediaElement } from "./media.js";
+
 export function extractTextFromRichContent(content) {
 	if (!Array.isArray(content)) return '';
 
@@ -101,6 +103,20 @@ function createRichContentBlock(block) {
 		});
 
 		return list.children.length ? list : null;
+	}
+
+	if (block.type === 'image') {
+		const mediaElement = createMediaElement(block.image);
+
+		if (!mediaElement) return null;
+
+		const figure = document.createElement('figure');
+		figure.className = 'media rich-media';
+		figure.setAttribute('media-variant', 'cover');
+		figure.setAttribute('media-density', 'large');
+		figure.appendChild(mediaElement);
+
+		return figure;
 	}
 
 	return null;

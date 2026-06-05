@@ -66,6 +66,11 @@
     "tools": {
       "type": "blocks"
     },
+    "deliverableProgress": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.progress-item"
+    },
     "datePublished": {
       "type": "date"
     }

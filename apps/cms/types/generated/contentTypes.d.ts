@@ -639,6 +639,10 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     datePublished: Schema.Attribute.Date;
+    deliverableProgress: Schema.Attribute.Component<
+      'shared.progress-item',
+      true
+    >;
     description: Schema.Attribute.Blocks;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<

@@ -11,6 +11,27 @@ export interface SharedMedia extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedProgressItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_progress_items';
+  info: {
+    description: 'A labelled percentage row for project deliverables.';
+    displayName: 'Progress item';
+    icon: 'chartBubble';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    percentage: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<100>;
+  };
+}
+
 export interface SharedQuote extends Struct.ComponentSchema {
   collectionName: 'components_shared_quotes';
   info: {
@@ -66,6 +87,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.media': SharedMedia;
+      'shared.progress-item': SharedProgressItem;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;

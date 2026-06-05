@@ -1,93 +1,144 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
+
 <BaseLayout title="Case Study - Darren Sorrels Design">
   <article id="case-study-detail" class="detail-page panel" panel-type="detail">
     <p>Loading case study...</p>
   </article>
 
-    <template id="case-study-detail-template">
-      <a class="button back-link" button-style="outline" href="/work">Back to Work</a>
+  <template id="case-study-detail-template">
+    <a class="button back-link" button-style="outline" href="/work"
+      >Back to Work</a
+    >
 
-      <header class="panel hero detail-hero" panel-density="zen" hero-layout="split" hero-density="zen">
-        <div class="hero-copy">
-          <p class="chip" chip-type="tag" chip-tone="inverse">Case Study</p>
-          <h1 class="hero-title" data-study-title></h1>
-          <p class="hero-text text-lead" data-study-date></p>
-          <div class="chip-group" chip-group-type="meta" data-study-tools-row hidden>
-            <strong>Tools:</strong>
-            <span class="chip-group" data-study-tools></span>
-          </div>
-        </div>
-        <div class="panel hero-media" data-study-cover-shell media-density="medium">
-          <div class="hero-media-inner" data-study-cover-media>
-            <span class="monogram" data-study-monogram></span>
-          </div>
-        </div>
-      </header>
-
-      <section
-        class="stats-section detail-stats counter-list"
-        aria-label="Case study snapshot"
-      >
-        <article class="card counter-item" card-type="stat" card-density="large" card-effect="halftone">
-          <p class="chip counter-label" chip-type="tag">Role</p>
-          <strong class="card-value">UX</strong>
-        </article>
-        <article class="card counter-item" card-type="stat" card-density="large" card-effect="halftone">
-          <p class="chip counter-label" chip-type="tag">Mode</p>
-          <strong class="card-value">UI</strong>
-        </article>
-        <article class="card counter-item" card-type="stat" card-density="large" card-effect="halftone">
-          <p class="chip counter-label" chip-type="tag">System</p>
-          <strong class="card-value">DS</strong>
-        </article>
-        <article
-          class="card counter-item"
-          card-type="stat"
-          card-density="large"
-          card-effect="halftone"
-          chip-tone="inverse"
-        >
-          <p class="chip counter-label" chip-type="tag">Launch</p>
-          <strong class="card-value">01</strong>
-        </article>
-      </section>
-
-      <div class="case-layout detail-layout">
-        <div class="case-main">
-          <section class="detail-content" data-study-content></section>
-        </div>
-
-        <aside class="case-sidebar">
-          <section class="panel" panel-type="sidebar">
-            <h2 class="panel-heading">Deliverables</h2>
-            <div class="progress-list">
-              <div class="progress-item">
-                <span>Product Strategy</span><span>100%</span><i
-                  class="progress-bar"></i>
-              </div>
-              <div class="progress-item">
-                <span>UX Research</span><span>100%</span><i
-                  class="progress-bar"></i>
-              </div>
-              <div class="progress-item">
-                <span>Visual Design</span><span>100%</span><i
-                  class="progress-bar"></i>
-              </div>
-            </div>
-          </section>
-          <section class="panel" panel-type="sidebar">
-            <h2 class="panel-heading">Stack</h2>
-            <div class="chip-group" data-study-stack></div>
-          </section>
-          <section class="panel" panel-type="cta">
-            <h2 class="panel-heading">Work With Me</h2>
-            <p class="panel-text">Let's build something as impactful as this.</p>
-            <a class="button" button-style="filled" href="/#contact">Hire Me Now</a>
-          </section>
-        </aside>
+    <header
+      class="panel hero detail-hero"
+      panel-density="zen"
+      hero-layout="split"
+      hero-density="zen"
+    >
+      <div class="hero-copy">
+        <p class="chip" chip-type="tag" chip-tone="inverse">Case Study</p>
+        <h1 class="hero-title" data-study-title></h1>
+        <p class="hero-text text-lead" data-study-date></p>
       </div>
-    </template>
+      <div
+        class="panel hero-media"
+        data-study-cover-shell
+        media-density="medium"
+      >
+        <div class="hero-media-inner" data-study-cover-media>
+          <span class="monogram" data-study-monogram></span>
+        </div>
+      </div>
+    </header>
+
+    <section
+      class="stats-section detail-stats"
+      aria-label="Case study snapshot"
+    >
+      <article
+        class="card"
+        card-type="stat"
+        card-density="large"
+        card-effect="halftone"
+      >
+        <p class="chip" chip-type="tag">Role</p>
+        <strong class="card-value">UX</strong>
+      </article>
+      <article
+        class="card"
+        card-type="stat"
+        card-density="large"
+        card-effect="halftone"
+      >
+        <p class="chip" chip-type="tag">Duration</p>
+        <strong class="card-value">8 months</strong>
+      </article>
+      <article
+        class="card"
+        card-type="stat"
+        card-density="large"
+        card-effect="halftone"
+      >
+        <p class="chip" chip-type="tag">Industry</p>
+        <strong class="card-value">DS</strong>
+      </article>
+      <article
+        class="card"
+        card-type="stat"
+        card-density="large"
+        card-effect="halftone"
+        chip-tone="inverse"
+      >
+        <p class="chip" chip-type="tag">Scope</p>
+        <strong class="card-value">Internal Product</strong>
+      </article>
+    </section>
+
+    <div class="case-layout detail-layout">
+      <div class="case-main">
+        <section class="detail-content" aria-label="Case study details">
+          <section class="detail-section" aria-label="Description">
+            <div data-study-description></div>
+          </section>
+          <section class="detail-section" aria-label="Challenge">
+            <div data-study-challenge></div>
+          </section>
+          <section class="detail-section" aria-label="Solution">
+            <div data-study-solution></div>
+          </section>
+          <section class="detail-section" aria-label="Results">
+            <div data-study-results></div>
+          </section>
+          <section
+            class="detail-media"
+            aria-label="Project media"
+            data-study-media-section
+            hidden
+          >
+            <ul class="detail-media-list" data-study-media-list></ul>
+          </section>
+          <template data-study-media-template>
+            <li class="detail-media-item">
+              <figure class="media" media-variant="cover" media-density="large">
+                <div data-study-media-frame></div>
+              </figure>
+            </li>
+          </template>
+        </section>
+      </div>
+
+      <aside class="case-sidebar">
+        <section class="panel" panel-type="sidebar">
+          <h2 class="panel-heading">Contributions</h2>
+          <div class="progress-list" data-study-progress></div>
+          <template data-study-progress-template>
+            <div class="progress-item">
+              <span data-study-progress-label></span>
+              <output data-study-progress-value></output>
+              <progress
+                class="progress-bar"
+                max="100"
+                value="100"
+                data-study-progress-bar></progress>
+            </div>
+          </template>
+        </section>
+        <section class="panel" panel-type="sidebar">
+          <h2 class="panel-heading">Skills Used</h2>
+          <div class="chip-group" data-study-stack></div>
+        </section>
+        <section class="panel" panel-type="cta">
+          <h2 class="panel-heading">Work With Me</h2>
+          <p class="panel-text">Let's build something as impactful as this.</p>
+          <a class="button" button-style="filled" href="/#contact"
+            >Hire Me Now</a
+          >
+        </section>
+      </aside>
+    </div>
+  </template>
   <script slot="after-main" type="module" src="/js/workDetail.js"></script>
 </BaseLayout>
