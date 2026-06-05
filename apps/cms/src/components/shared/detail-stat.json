@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_detail_stats",
+  "info": {
+    "displayName": "Detail stat",
+    "icon": "bulletList",
+    "description": "A label and value card for detail page snapshot metadata."
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

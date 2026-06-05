@@ -41,6 +41,11 @@
       ],
       "default": "medium"
     },
+    "heroMeta": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.hero-meta-chip"
+    },
     "content": {
       "type": "blocks",
       "required": true

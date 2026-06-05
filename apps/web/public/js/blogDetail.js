@@ -2,6 +2,7 @@ import { fetchFromStrapi } from './api.js';
 import { applyCoverMedia } from './media.js';
 import { renderRichContentInto } from './richText.js';
 import { formatDate, getSlugFromUrl } from './utils.js';
+import { renderHeroMeta } from './heroMeta.js';
 
 async function loadBlogPostDetail() {
 	const container = document.getElementById('blog-post-detail');
@@ -41,6 +42,12 @@ async function loadBlogPostDetail() {
 			excerpt.textContent = post.excerpt;
 			excerpt.hidden = false;
 		}
+
+		renderHeroMeta(
+			fragment.querySelector('[data-blog-hero-meta]'),
+			fragment.querySelector('[data-blog-hero-meta-template]'),
+			post.heroMeta
+		);
 
 		applyCoverMedia(fragment.querySelector('[data-blog-cover-media]'), post.blogPostCover, post, {
 			alt: post.title || 'Blog post cover',

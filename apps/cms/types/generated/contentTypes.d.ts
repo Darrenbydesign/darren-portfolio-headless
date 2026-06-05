@@ -592,6 +592,7 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     datePublished: Schema.Attribute.Date;
     excerpt: Schema.Attribute.Text;
+    heroMeta: Schema.Attribute.Component<'shared.hero-meta-chip', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -644,6 +645,7 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
       true
     >;
     description: Schema.Attribute.Blocks;
+    heroMeta: Schema.Attribute.Component<'shared.hero-meta-chip', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -654,6 +656,7 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    projectStats: Schema.Attribute.Component<'shared.detail-stat', true>;
     publishedAt: Schema.Attribute.DateTime;
     results: Schema.Attribute.Blocks;
     slug: Schema.Attribute.String &
