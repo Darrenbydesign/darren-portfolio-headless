@@ -1589,7 +1589,10 @@ label {
   display: grid;
   gap: var(--hero-gap);
   padding: var(--hero-padding);
-  background: linear-gradient(var(--hero-overlay-color), var(--hero-overlay-color)),
+  background: linear-gradient(
+      var(--hero-overlay-color),
+      var(--hero-overlay-color)
+    ),
     var(--surface-container-lowest);
 
   &:where([hero-density="small"]) {
@@ -1727,6 +1730,7 @@ label {
 
 .case-main {
   counter-reset: home-section;
+  counter-increment: home-section;
 }
 
 .case-sidebar {
@@ -1739,7 +1743,6 @@ label {
 }
 
 .section-heading {
-  counter-increment: home-section;
   display: flex;
   align-items: baseline;
   gap: var(--space-md);
@@ -1814,7 +1817,10 @@ label {
 .studies-grid {
   --layout-gap: var(--space-xl);
   --layout-min: 17.5rem;
-  --layout-template: repeat(auto-fit, minmax(min(100%, var(--layout-min)), 1fr));
+  --layout-template: repeat(
+    auto-fit,
+    minmax(min(100%, var(--layout-min)), 1fr)
+  );
   container-type: inline-size;
 }
 
@@ -2079,7 +2085,7 @@ label {
   & .field-control:focus {
     padding-inline: var(--space-sm);
     border-bottom-width: 0.25rem;
-    background: var(--halftone), var(--surface-container-low);
+    background: var(--surface-container-low);
     outline: 0;
   }
 }
@@ -2100,7 +2106,7 @@ label {
 }
 
 .back-link {
-  margin-block-end: calc(var(--space-xl) * -1);
+  margin-block-end: var(--space-xl);
 }
 
 .detail-hero {
