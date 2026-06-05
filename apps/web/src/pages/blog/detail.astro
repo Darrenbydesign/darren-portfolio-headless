@@ -13,6 +13,15 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <p class="chip" chip-type="tag">Journal Entry</p>
       <p class="chip" chip-type="date" data-blog-date></p>
       <h1 data-blog-title></h1>
+      <ul
+        class="hero-meta"
+        aria-label="Blog post highlights"
+        data-blog-hero-meta
+        hidden
+      ></ul>
+      <template data-blog-hero-meta-template>
+        <li class="chip" chip-style="outline"></li>
+      </template>
       <p class="detail-excerpt" data-blog-excerpt hidden></p>
       <figure
         class="media detail-cover-media"

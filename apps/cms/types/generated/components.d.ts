@@ -1,5 +1,30 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SharedDetailStat extends Struct.ComponentSchema {
+  collectionName: 'components_shared_detail_stats';
+  info: {
+    description: 'A label and value card for detail page snapshot metadata.';
+    displayName: 'Detail stat';
+    icon: 'bulletList';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedHeroMetaChip extends Struct.ComponentSchema {
+  collectionName: 'components_shared_hero_meta_chips';
+  info: {
+    description: 'A named chip displayed in detail page hero metadata.';
+    displayName: 'Hero meta chip';
+    icon: 'priceTag';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -86,6 +111,8 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'shared.detail-stat': SharedDetailStat;
+      'shared.hero-meta-chip': SharedHeroMetaChip;
       'shared.media': SharedMedia;
       'shared.progress-item': SharedProgressItem;
       'shared.quote': SharedQuote;

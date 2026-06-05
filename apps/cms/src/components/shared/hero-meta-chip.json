@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_hero_meta_chips",
+  "info": {
+    "displayName": "Hero meta chip",
+    "icon": "priceTag",
+    "description": "A named chip displayed in detail page hero metadata."
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

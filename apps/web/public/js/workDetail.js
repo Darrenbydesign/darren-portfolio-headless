@@ -5,6 +5,7 @@ import {
 } from "./richText.js";
 import { formatDate, getSlugFromUrl } from "./utils.js";
 import { createMediaElement, getCoverSize } from "./media.js";
+import { renderHeroMeta } from "./heroMeta.js";
 
 async function loadCaseStudyDetail() {
   const container = document.getElementById("case-study-detail");
@@ -41,6 +42,12 @@ async function loadCaseStudyDetail() {
 
     renderStack(fragment, toolsList);
     renderProgress(fragment, study.deliverableProgress);
+    renderProjectStats(fragment, study.projectStats);
+    renderHeroMeta(
+      fragment.querySelector("[data-study-hero-meta]"),
+      fragment.querySelector("[data-study-hero-meta-template]"),
+      study.heroMeta,
+    );
     renderHeroMedia(fragment, study);
     renderMediaGallery(fragment, study.media);
 
@@ -95,6 +102,45 @@ function renderMediaGallery(fragment, mediaItems = []) {
 
   renderMediaList(mediaList, mediaTemplate, mediaItems);
   mediaSection.hidden = mediaList.hidden;
+}
+
+function renderProjectStats(fragment, stats = []) {
+  const statsContainer = fragment.querySelector("[data-study-stats]");
+  const statsTemplate = fragment.querySelector("[data-study-stat-template]");
+  const items = normalizeProjectStats(stats);
+
+  statsContainer.replaceChildren(
+    ...items.map((item) => createProjectStat(statsTemplate, item)),
+  );
+}
+
+function createProjectStat(template, { label, value }) {
+  const stat = template.content.firstElementChild.cloneNode(true);
+
+  stat.querySelector("[data-study-stat-label]").textContent = label;
+  stat.querySelector("[data-study-stat-value]").textContent = value;
+
+  return stat;
+}
+
+function normalizeProjectStats(stats) {
+  const items = Array.isArray(stats) ? stats : [];
+  const normalizedItems = items
+    .map((item) => ({
+      label: typeof item?.label === "string" ? item.label.trim() : "",
+      value: typeof item?.value === "string" ? item.value.trim() : "",
+    }))
+    .filter((item) => item.label && item.value);
+
+  return normalizedItems.length
+    ? normalizedItems
+    : [
+        { label: "Role", value: "UX Designer/Product Designer" },
+        { label: "Duration", value: "1 month" },
+        { label: "Industry", value: "Design" },
+        { label: "Scope", value: "Internal Product" },
+        { label: "Team", value: "Product, Engineering, Stakeholders" },
+      ];
 }
 
 function renderMediaList(mediaList, mediaTemplate, mediaItems = []) {

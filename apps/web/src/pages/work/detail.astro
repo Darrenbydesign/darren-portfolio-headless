@@ -22,12 +22,15 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <p class="chip" chip-type="tag" chip-tone="inverse">Case Study</p>
         <h1 class="hero-title" data-study-title></h1>
         <p class="hero-text text-lead" data-study-date></p>
-        <div class="hero-meta" aria-label="Portfolio highlights">
-          <span class="chip" chip-style="outline">Product Design</span>
-          <span class="chip" chip-style="outline">1 Month</span>
-          <span class="chip" chip-style="outline">Design</span>
-          <span class="chip" chip-style="outline">Internal Project</span>
-        </div>
+        <ul
+          class="hero-meta"
+          aria-label="Case study highlights"
+          data-study-hero-meta
+          hidden
+        ></ul>
+        <template data-study-hero-meta-template>
+          <li class="chip" chip-style="outline"></li>
+        </template>
       </div>
 
       <div
@@ -41,58 +44,24 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </div>
     </header>
 
-    <section
-      class="stats-section detail-stats"
-      aria-label="Case study snapshot"
-    >
+    <section class="detail-stats" aria-label="Case study snapshot">
       <header class="section-heading">
         <h2 class="section-title">Key Outcomes</h2>
       </header>
-      <article
-        class="card"
-        card-type="stat"
-        card-density="medium"
-        card-effect="halftone"
-      >
-        <p class="chip" chip-type="tag">Role</p>
-        <strong class="card-value">UX Designer/Product Designer</strong>
-      </article>
-      <article
-        class="card"
-        card-type="stat"
-        card-density="medium"
-        card-effect="halftone"
-      >
-        <p class="chip" chip-type="tag">Duration</p>
-        <strong class="card-value">1 month</strong>
-      </article>
-      <article
-        class="card"
-        card-type="stat"
-        card-density="medium"
-        card-effect="halftone"
-      >
-        <p class="chip" chip-type="tag">Industry</p>
-        <strong class="card-value">Design</strong>
-      </article>
-      <article
-        class="card"
-        card-type="stat"
-        card-density="medium"
-        card-effect="halftone"
-      >
-        <p class="chip" chip-type="tag">Scope</p>
-        <strong class="card-value">Internal Product</strong>
-      </article>
-      <article
-        class="card"
-        card-type="stat"
-        card-density="medium"
-        card-effect="halftone"
-      >
-        <p class="chip" chip-type="tag">Team</p>
-        <strong class="card-value">Product, Engineering,Stakeholders</strong>
-      </article>
+      <dl class="stats-section" data-study-stats></dl>
+      <template data-study-stat-template>
+        <div
+          class="card detail-stat"
+          card-type="stat"
+          card-density="medium"
+          card-effect="halftone"
+        >
+          <dt class="chip" chip-type="tag" data-study-stat-label></dt>
+          <dd class="detail-stat-value">
+            <strong class="card-value" data-study-stat-value></strong>
+          </dd>
+        </div>
+      </template>
     </section>
 
     <div class="case-layout detail-layout">
