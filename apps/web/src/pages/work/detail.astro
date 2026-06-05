@@ -22,7 +22,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <p class="chip" chip-type="tag" chip-tone="inverse">Case Study</p>
         <h1 class="hero-title" data-study-title></h1>
         <p class="hero-text text-lead" data-study-date></p>
+        <div class="hero-meta" aria-label="Portfolio highlights">
+          <span class="chip" chip-style="outline">Product Design</span>
+          <span class="chip" chip-style="outline">1 Month</span>
+          <span class="chip" chip-style="outline">Design</span>
+          <span class="chip" chip-style="outline">Internal Project</span>
+        </div>
       </div>
+
       <div
         class="panel hero-media"
         data-study-cover-shell
@@ -38,42 +45,53 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       class="stats-section detail-stats"
       aria-label="Case study snapshot"
     >
+      <header class="section-heading">
+        <h2 class="section-title">Key Outcomes</h2>
+      </header>
       <article
         class="card"
         card-type="stat"
-        card-density="large"
+        card-density="medium"
         card-effect="halftone"
       >
         <p class="chip" chip-type="tag">Role</p>
-        <strong class="card-value">UX</strong>
+        <strong class="card-value">UX Designer/Product Designer</strong>
       </article>
       <article
         class="card"
         card-type="stat"
-        card-density="large"
+        card-density="medium"
         card-effect="halftone"
       >
         <p class="chip" chip-type="tag">Duration</p>
-        <strong class="card-value">8 months</strong>
+        <strong class="card-value">1 month</strong>
       </article>
       <article
         class="card"
         card-type="stat"
-        card-density="large"
+        card-density="medium"
         card-effect="halftone"
       >
         <p class="chip" chip-type="tag">Industry</p>
-        <strong class="card-value">DS</strong>
+        <strong class="card-value">Design</strong>
       </article>
       <article
         class="card"
         card-type="stat"
-        card-density="large"
+        card-density="medium"
         card-effect="halftone"
-        chip-tone="inverse"
       >
         <p class="chip" chip-type="tag">Scope</p>
         <strong class="card-value">Internal Product</strong>
+      </article>
+      <article
+        class="card"
+        card-type="stat"
+        card-density="medium"
+        card-effect="halftone"
+      >
+        <p class="chip" chip-type="tag">Team</p>
+        <strong class="card-value">Product, Engineering,Stakeholders</strong>
       </article>
     </section>
 
@@ -81,16 +99,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <div class="case-main">
         <section class="detail-content" aria-label="Case study details">
           <section class="detail-section" aria-label="Description">
-            <div data-study-description></div>
+            <header class="counter-list" data-study-description></header>
           </section>
           <section class="detail-section" aria-label="Challenge">
-            <div data-study-challenge></div>
+            <header class="counter-list" data-study-challenge></header>
           </section>
           <section class="detail-section" aria-label="Solution">
-            <div data-study-solution></div>
+            <header class="counter-list" data-study-solution></header>
           </section>
           <section class="detail-section" aria-label="Results">
-            <div data-study-results></div>
+            <header class="counter-list" data-study-results></header>
           </section>
           <section
             class="detail-media"
@@ -102,7 +120,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           </section>
           <template data-study-media-template>
             <li class="detail-media-item">
-              <figure class="media" media-variant="cover" media-density="large">
+              <figure class="media" media-variant="cover" media-density="small">
                 <div data-study-media-frame></div>
               </figure>
             </li>
