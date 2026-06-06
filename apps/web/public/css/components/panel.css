@@ -1,0 +1,186 @@
+/* -------------------------------------------------------------
+   3. COMPONENT PRIMITIVES
+   ------------------------------------------------------------- */
+
+/* Base classes define structure. Attributes define visual variants,
+   sizing, tone, and behavior with low-specificity :where() selectors. */
+.panel {
+  --panel-padding: var(--comp-panel-padding);
+  --panel-radius: var(--comp-panel-radius);
+  --panel-border: var(--comp-panel-border);
+  --panel-background: var(--comp-panel-background);
+  position: relative;
+  padding: var(--panel-padding);
+  border: var(--panel-border);
+  border-radius: var(--panel-radius);
+  background: var(--panel-background);
+  overflow: hidden;
+
+  &:where([panel-style="outline"]) {
+    --panel-background: transparent;
+  }
+
+  &:where([panel-style="text"]) {
+    --panel-border: 0;
+    --panel-background: transparent;
+  }
+
+  &:where([panel-shape="none"]) {
+    --panel-radius: 0;
+  }
+
+  &:where([panel-shape="pill"]) {
+    --panel-radius: var(--sys-radius-full);
+  }
+
+  &:where([panel-density="small"]) {
+    --panel-padding: var(--sys-space-md);
+  }
+
+  &:where([panel-density="large"]) {
+    --panel-padding: var(--sys-space-xl);
+  }
+
+  &:where([panel-density="zen"]) {
+    --panel-padding: clamp(2.5rem, 7vw, 5rem) var(--sys-space-lg);
+  }
+
+  &:where([panel-effect="halftone"])::after {
+    content: "";
+    position: absolute;
+    inset-block-end: -1.5rem;
+    inset-inline-end: -1.5rem;
+    inline-size: 11.25rem;
+    aspect-ratio: 1;
+    background: var(--sys-pattern-halftone);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &:where([panel-type="page"]) {
+    --panel-padding: clamp(1.5rem, 5vw, 3rem);
+    padding: var(--panel-padding);
+  }
+
+  &:where([panel-type="detail"]) {
+    display: grid;
+    gap: var(--sys-space-xl);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  @media (width <= 40rem) {
+    border-radius: var(--comp-panel-mobile-radius);
+    box-shadow: var(--comp-panel-mobile-shadow);
+  }
+}
+
+.panel:where([panel-type="process"]) {
+  display: grid;
+  gap: var(--sys-space-lg);
+  padding: var(--sys-space-xxl);
+  border-inline-start-width: 0.25rem;
+  background: var(--sys-color-surface-container-low);
+  box-shadow: none;
+
+  &::after {
+    display: none;
+  }
+
+  @media (width <= 53.75rem) {
+    --layout-template: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  @media (width <= 40rem) {
+    padding: var(--sys-space-lg);
+  }
+}
+
+.panel:where([panel-type="showcase"]) {
+  padding: 0.25rem;
+  background: var(--sys-color-ink);
+
+  &::after {
+    display: none;
+  }
+}
+
+.panel:where([panel-type="sidebar"]) {
+  display: grid;
+  gap: var(--sys-space-lg);
+  padding: 2.125rem;
+  border-width: 0.125rem;
+  box-shadow: none;
+
+  &::after {
+    display: none;
+  }
+
+  & .panel-heading {
+    margin: 0;
+    padding-bottom: var(--sys-space-md);
+    border-bottom: var(--sys-border-hairline);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (width <= 40rem) {
+    padding: var(--sys-space-lg);
+  }
+}
+
+.panel:where([panel-type="cta"]) {
+  display: grid;
+  justify-items: center;
+  gap: var(--sys-space-md);
+  padding: 2.75rem;
+  background: var(--sys-color-primary);
+  color: var(--sys-color-on-primary);
+  text-align: center;
+  box-shadow: var(--sys-offset-hard);
+
+  &::before {
+    content: "->";
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    aspect-ratio: 1;
+    border: 0.125rem solid var(--sys-color-on-primary);
+    border-radius: var(--sys-radius-full);
+    font-family: var(--sys-typography-heading-font-family);
+    font-size: 1.5rem;
+  }
+
+  &::after {
+    display: none;
+  }
+
+  & .panel-heading,
+  & .panel-text {
+    color: var(--sys-color-on-primary);
+  }
+
+  & .button {
+    width: 100%;
+    background: var(--sys-color-surface-container-lowest);
+    color: var(--sys-color-ink);
+  }
+
+  @media (width <= 40rem) {
+    padding: var(--sys-space-lg);
+  }
+}
+
+
+

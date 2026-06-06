@@ -1,0 +1,22 @@
+/* -------------------------------------------------------------
+   UTILITIES
+   ------------------------------------------------------------- */
+.speed-line {
+  min-height: 1.75rem;
+  background: var(--sys-pattern-speed-lines);
+}
+
+.halftone-overlay {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--sys-pattern-halftone);
+    opacity: 0.24;
+    pointer-events: none;
+  }
+}
+

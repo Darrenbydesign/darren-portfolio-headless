@@ -1,0 +1,84 @@
+.button,
+button {
+  --button-padding: var(--comp-button-padding);
+  --button-radius: var(--comp-button-radius);
+  --button-border: var(--comp-button-border);
+  --button-background: var(--comp-button-background);
+  --button-color: var(--comp-button-foreground);
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: fit-content;
+  min-block-size: 2.75rem;
+  padding: var(--button-padding);
+  border: var(--button-border);
+  border-radius: var(--button-radius);
+  background: var(--button-background);
+  color: var(--button-color);
+  font-family: var(--sys-typography-label-font-family);
+  font-size: var(--sys-typography-label-font-size);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color var(--sys-motion-transition),
+    box-shadow var(--sys-motion-transition),
+    color var(--sys-motion-transition),
+    transform var(--sys-motion-transition);
+
+  &:where([button-style="outline"]) {
+    --button-background: transparent;
+    --button-color: var(--sys-color-ink);
+  }
+
+  &:where([button-style="text"]) {
+    --button-border: 0;
+    --button-background: transparent;
+    --button-color: var(--sys-color-primary);
+  }
+
+  &:where([button-shape="pill"]) {
+    --button-radius: var(--sys-radius-full);
+  }
+
+  &:where([button-shape="circle"]) {
+    --button-radius: var(--sys-radius-full);
+    inline-size: 2.75rem;
+    padding: 0;
+  }
+
+  &:where([button-shape="none"]) {
+    --button-radius: 0;
+  }
+
+  &:where([button-density="small"]) {
+    min-block-size: 2.25rem;
+    --button-padding: var(--sys-space-xs) var(--sys-space-sm);
+  }
+
+  &:where([button-density="large"]) {
+    min-block-size: 3.25rem;
+    --button-padding: var(--sys-space-md) var(--sys-space-lg);
+  }
+
+  &:where([button-density="zen"]) {
+    min-block-size: 3.75rem;
+    --button-padding: var(--sys-space-lg) var(--sys-space-xl);
+  }
+
+  &:where(:hover, :focus-visible) {
+    background: var(--comp-button-hover-background);
+    color: var(--comp-button-hover-foreground);
+    box-shadow: var(--comp-button-hover-shadow);
+    transform: translate(-0.125rem, -0.125rem);
+  }
+}
+
+
+
+

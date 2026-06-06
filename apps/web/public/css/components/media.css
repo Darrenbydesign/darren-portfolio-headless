@@ -1,0 +1,111 @@
+/* -------------------------------------------------------------
+   MEDIA
+   ------------------------------------------------------------- */
+.monogram {
+  display: grid;
+  place-items: center;
+  inline-size: min(72%, 20rem);
+  aspect-ratio: 1;
+  border: var(--sys-border-ink-heavy);
+  border-radius: var(--sys-radius-full);
+  background: var(--sys-color-surface-container-lowest);
+  color: var(--sys-color-primary);
+  font-family: var(--sys-typography-heading-font-family);
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 800;
+  box-shadow: var(--sys-offset-hard);
+}
+
+.logo-image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+.media {
+  display: block;
+  margin: 0;
+
+  &:where([media-variant="cover"]) {
+    --cover-block-size: clamp(11.875rem, 28vw, 17.5rem);
+    inline-size: 100%;
+    block-size: var(--cover-block-size);
+    max-block-size: var(--cover-block-size);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: var(--sys-border-hairline);
+    border-radius: var(--sys-radius-md);
+    background: var(--sys-color-surface-container-low);
+
+    &:where([media-style="outline"]) {
+      background: transparent;
+    }
+
+    &:where([media-style="text"]) {
+      border-color: transparent;
+      background: transparent;
+    }
+
+    &:where([media-shape="pill"]) {
+      border-radius: var(--sys-radius-full);
+    }
+
+    &:where([media-shape="circle"]) {
+      border-radius: var(--sys-radius-full);
+      aspect-ratio: 1;
+    }
+
+    &:where([media-shape="none"]) {
+      border-radius: 0;
+    }
+
+    &:where([media-density="small"]) {
+      --cover-block-size: clamp(8.75rem, 20vw, 12.5rem);
+    }
+
+    &:where([media-density="large"]) {
+      --cover-block-size: clamp(16.25rem, 42vw, 27.5rem);
+    }
+
+    &:where([media-density="zen"]) {
+      --cover-block-size: min(70vh, 45rem);
+    }
+
+    & img,
+    & video {
+      display: block;
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+    }
+
+    & .logo-image {
+      object-fit: contain;
+    }
+
+    & audio,
+    & .media-link {
+      align-self: center;
+      justify-self: center;
+    }
+  }
+}
+
+.detail-cover-media {
+  --cover-block-size: clamp(16.25rem, 48vw, 32.5rem);
+  aspect-ratio: 16 / 9;
+  margin-block-start: var(--sys-space-md);
+
+  &:where([media-density="small"]) {
+    --cover-block-size: clamp(11.25rem, 34vw, 20rem);
+  }
+
+  &:where([media-density="large"]) {
+    --cover-block-size: clamp(22.5rem, 58vw, 42.5rem);
+  }
+
+  &:where([media-density="zen"]) {
+    --cover-block-size: min(78vh, 56.25rem);
+  }
+}

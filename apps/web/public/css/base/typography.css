@@ -1,0 +1,106 @@
+/* -------------------------------------------------------------
+   TYPOGRAPHY
+   ------------------------------------------------------------- */
+a {
+  color: var(--sys-color-primary);
+  font-weight: 700;
+  text-decoration-color: var(--sys-color-secondary-container);
+  text-decoration-thickness: 0.1875rem;
+  text-underline-offset: 0.18em;
+  transition:
+    color var(--sys-motion-transition),
+    text-decoration-color var(--sys-motion-transition);
+
+  &:where(:hover, :focus-visible) {
+    color: var(--sys-color-secondary);
+    text-decoration-color: var(--sys-color-ink);
+  }
+}
+
+h1,
+h2,
+h3 {
+  color: var(--sys-color-on-surface);
+  font-family: var(--sys-typography-heading-font-family);
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: var(--sys-typography-display-font-size);
+  font-style: italic;
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin-bottom: var(--sys-space-lg);
+  font-size: var(--sys-typography-headline-font-size);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: var(--sys-typography-title-font-size);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+p + p,
+p + ul,
+p + ol,
+ul + p,
+ol + p {
+  margin-top: var(--sys-space-md);
+}
+
+hr {
+  inline-size: min(100%, 26.25rem);
+  block-size: 0.75rem;
+  margin-block: 0 var(--sys-space-xl);
+  margin-inline: 0;
+  border: 0;
+  background: var(--sys-pattern-speed-lines);
+}
+
+.text-lead,
+.text-large,
+.detail-excerpt {
+  color: var(--sys-color-on-surface-variant);
+  font-size: var(--sys-typography-body-large-font-size);
+  line-height: 1.6;
+}
+
+.rich-heading {
+  margin-block-start: var(--sys-space-lg);
+  color: var(--sys-color-ink);
+  font-style: italic;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.rich-media {
+  margin-block: var(--sys-space-lg);
+}
+
+.rich-paragraph {
+  &:first-child {
+    color: var(--sys-color-ink);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+}
+
+.rich-list {
+  display: grid;
+  gap: var(--sys-space-sm);
+  padding-inline-start: var(--sys-space-lg);
+}
+
+.rich-list-item {
+  &::marker {
+    color: var(--sys-color-secondary);
+    font-weight: 800;
+  }
+}
