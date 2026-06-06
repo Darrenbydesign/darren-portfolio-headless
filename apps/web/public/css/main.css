@@ -1730,7 +1730,6 @@ label {
 
 .case-main {
   counter-reset: home-section;
-  counter-increment: home-section;
 }
 
 .case-sidebar {
@@ -1743,6 +1742,7 @@ label {
 }
 
 .section-heading {
+  counter-increment: home-section;
   display: flex;
   align-items: baseline;
   gap: var(--space-md);
