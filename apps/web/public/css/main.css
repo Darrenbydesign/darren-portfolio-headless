@@ -2124,9 +2124,12 @@ label {
 }
 
 .back-link {
-  margin-block: var(--space-lg);
+  margin-block: 0 var(--space-lg);
 }
 
+.detail-page {
+  margin-block: var(--space-lg);
+}
 .detail-hero {
   padding: clamp(2.5rem, 7vw, 5rem) var(--space-lg);
   border: var(--border-ink-heavy);

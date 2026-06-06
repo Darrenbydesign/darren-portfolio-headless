@@ -3,12 +3,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Blog Post - Darren Sorrels Design">
-  <article id="blog-post-detail" class="detail-page panel" panel-type="detail">
+  <article id="blog-post-detail" class="detail-page">
     <p>Loading blog post...</p>
   </article>
 
   <template id="blog-detail-template">
-    <a class="button" button-style="outline" href="/blog">Back to Journal</a>
+    <a class="button back-link" button-style="outline" href="/blog"
+      >Back to Journal</a
+    >
 
     <header class="detail-header">
       <p class="chip" chip-type="tag">Journal Entry</p>
