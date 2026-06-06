@@ -43,103 +43,106 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
     </div>
   </section>
 
-  <section id="services" class="section-grid" grid-columns="two">
-    <header class="section-heading">
-      <h2 class="section-title">My Services</h2>
-    </header>
-    <hr />
+  <div class="counter-list">
+    <section id="services" class="section-grid" grid-columns="two" counter-item>
+      <header class="section-heading">
+        <h2 class="section-title">My Services</h2>
+      </header>
+      <hr />
 
-    <article class="card" card-type="feature" card-density="large">
-      <h3 class="card-heading">UX Design Strategy</h3>
-      <p class="card-text text-lead">
-        I work smarter <em>with you</em>, to discover the problems that really
-        need to be solved for your target users. Once, we discover the issues I
-        help you to implement the best solution to solve that problem.
+      <article class="card" card-type="feature" card-density="large">
+        <h3 class="card-heading">UX Design Strategy</h3>
+        <p class="card-text text-lead">
+          I work smarter <em>with you</em>, to discover the problems that really
+          need to be solved for your target users. Once, we discover the issues
+          I help you to implement the best solution to solve that problem.
+        </p>
+      </article>
+
+      <article class="card" card-type="feature" card-density="large">
+        <h3 class="card-heading">Interaction Design</h3>
+        <p class="card-text text-lead">
+          I craft beautiful interfaces that will make your products work
+          smoothly and provide delightful experiences the power of aesthetics
+          and function combined.
+        </p>
+      </article>
+
+      <article class="card" card-type="feature" card-density="large">
+        <h3 class="card-heading">UI Development</h3>
+        <p class="card-text text-lead">
+          I bring the designs to life with code utilizing my skills with
+          HTML/CSS/JS.
+        </p>
+      </article>
+
+      <article class="card" card-type="feature" card-density="large">
+        <h3 class="card-heading">Identity Design</h3>
+        <p class="card-text text-lead">
+          I provide design services necessary to communicate your brand identity
+          to your customers which include logo design along with the collaterals
+          the logo design would be used on.
+        </p>
+      </article>
+    </section>
+
+    <section id="designProcess" class="panel" panel-type="process" counter-item>
+      <header class="section-heading">
+        <h2 class="section-title">The Approach</h2>
+      </header>
+      <hr />
+      <p class="text-lead">
+        The work moves like a sequence of panels: research creates the scene,
+        strategy gives it structure, and interaction design turns the moment
+        into something people can feel.
       </p>
-    </article>
-
-    <article class="card" card-type="feature" card-density="large">
-      <h3 class="card-heading">Interaction Design</h3>
-      <p class="card-text text-lead">
-        I craft beautiful interfaces that will make your products work smoothly
-        and provide delightful experiences the power of aesthetics and function
-        combined.
-      </p>
-    </article>
-
-    <article class="card" card-type="feature" card-density="large">
-      <h3 class="card-heading">UI Development</h3>
-      <p class="card-text text-lead">
-        I bring the designs to life with code utilizing my skills with
-        HTML/CSS/JS.
-      </p>
-    </article>
-
-    <article class="card" card-type="feature" card-density="large">
-      <h3 class="card-heading">Identity Design</h3>
-      <p class="card-text text-lead">
-        I provide design services necessary to communicate your brand identity
-        to your customers which include logo design along with the collaterals
-        the logo design would be used on.
-      </p>
-    </article>
-  </section>
-
-  <section id="designProcess" class="panel" panel-type="process">
-    <header class="section-heading">
-      <h2 class="section-title">The Approach</h2>
-    </header>
-    <hr />
-    <p class="text-lead">
-      The work moves like a sequence of panels: research creates the scene,
-      strategy gives it structure, and interaction design turns the moment into
-      something people can feel.
-    </p>
-    <div class="section-grid" grid-columns="three">
-      <article class="card" card-style="outline" card-density="small">
-        <h3 class="card-heading">Understand</h3>
-        <p class="card-text">
-          By conducting user research I can understand your customers needs and
-          help you provide the optimal experience for them with your product.
-        </p>
-      </article>
-      <article class="card" card-style="outline" card-density="small">
-        <h3 class="card-heading">Define</h3>
-        <p class="card-text">
-          I combine the research gathered to hone in the key pain points your
-          customers are facing.
-        </p>
-      </article>
-      <article class="card" card-style="outline" card-density="small">
-        <h3 class="card-heading">Ideate</h3>
-        <p class="card-text">
-          This is where the magic happens. I generate ideas with you and shape
-          them into clear product directions.
-        </p>
-      </article>
-      <article class="card" card-style="outline" card-density="small">
-        <h3 class="card-heading">Prototype</h3>
-        <p class="card-text">
-          We'll build out the ideas most likely to improve the experience your
-          users have.
-        </p>
-      </article>
-      <article class="card" card-style="outline" card-density="small">
-        <h3 class="card-heading">Testing</h3>
-        <p class="card-text">
-          Those ideas need to be tested to prove whether they will achieve the
-          business needs and the users needs.
-        </p>
-      </article>
-      <article class="card" card-style="outline" card-density="small">
-        <h3 class="card-heading">Implement</h3>
-        <p class="card-text">
-          Once we determine the winner through testing, we begin shipping the
-          product out to customers.
-        </p>
-      </article>
-    </div>
-  </section>
+      <div class="section-grid" grid-columns="three">
+        <article class="card" card-style="outline" card-density="small">
+          <h3 class="card-heading">Understand</h3>
+          <p class="card-text">
+            By conducting user research I can understand your customers needs
+            and help you provide the optimal experience for them with your
+            product.
+          </p>
+        </article>
+        <article class="card" card-style="outline" card-density="small">
+          <h3 class="card-heading">Define</h3>
+          <p class="card-text">
+            I combine the research gathered to hone in the key pain points your
+            customers are facing.
+          </p>
+        </article>
+        <article class="card" card-style="outline" card-density="small">
+          <h3 class="card-heading">Ideate</h3>
+          <p class="card-text">
+            This is where the magic happens. I generate ideas with you and shape
+            them into clear product directions.
+          </p>
+        </article>
+        <article class="card" card-style="outline" card-density="small">
+          <h3 class="card-heading">Prototype</h3>
+          <p class="card-text">
+            We'll build out the ideas most likely to improve the experience your
+            users have.
+          </p>
+        </article>
+        <article class="card" card-style="outline" card-density="small">
+          <h3 class="card-heading">Testing</h3>
+          <p class="card-text">
+            Those ideas need to be tested to prove whether they will achieve the
+            business needs and the users needs.
+          </p>
+        </article>
+        <article class="card" card-style="outline" card-density="small">
+          <h3 class="card-heading">Implement</h3>
+          <p class="card-text">
+            Once we determine the winner through testing, we begin shipping the
+            product out to customers.
+          </p>
+        </article>
+      </div>
+    </section>
+  </div>
 
   <section id="blog" class="content-section blog">
     <h2>Latest Blog Posts</h2>

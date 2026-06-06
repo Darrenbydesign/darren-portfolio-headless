@@ -27,7 +27,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           aria-label="Case study highlights"
           data-study-hero-meta
           hidden
-        ></ul>
+        >
+        </ul>
         <template data-study-hero-meta-template>
           <li class="chip" chip-style="outline"></li>
         </template>
@@ -44,7 +45,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </div>
     </header>
 
-    <section class="detail-stats" aria-label="Case study snapshot">
+    <section class="detail-stats counter-list" aria-label="Case study snapshot">
       <header class="section-heading">
         <h2 class="section-title">Key Outcomes</h2>
       </header>
@@ -66,18 +67,21 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     <div class="case-layout detail-layout">
       <div class="case-main">
-        <section class="detail-content" aria-label="Case study details">
+        <section
+          class="detail-content counter-list"
+          aria-label="Case study details"
+        >
           <section class="detail-section" aria-label="Description">
-            <header class="counter-list" data-study-description></header>
+            <header data-study-description></header>
           </section>
           <section class="detail-section" aria-label="Challenge">
-            <header class="counter-list" data-study-challenge></header>
+            <header data-study-challenge></header>
           </section>
           <section class="detail-section" aria-label="Solution">
-            <header class="counter-list" data-study-solution></header>
+            <header data-study-solution></header>
           </section>
           <section class="detail-section" aria-label="Results">
-            <header class="counter-list" data-study-results></header>
+            <header data-study-results></header>
           </section>
           <section
             class="detail-media"

@@ -81,6 +81,7 @@ function createRichContentBlock(block) {
 
 		const heading = document.createElement(`h${level}`);
 		heading.className = 'rich-heading';
+		heading.setAttribute('counter-item', '');
 		heading.textContent = text;
 		return heading;
 	}

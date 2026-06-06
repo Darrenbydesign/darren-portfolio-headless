@@ -1728,10 +1728,6 @@ label {
   gap: 4rem;
 }
 
-.case-main {
-  counter-reset: home-section;
-}
-
 .case-sidebar {
   position: sticky;
   inset-block-start: 6.5rem;
@@ -1742,21 +1738,10 @@ label {
 }
 
 .section-heading {
-  counter-increment: home-section;
   display: flex;
   align-items: baseline;
   gap: var(--space-md);
   grid-column: 1 / -1;
-}
-
-.section-heading::before {
-  content: counter(home-section, decimal-leading-zero) ".";
-  color: var(--surface-container-highest);
-  font-family: var(--font-body);
-  font-size: 2.25rem;
-  font-style: italic;
-  font-weight: 800;
-  line-height: 1;
 }
 
 .section-title {
@@ -1791,13 +1776,16 @@ label {
   counter-reset: counter-list-item;
   list-style: none;
 
-  & > .counter-item {
+  & :where(.counter-item, [counter-item]) {
     counter-increment: counter-list-item;
     list-style: none;
   }
 
-  & > .counter-item > .counter-label::before {
-    content: counter(counter-list-item, decimal-leading-zero);
+  & :where(.counter-item, [counter-item])::before,
+  &
+    :where(.counter-item, [counter-item])
+    > :where(.counter-label, .section-heading)::before {
+    content: counter(counter-list-item, decimal-leading-zero) ".";
     display: block;
     color: var(--outline);
     font-family: var(--font-label);
@@ -1807,7 +1795,37 @@ label {
     letter-spacing: 0.1em;
   }
 
-  & > .counter-item > .chip.counter-label {
+  &
+    :where(.counter-item, [counter-item]):has(
+      > :where(.counter-label, .section-heading)
+    )::before {
+    content: none;
+  }
+
+  &
+    :where(.counter-item, [counter-item]):where(
+      .rich-heading,
+      .section-heading
+    ) {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+
+  &
+    :where(.counter-item, [counter-item]):where(
+      .rich-heading,
+      .section-heading
+    )::before,
+  & :where(.counter-item, [counter-item]) > .section-heading::before {
+    color: var(--surface-container-highest);
+    font-family: var(--font-body);
+    font-size: 2.25rem;
+    font-style: italic;
+    line-height: 1;
+  }
+
+  & :where(.counter-item, [counter-item]) > .chip.counter-label {
     display: inline-grid;
   }
 }
@@ -2106,7 +2124,7 @@ label {
 }
 
 .back-link {
-  margin-block-end: var(--space-xl);
+  margin-block: var(--space-lg);
 }
 
 .detail-hero {
