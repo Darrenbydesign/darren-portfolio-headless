@@ -1,0 +1,63 @@
+/* -------------------------------------------------------------
+   SHOWCASE
+   ------------------------------------------------------------- */
+.showcase-screen {
+  position: relative;
+  display: grid;
+  gap: var(--sys-space-md);
+  min-height: 28.75rem;
+  padding: var(--sys-space-xl);
+  border-radius: var(--sys-radius-md);
+  background: linear-gradient(
+      135deg,
+      var(--comp-showcase-highlight-color),
+      transparent 30%
+    ),
+    repeating-linear-gradient(
+      165deg,
+      var(--comp-showcase-stripe-color) 0,
+      var(--comp-showcase-stripe-color) 0.625rem,
+      var(--comp-showcase-stripe-accent-color) 0.625rem,
+      var(--comp-showcase-stripe-accent-color) 1.25rem
+    );
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 18% 8% 14% 18%;
+    border: var(--sys-border-ink-heavy);
+    border-color: var(--comp-showcase-device-border-color);
+    border-radius: 1.75rem;
+    background: linear-gradient(
+        120deg,
+        var(--comp-showcase-accent-color),
+        transparent 30%
+      ),
+      var(--sys-pattern-halftone), var(--comp-showcase-device-surface-color);
+    box-shadow: var(--sys-shadow-showcase-device);
+    transform: rotate(-12deg);
+  }
+
+  @media (width <= 40rem) {
+    min-height: 20rem;
+  }
+}
+
+.showcase-line {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 26.25rem);
+  height: 0.875rem;
+  border-radius: var(--sys-radius-full);
+  background: var(--comp-showcase-accent-color);
+
+  &:nth-child(2) {
+    width: 72%;
+  }
+
+  &:nth-child(3) {
+    width: 48%;
+  }
+}
+

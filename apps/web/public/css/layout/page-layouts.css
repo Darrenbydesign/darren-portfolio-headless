@@ -1,0 +1,149 @@
+/* 5.4 Layout systems */
+.stats-section {
+  --layout-column-count: 4;
+  margin-block: calc(var(--sys-space-xxl) * -0.5) var(--sys-space-huge);
+  margin-inline: 0;
+  position: relative;
+  z-index: 2;
+
+  @media (width <= 53.75rem) {
+    --layout-column-count: 2;
+    margin-block-start: var(--sys-space-xl);
+  }
+
+  @media (width <= 40rem) {
+    --layout-column-count: 1;
+  }
+}
+
+.case-layout {
+  --layout-align: start;
+  --layout-gap: 4rem;
+  --layout-template: minmax(0, 8fr) minmax(17.5rem, 4fr);
+  align-items: start;
+
+  @media (width <= 53.75rem) {
+    --layout-template: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  @media (width <= 40rem) {
+    gap: var(--sys-space-xl);
+  }
+}
+
+.case-main,
+.case-sidebar {
+  display: grid;
+  gap: 4rem;
+
+  @media (width <= 40rem) {
+    gap: var(--sys-space-xl);
+  }
+}
+
+.case-sidebar {
+  position: sticky;
+  inset-block-start: 6.5rem;
+
+  @media (width <= 53.75rem) {
+    position: static;
+  }
+}
+
+.section-grid {
+  --layout-gap: var(--sys-space-lg);
+}
+
+.posts-grid,
+.studies-grid {
+  --layout-gap: var(--sys-space-xl);
+  --layout-min: 17.5rem;
+  --layout-template: repeat(
+    auto-fit,
+    minmax(min(100%, var(--layout-min)), 1fr)
+  );
+  container-type: inline-size;
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sys-space-md);
+  grid-column: 1 / -1;
+}
+
+.section-title {
+  margin: 0;
+  font-style: italic;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.counter-label {
+  display: grid;
+  gap: var(--sys-space-xs);
+  margin-block-end: var(--sys-space-sm);
+  color: var(--sys-color-secondary);
+}
+
+.counter-list {
+  counter-reset: counter-list-item;
+  list-style: none;
+
+  & :where(.counter-item, [counter-item]) {
+    counter-increment: counter-list-item;
+    list-style: none;
+  }
+
+  & :where(.counter-item, [counter-item])::before,
+  &
+    :where(.counter-item, [counter-item])
+    > :where(.counter-label, .section-heading)::before {
+    content: counter(counter-list-item, decimal-leading-zero) ".";
+    display: block;
+    color: var(--sys-color-outline);
+    font-family: var(--sys-typography-label-font-family);
+    font-size: var(--sys-typography-caption-font-size);
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  &
+    :where(.counter-item, [counter-item]):has(
+      > :where(.counter-label, .section-heading)
+    )::before {
+    content: none;
+  }
+
+  &
+    :where(.counter-item, [counter-item]):where(
+      .rich-heading,
+      .section-heading
+    ) {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sys-space-md);
+  }
+
+  &
+    :where(.counter-item, [counter-item]):where(
+      .rich-heading,
+      .section-heading
+    )::before,
+  & :where(.counter-item, [counter-item]) > .section-heading::before {
+    color: var(--sys-color-surface-container-highest);
+    font-family: var(--sys-typography-body-font-family);
+    font-size: 2.25rem;
+    font-style: italic;
+    line-height: 1;
+  }
+
+  & :where(.counter-item, [counter-item]) > .chip.counter-label {
+    display: inline-grid;
+  }
+}
+
+
+

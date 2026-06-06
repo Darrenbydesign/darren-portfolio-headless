@@ -1,0 +1,291 @@
+/* Layout primitives */
+.layout-grid {
+  --layout-column-count: 12;
+}
+
+.section-grid,
+.stats-section,
+.case-layout,
+.posts-grid,
+.studies-grid {
+  --layout-column-count: 1;
+}
+
+.layout-grid,
+.section-grid,
+.stats-section,
+.case-layout,
+.posts-grid,
+.studies-grid {
+  --layout-gap: var(--sys-space-lg);
+  --layout-template: repeat(var(--layout-column-count), minmax(0, 1fr));
+  display: grid;
+  align-items: var(--layout-align, stretch);
+  gap: var(--layout-gap);
+  grid-template-columns: var(--layout-template);
+}
+
+.layout-grid:where([layout-gap="none"]),
+.layout-flex:where([layout-gap="none"]) {
+  --layout-gap: 0;
+}
+
+.layout-grid:where([layout-gap="small"]),
+.layout-flex:where([layout-gap="small"]) {
+  --layout-gap: var(--sys-space-sm);
+}
+
+.layout-grid:where([layout-gap="medium"]),
+.layout-flex:where([layout-gap="medium"]) {
+  --layout-gap: var(--sys-space-md);
+}
+
+.layout-grid:where([layout-gap="large"]),
+.layout-flex:where([layout-gap="large"]) {
+  --layout-gap: var(--sys-space-lg);
+}
+
+.layout-grid:where([layout-gap="xlarge"]),
+.layout-flex:where([layout-gap="xlarge"]) {
+  --layout-gap: var(--sys-space-xl);
+}
+
+.layout-grid:where([layout-align="start"]),
+.layout-flex:where([layout-align="start"]) {
+  --layout-align: start;
+}
+
+.layout-grid:where([layout-align="center"]),
+.layout-flex:where([layout-align="center"]) {
+  --layout-align: center;
+}
+
+.layout-grid:where([grid-columns="one"], [grid-columns="1"]),
+.section-grid:where([grid-columns="one"], [grid-columns="1"]) {
+  --layout-column-count: 1;
+}
+
+.layout-grid:where([grid-columns="two"], [grid-columns="2"]),
+.section-grid:where([grid-columns="two"], [grid-columns="2"]) {
+  --layout-column-count: 2;
+}
+
+.layout-grid:where([grid-columns="three"], [grid-columns="3"]),
+.section-grid:where([grid-columns="three"], [grid-columns="3"]) {
+  --layout-column-count: 3;
+}
+
+.layout-grid:where([grid-columns="four"], [grid-columns="4"]),
+.section-grid:where([grid-columns="four"], [grid-columns="4"]) {
+  --layout-column-count: 4;
+}
+
+.layout-grid:where([grid-columns="six"], [grid-columns="6"]),
+.section-grid:where([grid-columns="six"], [grid-columns="6"]) {
+  --layout-column-count: 6;
+}
+
+.layout-grid:where([grid-columns="twelve"], [grid-columns="12"]) {
+  --layout-column-count: 12;
+}
+
+.layout-grid:where([grid-columns="auto"], [grid-mode="auto"]) {
+  --layout-template: repeat(
+    auto-fit,
+    minmax(min(100%, var(--layout-min, 17.5rem)), 1fr)
+  );
+}
+
+.layout-grid:where([grid-mode="stack"]) {
+  --layout-template: 1fr;
+}
+
+.layout-grid:where([grid-layout="split-8-4"]) {
+  --layout-template: minmax(0, 8fr) minmax(17.5rem, 4fr);
+}
+
+.layout-grid:where([grid-layout="split-7-5"]) {
+  --layout-template: minmax(0, 7fr) minmax(17.5rem, 5fr);
+}
+
+.layout-grid > :where([grid-span="full"]),
+.section-grid > :where(.section-title, .section-heading, hr) {
+  grid-column: 1 / -1;
+}
+
+.layout-grid > :where([grid-span="1"]) {
+  --grid-span: 1;
+  grid-column: span 1;
+}
+
+.layout-grid > :where([grid-span="2"]) {
+  --grid-span: 2;
+  grid-column: span 2;
+}
+
+.layout-grid > :where([grid-span="3"]) {
+  --grid-span: 3;
+  grid-column: span 3;
+}
+
+.layout-grid > :where([grid-span="4"]) {
+  --grid-span: 4;
+  grid-column: span 4;
+}
+
+.layout-grid > :where([grid-span="5"]) {
+  --grid-span: 5;
+  grid-column: span 5;
+}
+
+.layout-grid > :where([grid-span="6"]) {
+  --grid-span: 6;
+  grid-column: span 6;
+}
+
+.layout-grid > :where([grid-span="7"]) {
+  --grid-span: 7;
+  grid-column: span 7;
+}
+
+.layout-grid > :where([grid-span="8"]) {
+  --grid-span: 8;
+  grid-column: span 8;
+}
+
+.layout-grid > :where([grid-span="9"]) {
+  --grid-span: 9;
+  grid-column: span 9;
+}
+
+.layout-grid > :where([grid-span="10"]) {
+  --grid-span: 10;
+  grid-column: span 10;
+}
+
+.layout-grid > :where([grid-span="11"]) {
+  --grid-span: 11;
+  grid-column: span 11;
+}
+
+.layout-grid > :where([grid-span="12"]) {
+  --grid-span: 12;
+  grid-column: span 12;
+}
+
+@media (width <= 53.75rem) {
+  .layout-grid:where([grid-collapse="tablet"]),
+  .section-grid {
+    --layout-template: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .layout-grid:where([grid-collapse="tablet"]) > :where([grid-span]) {
+    grid-column: auto;
+  }
+}
+
+@media (width <= 40rem) {
+  .layout-grid:where([grid-collapse="mobile"]) {
+    --layout-template: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .layout-grid:where([grid-collapse="mobile"]) > :where([grid-span]) {
+    grid-column: auto;
+  }
+}
+
+.layout-flex {
+  --layout-column-count: 12;
+  --layout-gap: var(--sys-space-lg);
+  --layout-min: 17.5rem;
+  display: flex;
+  flex-wrap: var(--layout-wrap, wrap);
+  align-items: var(--layout-align, stretch);
+  gap: var(--layout-gap);
+}
+
+.layout-flex > * {
+  flex: var(--layout-item-flex, 1 1 min(100%, var(--layout-min)));
+}
+
+.layout-flex:where([flex-grid="columns"]) > * {
+  --grid-span: 12;
+  --grid-gap-count: calc(var(--layout-column-count) - 1);
+  --grid-span-gap-count: calc(var(--grid-span) - 1);
+  flex: 0 1
+    calc(
+      (
+          (100% - (var(--layout-gap) * var(--grid-gap-count))) /
+            var(--layout-column-count)
+        ) * var(--grid-span) + (var(--layout-gap) * var(--grid-span-gap-count))
+    );
+}
+
+.layout-flex > :where([grid-span="1"]) {
+  --grid-span: 1;
+}
+
+.layout-flex > :where([grid-span="2"]) {
+  --grid-span: 2;
+}
+
+.layout-flex > :where([grid-span="3"]) {
+  --grid-span: 3;
+}
+
+.layout-flex > :where([grid-span="4"]) {
+  --grid-span: 4;
+}
+
+.layout-flex > :where([grid-span="5"]) {
+  --grid-span: 5;
+}
+
+.layout-flex > :where([grid-span="6"]) {
+  --grid-span: 6;
+}
+
+.layout-flex > :where([grid-span="7"]) {
+  --grid-span: 7;
+}
+
+.layout-flex > :where([grid-span="8"]) {
+  --grid-span: 8;
+}
+
+.layout-flex > :where([grid-span="9"]) {
+  --grid-span: 9;
+}
+
+.layout-flex > :where([grid-span="10"]) {
+  --grid-span: 10;
+}
+
+.layout-flex > :where([grid-span="11"]) {
+  --grid-span: 11;
+}
+
+.layout-flex > :where([grid-span="12"]) {
+  --grid-span: 12;
+}
+
+.layout-flex > :where([grid-span="full"]) {
+  --grid-span: var(--layout-column-count);
+  flex-basis: 100%;
+}
+
+@media (width <= 53.75rem) {
+  .layout-flex:where([grid-collapse="tablet"]) > * {
+    flex-basis: 100%;
+  }
+}
+
+@media (width <= 40rem) {
+  .layout-flex:where([grid-collapse="mobile"]) > * {
+    flex-basis: 100%;
+  }
+}
+
+

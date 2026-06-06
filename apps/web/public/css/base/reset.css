@@ -1,0 +1,87 @@
+/* -------------------------------------------------------------
+   2. BASE STYLES & RESET
+   ------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-block-size: 100vh;
+  background: var(--sys-color-page-background);
+  color: var(--sys-color-text-primary);
+  font-family: var(--sys-typography-body-font-family);
+  font-size: var(--sys-typography-body-font-size);
+  line-height: 1.6;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+img,
+video,
+canvas {
+  block-size: auto;
+}
+
+img,
+video {
+  object-fit: cover;
+}
+
+:focus-visible {
+  outline: 0.1875rem solid var(--sys-color-secondary);
+  outline-offset: 0.1875rem;
+}
+
+.sr-only {
+  position: absolute;
+  inline-size: 0.0625rem;
+  block-size: 0.0625rem;
+  margin: -0.0625rem;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  inset-block-start: var(--sys-space-md);
+  inset-inline-start: var(--sys-space-md);
+  z-index: 200;
+  padding: var(--sys-space-sm) var(--sys-space-md);
+  border: var(--sys-border-ink);
+  border-radius: var(--sys-radius-md);
+  background: var(--sys-color-surface-container-lowest);
+  color: var(--sys-color-on-surface);
+  font-family: var(--sys-typography-label-font-family);
+  font-size: var(--sys-typography-label-font-size);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: var(--sys-offset-hard);
+  transform: translateY(calc(-100% - var(--sys-space-xl)));
+  transition: transform var(--sys-motion-transition);
+
+  &:where(:focus, :focus-visible) {
+    transform: translateY(0);
+  }
+}
+
+
+

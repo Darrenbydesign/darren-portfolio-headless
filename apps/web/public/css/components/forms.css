@@ -1,0 +1,111 @@
+/* -------------------------------------------------------------
+   FORMS
+   ------------------------------------------------------------- */
+.contact {
+  padding: clamp(1.5rem, 5vw, 3rem);
+
+  @media (width <= 40rem) {
+    border-radius: var(--sys-radius-xl);
+    box-shadow: 0.375rem 0.375rem 0 var(--sys-color-primary-fixed-dim);
+  }
+
+  & form {
+    display: grid;
+    gap: var(--sys-space-md);
+    max-width: 42.5rem;
+  }
+
+  & .field-control {
+    --field-padding: var(--comp-field-padding);
+    --field-radius: var(--comp-field-radius);
+    --field-border: var(--comp-field-border);
+    --field-border-block-end: var(--comp-field-border-block-end);
+    --field-background: var(--comp-field-background);
+    inline-size: 100%;
+    padding: var(--field-padding);
+    border: var(--field-border);
+    border-block-end: var(--field-border-block-end);
+    border-radius: var(--field-radius);
+    background: var(--field-background);
+    color: var(--comp-field-foreground);
+    font: inherit;
+    transition:
+      background-color var(--sys-motion-transition),
+      border-color var(--sys-motion-transition),
+      border-width var(--sys-motion-transition),
+      padding var(--sys-motion-transition);
+
+    &:where([field-style="outline"]) {
+      --field-padding: var(--sys-space-sm) var(--sys-space-md);
+      --field-border: var(--sys-border-ink);
+      --field-border-block-end: var(--sys-border-ink);
+      --field-background: var(--sys-color-surface-container-lowest);
+    }
+
+    &:where([field-style="filled"]) {
+      --field-padding: var(--sys-space-sm) var(--sys-space-md);
+      --field-border-block-end: 0;
+      --field-background: var(--sys-color-surface-container-low);
+    }
+
+    &:where([field-shape="round"]) {
+      --field-radius: var(--sys-radius-md);
+    }
+
+    &:where([field-shape="pill"]) {
+      --field-radius: var(--sys-radius-full);
+    }
+
+    &:where([field-shape="none"]) {
+      --field-radius: 0;
+    }
+
+    &:where([field-density="small"]) {
+      --field-padding: var(--sys-space-xs) 0;
+    }
+
+    &:where([field-density="large"]) {
+      --field-padding: var(--sys-space-md) 0;
+    }
+
+    &:where([field-variant="multiline"]) {
+      min-height: 8.75rem;
+      resize: vertical;
+    }
+
+    &:where(:focus) {
+      padding-inline: var(--sys-space-sm);
+      border-bottom-width: 0.25rem;
+      background: var(--sys-color-surface-container-low);
+      outline: 0;
+    }
+  }
+}
+
+.field {
+  display: grid;
+  gap: var(--sys-space-xs);
+}
+
+.form-status {
+  display: none;
+  margin-block-start: var(--sys-space-md);
+  padding: var(--sys-space-md);
+  border: var(--sys-border-ink);
+  border-radius: var(--sys-radius-md);
+  font-family: var(--sys-typography-label-font-family);
+  font-weight: 700;
+  text-transform: uppercase;
+
+  &:where(.success) {
+    display: block;
+    background: var(--comp-status-success-background);
+    color: var(--comp-status-success-foreground);
+  }
+
+  &:where(.error) {
+    display: block;
+    background: var(--sys-color-error-container);
+    color: var(--sys-color-on-error-container);
+  }
+}

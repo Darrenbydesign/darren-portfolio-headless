@@ -1,0 +1,161 @@
+.card {
+  --card-padding: var(--comp-card-padding);
+  --card-radius: var(--comp-card-radius);
+  --card-border: var(--comp-card-border);
+  --card-background: var(--comp-card-background);
+  container-type: inline-size;
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: var(--sys-space-md);
+  min-block-size: 100%;
+  padding: var(--card-padding);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  background: var(--card-background);
+  overflow: hidden;
+  transition:
+    background-color var(--sys-motion-transition),
+    box-shadow var(--sys-motion-transition),
+    transform var(--sys-motion-transition);
+
+  & .card-heading {
+    position: relative;
+    z-index: 1;
+    color: var(--comp-card-heading-color);
+  }
+
+  & .card-text,
+  & .chip:where([chip-type="date"]) {
+    position: relative;
+    z-index: 1;
+    color: var(--comp-card-text-color);
+  }
+
+  &:where([card-style="outline"]) {
+    --card-border: var(--sys-border-hairline);
+    --card-background: transparent;
+  }
+
+  &:where([card-style="text"]) {
+    --card-border: 0;
+    --card-background: transparent;
+  }
+
+  &:where([card-shape="none"]) {
+    --card-radius: 0;
+  }
+
+  &:where([card-shape="pill"]) {
+    --card-radius: var(--sys-radius-full);
+  }
+
+  &:where([card-density="small"]) {
+    --card-padding: 1.5625rem;
+    gap: var(--sys-space-sm);
+    min-block-size: auto;
+  }
+
+  &:where([card-density="large"]) {
+    --card-padding: var(--sys-space-xl);
+  }
+
+  &:where([card-density="zen"]) {
+    --card-padding: clamp(2rem, 6vw, 4rem);
+  }
+
+  &:where([card-effect="halftone"])::after {
+    content: "";
+    position: absolute;
+    inset-block-end: -1.5rem;
+    inset-inline-end: -1.5rem;
+    inline-size: 11.25rem;
+    aspect-ratio: 1;
+    background: var(--sys-pattern-halftone);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &:where([card-interactive="true"]):where(:hover, :focus-within) {
+    background: var(--comp-card-interactive-background);
+    box-shadow: var(--comp-card-interactive-shadow);
+    transform: translate(-0.125rem, -0.125rem);
+  }
+
+  &:where([card-style="outline"]) {
+    & .card-heading {
+      color: var(--sys-color-secondary);
+    }
+
+    & .card-text {
+      color: var(--sys-color-on-surface-variant);
+    }
+  }
+
+  &:where([card-type="feature"]) {
+    box-shadow: var(--sys-offset-hard);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: auto -1rem -1rem auto;
+      inline-size: 7.5rem;
+      aspect-ratio: 1;
+      background: var(--sys-pattern-halftone);
+      opacity: 0.44;
+    }
+  }
+
+  &:where([card-type="stat"]) {
+    gap: var(--sys-space-sm);
+    min-block-size: 9rem;
+    box-shadow: var(--sys-offset-hard);
+
+    &::after {
+      inset-block-end: -1.125rem;
+      inset-inline-end: -1.125rem;
+      inline-size: 5rem;
+      opacity: 0.22;
+    }
+
+    & .card-value {
+      color: var(--sys-color-ink);
+      font-family: var(--sys-typography-heading-font-family);
+      font-size: var(--sys-typography-title-font-size);
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.15;
+    }
+
+    &:where([chip-tone="inverse"]) {
+      background: var(--sys-color-ink);
+      color: var(--sys-color-inverse-on-surface);
+
+      & .card-value,
+      & .chip {
+        color: var(--sys-color-inverse-on-surface);
+      }
+    }
+
+    @media (width <= 40rem) {
+      min-height: 7.5rem;
+      padding: var(--sys-space-lg);
+    }
+  }
+}
+
+@container (min-width: 32.5rem) {
+  .card {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+
+    & .card-heading,
+    & .media:where([media-variant="cover"]),
+    & .chip:where([chip-type="date"]),
+    & .card-text,
+    & .chip-group:where([chip-group-type="meta"]),
+    & .button {
+      grid-column: 1 / -1;
+    }
+  }
+}

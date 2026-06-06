@@ -2,7 +2,8 @@ import { fetchFromStrapi } from "./api.js";
 
 export function setupContactForm() {
   const form = document.getElementById("contact-form");
-  const statusEl = document.getElementById("form-status");
+  const statusEl =
+    document.querySelector(".form-status") || document.getElementById("form-status");
 
   if (!form || !statusEl) return;
 
