@@ -127,7 +127,7 @@
     }
   }
 
-  &:where([card-layout="vertical"]){
+  &:where([card-layout="vertical"]) {
     flex-direction: column;
     align-items: stretch;
   }
@@ -152,7 +152,7 @@
 
 @container card-group (min-width: 48rem) {
   .card {
-    &:where([card-layout-shift="horizontal"]) {
+    &:where([card-layout="horizontal"]) {
       flex-direction: row;
       align-items: stretch;
       flex-wrap: wrap;

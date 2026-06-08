@@ -13,10 +13,6 @@ Cascade order:
 @import url("./abstracts/tokens.css");
 @import url("./base/reset.css");
 @import url("./base/typography.css");
-@import url("./layout/layout-primitives.css");
-@import url("./layout/site-shell.css");
-@import url("./layout/page-layouts.css");
-@import url("./layout/page-content.css");
 @import url("./components/panel.css");
 @import url("./components/card.css");
 @import url("./components/button.css");
@@ -26,6 +22,8 @@ Cascade order:
 @import url("./components/hero.css");
 @import url("./components/showcase.css");
 @import url("./components/progress.css");
+@import url("./layout/layout-primitives.css");
+@import url("./layout/site-shell.css");
+@import url("./layout/page-layouts.css");
+@import url("./layout/page-content.css");
 @import url("./utilities/utilities.css");
-
-
