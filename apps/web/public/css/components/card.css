@@ -3,13 +3,13 @@
   --card-radius: var(--comp-card-radius);
   --card-border: var(--comp-card-border);
   --card-background: var(--comp-card-background);
-  container-type: inline-size;
+  --card-gap: var(--sys-space-md);
+  --card-media-inline-size: min(42%, 18rem);
   position: relative;
-  display: grid;
-  align-content: start;
-  gap: var(--sys-space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   min-block-size: 100%;
-  padding: var(--card-padding);
   border: var(--card-border);
   border-radius: var(--card-radius);
   background: var(--card-background);
@@ -18,20 +18,33 @@
     background-color var(--sys-motion-transition),
     box-shadow var(--sys-motion-transition),
     transform var(--sys-motion-transition);
+}
+.card-content {
+  position: relative;
+  padding: var(--card-padding);
+  z-index: 1;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--card-gap);
+  min-inline-size: 0;
+}
 
-  & .card-heading {
-    position: relative;
-    z-index: 1;
-    color: var(--comp-card-heading-color);
-  }
+.card-heading {
+  position: relative;
+  z-index: 1;
+  color: var(--comp-card-heading-color);
+}
 
-  & .card-text,
-  & .chip:where([chip-type="date"]) {
-    position: relative;
-    z-index: 1;
-    color: var(--comp-card-text-color);
-  }
+.card-text,
+.card > .chip:where([chip-type="date"]) {
+  position: relative;
+  z-index: 1;
+  color: var(--comp-card-text-color);
+}
 
+.card {
   &:where([card-style="outline"]) {
     --card-border: var(--sys-border-hairline);
     --card-background: transparent;
@@ -49,10 +62,11 @@
   &:where([card-shape="pill"]) {
     --card-radius: var(--sys-radius-full);
   }
-
+}
+.card {
   &:where([card-density="small"]) {
     --card-padding: 1.5625rem;
-    gap: var(--sys-space-sm);
+    --card-gap: var(--sys-space-sm);
     min-block-size: auto;
   }
 
@@ -63,7 +77,8 @@
   &:where([card-density="zen"]) {
     --card-padding: clamp(2rem, 6vw, 4rem);
   }
-
+}
+.card {
   &:where([card-effect="halftone"])::after {
     content: "";
     position: absolute;
@@ -91,7 +106,88 @@
       color: var(--sys-color-on-surface-variant);
     }
   }
+}
+.card {
+  &:where([card-layout="horizontal"]) {
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: wrap;
 
+    & > .media:where([media-variant="cover"]) {
+      flex: 1 1 min(100%, var(--card-media-inline-size));
+      inline-size: auto;
+      block-size: auto;
+      min-block-size: 100%;
+      max-block-size: none;
+      aspect-ratio: 4 / 3;
+    }
+
+    & > .card-content {
+      flex: 999 1 18rem;
+    }
+  }
+
+  &:where([card-layout="vertical"]) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@container (max-width: 38rem) {
+  .card {
+    &:where([card-layout="horizontal"]) {
+      flex-direction: column;
+
+      & > .media:where([media-variant="cover"]) {
+        flex-basis: auto;
+        inline-size: 100%;
+        block-size: var(--cover-block-size);
+        max-block-size: var(--cover-block-size);
+        min-block-size: 0;
+        aspect-ratio: 16 / 9;
+      }
+    }
+  }
+}
+
+@container card-group (min-width: 48rem) {
+  .card {
+    &:where([card-layout="horizontal"]) {
+      flex-direction: row;
+      align-items: stretch;
+      flex-wrap: wrap;
+
+      & > .media:where([media-variant="cover"]) {
+        flex: 1 1 min(100%, var(--card-media-inline-size));
+        inline-size: auto;
+        block-size: auto;
+        min-block-size: 100%;
+        max-block-size: none;
+        aspect-ratio: 4 / 3;
+      }
+
+      & > .card-content {
+        flex: 999 1 18rem;
+      }
+    }
+  }
+}
+
+.card-group {
+  --card-group-gap: var(--layout-gap, var(--sys-space-xl));
+  --card-group-min: var(--layout-min, 17.5rem);
+  --card-group-template: repeat(
+    auto-fit,
+    minmax(min(100%, var(--card-group-min)), 1fr)
+  );
+  container-name: card-group;
+  container-type: inline-size;
+  display: grid;
+  gap: var(--card-group-gap);
+  grid-template-columns: var(--card-group-template);
+}
+
+.card {
   &:where([card-type="feature"]) {
     box-shadow: var(--sys-offset-hard);
 
@@ -144,18 +240,7 @@
   }
 }
 
-@container (min-width: 32.5rem) {
-  .card {
-    grid-template-columns: 1fr auto;
-    align-items: start;
-
-    & .card-heading,
-    & .media:where([media-variant="cover"]),
-    & .chip:where([chip-type="date"]),
-    & .card-text,
-    & .chip-group:where([chip-group-type="meta"]),
-    & .button {
-      grid-column: 1 / -1;
-    }
-  }
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
 }

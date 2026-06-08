@@ -1,5 +1,10 @@
 <template id="blog-card-template">
-  <article class="card" card-effect="halftone" card-interactive="true">
+  <article
+    class="card"
+    card-layout="vertical"
+    card-effect="halftone"
+    card-interactive="true"
+  >
     <figure
       class="media"
       media-variant="cover"
@@ -7,9 +12,11 @@
       data-blog-cover-media
     >
     </figure>
-    <h3 class="card-heading" data-blog-title></h3>
-    <p class="chip" chip-type="date" data-blog-date></p>
-    <p class="card-text" data-blog-preview></p>
-    <a class="button" button-style="filled" data-blog-link>Read More</a>
+    <div class="card-content">
+      <h3 class="card-heading" data-blog-title></h3>
+      <p class="chip" chip-type="date" data-blog-date></p>
+      <p class="card-text" data-blog-preview></p>
+      <a class="button" button-style="filled" data-blog-link>Read More</a>
+    </div>
   </article>
 </template>

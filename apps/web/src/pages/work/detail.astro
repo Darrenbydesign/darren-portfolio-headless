@@ -12,12 +12,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       >Back to Work</a
     >
 
-    <header
-      class="panel hero detail-hero"
-      panel-density="zen"
-      hero-layout="split"
-      hero-density="zen"
-    >
+    <header class="hero detail-hero" hero-layout="split" hero-density="medium">
       <div class="hero-copy">
         <p class="chip" chip-type="tag" chip-tone="inverse">Case Study</p>
         <h1 class="hero-title" data-study-title></h1>
@@ -57,10 +52,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           card-density="medium"
           card-effect="halftone"
         >
-          <dt class="chip" chip-type="tag" data-study-stat-label></dt>
-          <dd class="detail-stat-value">
-            <strong class="card-value" data-study-stat-value></strong>
-          </dd>
+          <div class="card-content">
+            <dt class="chip" chip-type="tag" data-study-stat-label></dt>
+            <dd class="detail-stat-value">
+              <strong class="card-value" data-study-stat-value></strong>
+            </dd>
+          </div>
         </div>
       </template>
     </section>
