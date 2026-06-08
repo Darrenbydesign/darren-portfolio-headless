@@ -51,6 +51,9 @@
 .detail-stats {
   margin-block: calc(var(--sys-space-xxl) * -0.5) var(--sys-space-xxl);
   margin-inline: 0;
+  & .section-heading {
+    margin-block: var(--sys-space-lg);
+  }
 }
 
 .detail-stats .stats-section {
@@ -104,6 +107,3 @@
   padding-inline-start: 0;
   list-style: none;
 }
-
-
-

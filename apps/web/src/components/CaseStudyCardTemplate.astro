@@ -1,5 +1,10 @@
 <template id="case-study-card-template">
-  <article class="card" card-effect="halftone" card-interactive="true">
+  <article
+    class="card"
+    card-layout-shift="horizontal"
+    card-effect="halftone"
+    card-interactive="true"
+  >
     <figure
       class="media"
       media-variant="cover"
@@ -7,13 +12,17 @@
       data-study-cover-media
     >
     </figure>
-    <h3 class="card-heading" data-study-title></h3>
-    <p class="chip" chip-type="date" data-study-date></p>
-    <p class="card-text" data-study-preview></p>
-    <p class="chip-group" chip-group-type="meta">
-      <strong>Tools:</strong>
-      <span data-study-tools></span>
-    </p>
-    <a class="button" button-style="filled" data-study-link>View Case Study</a>
+    <div class="card-content">
+      <h3 class="card-heading" data-study-title></h3>
+      <p class="chip" chip-type="date" data-study-date></p>
+      <p class="card-text" data-study-preview></p>
+      <p class="chip-group" chip-group-type="meta">
+        <strong>Tools:</strong>
+        <span data-study-tools></span>
+      </p>
+      <a class="button" button-style="filled" data-study-link
+        >View Case Study</a
+      >
+    </div>
   </article>
 </template>
