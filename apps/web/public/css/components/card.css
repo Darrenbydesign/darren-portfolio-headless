@@ -4,6 +4,7 @@
   --card-border: var(--comp-card-border);
   --card-background: var(--comp-card-background);
   --card-gap: var(--sys-space-md);
+  --card-media-inline-size: min(42%, 18rem);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -111,11 +112,81 @@
     flex-direction: row;
     align-items: stretch;
     flex-wrap: wrap;
+
+    & > .media:where([media-variant="cover"]) {
+      flex: 1 1 min(100%, var(--card-media-inline-size));
+      inline-size: auto;
+      block-size: auto;
+      min-block-size: 100%;
+      max-block-size: none;
+      aspect-ratio: 4 / 3;
+    }
+
+    & > .card-content {
+      flex: 999 1 18rem;
+    }
   }
+
   &:where([card-layout="vertical"]){
     flex-direction: column;
     align-items: stretch;
   }
+}
+
+@container (max-width: 38rem) {
+  .card {
+    &:where([card-layout="horizontal"]) {
+      flex-direction: column;
+
+      & > .media:where([media-variant="cover"]) {
+        flex-basis: auto;
+        inline-size: 100%;
+        block-size: var(--cover-block-size);
+        max-block-size: var(--cover-block-size);
+        min-block-size: 0;
+        aspect-ratio: 16 / 9;
+      }
+    }
+  }
+}
+
+@container card-group (min-width: 48rem) {
+  .card {
+    &:where([card-layout-shift="horizontal"]) {
+      flex-direction: row;
+      align-items: stretch;
+      flex-wrap: wrap;
+
+      & > .media:where([media-variant="cover"]) {
+        flex: 1 1 min(100%, var(--card-media-inline-size));
+        inline-size: auto;
+        block-size: auto;
+        min-block-size: 100%;
+        max-block-size: none;
+        aspect-ratio: 4 / 3;
+      }
+
+      & > .card-content {
+        flex: 999 1 18rem;
+      }
+    }
+  }
+}
+
+.card-group {
+  --card-group-gap: var(--layout-gap, var(--sys-space-xl));
+  --card-group-min: var(--layout-min, 17.5rem);
+  --card-group-template: repeat(
+    auto-fit,
+    minmax(min(100%, var(--card-group-min)), 1fr)
+  );
+  container-name: card-group;
+  container-type: inline-size;
+  display: grid;
+  gap: var(--card-group-gap);
+  grid-template-columns: var(--card-group-template);
+}
+
 .card {
   &:where([card-type="feature"]) {
     box-shadow: var(--sys-offset-hard);
