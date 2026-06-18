@@ -1,6 +1,7 @@
 import { fetchFromStrapi } from './api.js';
 import { applyCoverMedia } from './media.js';
 import { renderRichContentInto } from './richText.js';
+import { renderContentBlocksInto } from './contentBlocks.js';
 import { formatDate, getSlugFromUrl } from './utils.js';
 import { renderHeroMeta } from './heroMeta.js';
 
@@ -17,8 +18,9 @@ async function loadBlogPostDetail() {
 	}
 
 	try {
+		const encodedSlug = encodeURIComponent(slug);
 		const result = await fetchFromStrapi(
-			`/blog-posts?filters[slug][$eq]=${slug}&populate=*`
+			`/blog-posts?filters[slug][$eq]=${encodedSlug}&populate[blogPostCover]=*&populate[heroMeta]=*&populate[media]=*&populate[contentBlocks][populate]=*`
 		);
 
 		const post = result.data?.[0];
@@ -53,12 +55,29 @@ async function loadBlogPostDetail() {
 			alt: post.title || 'Blog post cover',
 		});
 
-		renderRichContentInto(content, post.content);
+		const renderedBlocks = renderContentBlocksInto(
+			content,
+			post.contentBlocks,
+			getContentBlockTemplates(fragment)
+		);
+
+		if (!renderedBlocks) {
+			renderRichContentInto(content, post.content);
+		}
 		container.replaceChildren(fragment);
 	} catch (error) {
 		console.error('Error loading blog post detail:', error);
 		showDetailMessage(container, 'Unable to load this blog post right now.');
 	}
+}
+
+function getContentBlockTemplates(fragment) {
+	return {
+		media: fragment.querySelector('[data-content-block-media-template]'),
+		quote: fragment.querySelector('[data-content-block-quote-template]'),
+		slider: fragment.querySelector('[data-content-block-slider-template]'),
+		sliderItem: fragment.querySelector('[data-content-block-slider-item-template]'),
+	};
 }
 
 function showDetailMessage(container, message) {

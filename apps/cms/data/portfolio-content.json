@@ -1,0 +1,318 @@
+{
+  "caseStudies": [
+    {
+      "title": "Dynamic Content System for Case Studies",
+      "slug": "dynamic-content-system-case-study",
+      "caseStudyCover": "coffee-shadow.jpg",
+      "coverSize": "large",
+      "heroMeta": [
+        {
+          "label": "Content Strategy"
+        },
+        {
+          "label": "Design Systems"
+        },
+        {
+          "label": "CMS Architecture"
+        }
+      ],
+      "projectStats": [
+        {
+          "label": "Role",
+          "value": "Product Designer"
+        },
+        {
+          "label": "Timeline",
+          "value": "4 weeks"
+        },
+        {
+          "label": "Outcome",
+          "value": "Reusable story system"
+        }
+      ],
+      "description": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "text": "A sample case study that validates the new dynamic content block model."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "type": "list",
+          "format": "unordered",
+          "children": [
+            {
+              "type": "list-item",
+              "children": [
+                {
+                  "text": "Strapi"
+                }
+              ]
+            },
+            {
+              "type": "list-item",
+              "children": [
+                {
+                  "text": "Astro"
+                }
+              ]
+            },
+            {
+              "type": "list-item",
+              "children": [
+                {
+                  "text": "Content Modeling"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "deliverableProgress": [
+        {
+          "label": "Content Model",
+          "percentage": 100
+        },
+        {
+          "label": "Block Rendering",
+          "percentage": 100
+        },
+        {
+          "label": "Authoring QA",
+          "percentage": 80
+        }
+      ],
+      "datePublished": "2026-06-18",
+      "contentBlocks": [
+        {
+          "__component": "shared.content-rich-text",
+          "body": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Why this structure works"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "The case study now has one ordered narrative stream, so writing, imagery, callouts, and galleries can appear exactly where the story needs them."
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "format": "unordered",
+              "children": [
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Lead with context and project framing"
+                    }
+                  ]
+                },
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Place evidence and media beside the relevant decision"
+                    }
+                  ]
+                },
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Close with outcomes without forcing every project into the same section order"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Design note",
+          "body": "A flexible content system should preserve editorial intent without turning every page into a bespoke template."
+        },
+        {
+          "__component": "shared.external-image",
+          "url": "https://picsum.photos/id/119/1200/800",
+          "alt": "Abstract workspace image from Picsum"
+        },
+        {
+          "__component": "shared.content-rich-text",
+          "body": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Block order as the source of truth"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Rather than maintaining separate challenge, solution, and results fields forever, the CMS can now model the case study as a sequence of reusable content blocks."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__component": "shared.external-gallery",
+          "images": [
+            {
+              "url": "https://picsum.photos/id/180/900/600",
+              "alt": "Desk setup detail from Picsum"
+            },
+            {
+              "url": "https://picsum.photos/id/201/900/600",
+              "alt": "Process reference image from Picsum"
+            },
+            {
+              "url": "https://picsum.photos/id/225/900/600",
+              "alt": "Gallery detail image from Picsum"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "blogPosts": [
+    {
+      "title": "Testing Dynamic Blocks in a Blog Post",
+      "slug": "testing-dynamic-blocks-blog-post",
+      "blogPostCover": "beautiful-picture.jpg",
+      "coverSize": "medium",
+      "heroMeta": [
+        {
+          "label": "CMS"
+        },
+        {
+          "label": "Publishing"
+        },
+        {
+          "label": "Pattern Test"
+        }
+      ],
+      "content": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "text": "Fallback rich text remains available for older posts."
+            }
+          ]
+        }
+      ],
+      "excerpt": "A sample blog post that exercises rich text, quote, media, and gallery dynamic blocks.",
+      "datePublished": "2026-06-18",
+      "tags": "cms,dynamic-blocks,content-design",
+      "contentBlocks": [
+        {
+          "__component": "shared.content-rich-text",
+          "body": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "A more flexible post body"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "This post uses the same dynamic block renderer as case studies, which keeps publishing behavior consistent while letting each entry choose its own structure."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__component": "shared.external-image",
+          "url": "https://picsum.photos/id/24/1200/800",
+          "alt": "Notebook and desk image from Picsum"
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Publishing principle",
+          "body": "When the CMS owns block order, authors can test layouts through content instead of new page templates."
+        },
+        {
+          "__component": "shared.content-rich-text",
+          "body": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "What to check"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "format": "ordered",
+              "children": [
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "The cover image renders in the hero"
+                    }
+                  ]
+                },
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "The inline media block keeps its position in the article body"
+                    }
+                  ]
+                },
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "The slider produces a list of media items without changing the template"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__component": "shared.external-gallery",
+          "images": [
+            {
+              "url": "https://picsum.photos/id/42/900/600",
+              "alt": "Blog detail gallery image from Picsum"
+            },
+            {
+              "url": "https://picsum.photos/id/96/900/600",
+              "alt": "Second blog gallery image from Picsum"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

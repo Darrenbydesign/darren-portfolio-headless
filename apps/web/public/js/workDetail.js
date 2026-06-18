@@ -3,6 +3,7 @@ import {
   extractListItemsFromRichContent,
   createRichContentFragment,
 } from "./richText.js";
+import { renderContentBlocksInto } from "./contentBlocks.js";
 import { formatDate, getSlugFromUrl } from "./utils.js";
 import { createMediaElement, getCoverSize } from "./media.js";
 import { renderHeroMeta } from "./heroMeta.js";
@@ -20,8 +21,9 @@ async function loadCaseStudyDetail() {
   }
 
   try {
+    const encodedSlug = encodeURIComponent(slug);
     const result = await fetchFromStrapi(
-      `/case-studies?filters[slug][$eq]=${slug}&populate=*`,
+      `/case-studies?filters[slug][$eq]=${encodedSlug}&populate[caseStudyCover]=*&populate[heroMeta]=*&populate[projectStats]=*&populate[deliverableProgress]=*&populate[media]=*&populate[contentBlocks][populate]=*`,
     );
 
     const study = result.data?.[0];
@@ -61,10 +63,28 @@ async function loadCaseStudyDetail() {
 }
 
 function renderCaseStudyContent(fragment, study) {
+  const content = fragment.querySelector("[data-study-content]");
+  const renderedBlocks = renderContentBlocksInto(
+    content,
+    study.contentBlocks,
+    getContentBlockTemplates(fragment),
+  );
+
+  if (renderedBlocks) return;
+
   renderRichField(fragment, "[data-study-description]", study.description);
   renderRichField(fragment, "[data-study-challenge]", study.challenge);
   renderRichField(fragment, "[data-study-solution]", study.solution);
   renderRichField(fragment, "[data-study-results]", study.results);
+}
+
+function getContentBlockTemplates(fragment) {
+  return {
+    media: fragment.querySelector("[data-content-block-media-template]"),
+    quote: fragment.querySelector("[data-content-block-quote-template]"),
+    slider: fragment.querySelector("[data-content-block-slider-template]"),
+    sliderItem: fragment.querySelector("[data-content-block-slider-item-template]"),
+  };
 }
 
 function renderRichField(fragment, selector, content) {
