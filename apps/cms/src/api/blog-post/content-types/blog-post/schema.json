@@ -47,8 +47,18 @@
       "component": "shared.hero-meta-chip"
     },
     "content": {
-      "type": "blocks",
-      "required": true
+      "type": "blocks"
+    },
+    "contentBlocks": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.content-rich-text",
+        "shared.media",
+        "shared.external-image",
+        "shared.quote",
+        "shared.slider",
+        "shared.external-gallery"
+      ]
     },
     "excerpt": {
       "type": "text",

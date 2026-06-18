@@ -38,6 +38,29 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </header>
 
     <div class="detail-content" data-blog-content></div>
+    <template data-content-block-media-template>
+      <figure class="media" media-variant="cover" media-density="large">
+        <div data-content-block-media-frame></div>
+      </figure>
+    </template>
+    <template data-content-block-quote-template>
+      <figure class="content-quote">
+        <blockquote data-content-block-quote-body></blockquote>
+        <figcaption data-content-block-quote-title hidden></figcaption>
+      </figure>
+    </template>
+    <template data-content-block-slider-template>
+      <section class="content-slider" aria-label="Image gallery">
+        <ul class="content-slider-list" data-content-block-slider-list></ul>
+      </section>
+    </template>
+    <template data-content-block-slider-item-template>
+      <li class="content-slider-item">
+        <figure class="media" media-variant="cover" media-density="small">
+          <div data-content-block-slider-frame></div>
+        </figure>
+      </li>
+    </template>
   </template>
   <script slot="after-main" type="module" src="/js/blogDetail.js"></script>
 </BaseLayout>

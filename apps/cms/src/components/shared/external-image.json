@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_external_images",
+  "info": {
+    "displayName": "External Image",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "alt": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string"
+    }
+  }
+}

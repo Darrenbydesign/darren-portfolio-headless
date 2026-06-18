@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_external_galleries",
+  "info": {
+    "displayName": "External Gallery",
+    "icon": "images"
+  },
+  "options": {},
+  "attributes": {
+    "images": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

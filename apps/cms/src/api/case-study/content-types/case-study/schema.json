@@ -54,6 +54,17 @@
     "description": {
       "type": "blocks"
     },
+    "contentBlocks": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.content-rich-text",
+        "shared.media",
+        "shared.external-image",
+        "shared.quote",
+        "shared.slider",
+        "shared.external-gallery"
+      ]
+    },
     "media": {
       "type": "media",
       "multiple": true,

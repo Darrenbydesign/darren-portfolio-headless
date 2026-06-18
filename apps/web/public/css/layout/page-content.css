@@ -107,3 +107,45 @@
   padding-inline-start: 0;
   list-style: none;
 }
+
+.content-block {
+  display: grid;
+  gap: var(--sys-space-md);
+}
+
+.content-quote {
+  display: grid;
+  gap: var(--sys-space-sm);
+  margin: 0;
+  padding: var(--sys-space-lg);
+  border: var(--sys-border-ink);
+  border-radius: var(--sys-radius-md);
+  background: var(--sys-color-surface-container-lowest);
+}
+
+.content-quote blockquote {
+  margin: 0;
+  color: var(--sys-color-ink);
+  font-size: var(--sys-typography-body-large-font-size);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.content-quote figcaption {
+  color: var(--sys-color-on-surface-variant);
+  font-weight: 700;
+}
+
+.content-slider {
+  display: grid;
+  gap: var(--sys-space-md);
+}
+
+.content-slider-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--sys-space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
