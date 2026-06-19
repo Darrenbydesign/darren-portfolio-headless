@@ -29,16 +29,27 @@ export function setupContactForm() {
         }),
       });
 
-      statusEl.textContent =
-        "Message sent successfully! I'll get back to you soon.";
-      statusEl.className = "success";
+      setFormStatus(
+        statusEl,
+        "Message sent successfully! I'll get back to you soon.",
+        "success",
+      );
       form.reset();
     } catch (error) {
       console.error("Error sending message:", error);
-      statusEl.textContent = "Error sending message. Please try again.";
-      statusEl.className = "error";
+      setFormStatus(
+        statusEl,
+        "Error sending message. Please try again.",
+        "error",
+      );
     }
   });
+}
+
+function setFormStatus(statusEl, message, state) {
+  statusEl.textContent = message;
+  statusEl.classList.remove("success", "error");
+  statusEl.classList.add(state);
 }
 
 document.addEventListener("DOMContentLoaded", setupContactForm);
