@@ -64,6 +64,10 @@
   margin: 0;
 }
 
+.detail-stat {
+  padding: var(--card-padding);
+}
+
 .detail-layout {
   margin-block-start: 0;
 }

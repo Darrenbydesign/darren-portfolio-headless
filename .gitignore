@@ -9,6 +9,8 @@ Thumbs.db
 .astro/
 dist/
 build/
+output/
+.playwright-cli/
 
 apps/*/node_modules/
 apps/web/.astro/

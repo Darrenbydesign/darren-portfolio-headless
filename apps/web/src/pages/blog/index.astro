@@ -1,14 +1,26 @@
 ---
-import BlogCardTemplate from "../../components/BlogCardTemplate.astro";
+import BlogCard from "../../components/BlogCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getBlogPosts } from "../../lib/strapi";
+
+const posts = await getBlogPosts();
 ---
 
-<BaseLayout title="Journal - Darren Sorrels Design">
+<BaseLayout
+  title="Journal - Darren Sorrels Design"
+  description="Articles from Darren Sorrels about UX strategy, interaction design, research, and front-end craft."
+>
   <section class="blog-page">
     <p class="chip" chip-type="tag">Notes and Process</p>
     <h2>Journal</h2>
-    <div id="blog-posts" class="card-group posts-grid"></div>
-    <BlogCardTemplate />
+    <div class="card-group posts-grid">
+      {
+        posts.length ? (
+          posts.map((post) => <BlogCard post={post} />)
+        ) : (
+          <p>No blog posts yet. Check back soon!</p>
+        )
+      }
+    </div>
   </section>
-  <script slot="after-main" type="module" src="/js/blog.js"></script>
 </BaseLayout>

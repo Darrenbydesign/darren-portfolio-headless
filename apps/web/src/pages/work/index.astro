@@ -1,14 +1,26 @@
 ---
-import CaseStudyCardTemplate from "../../components/CaseStudyCardTemplate.astro";
+import CaseStudyCard from "../../components/CaseStudyCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCaseStudies } from "../../lib/strapi";
+
+const studies = await getCaseStudies();
 ---
 
-<BaseLayout title="Work - Darren Sorrels Design">
+<BaseLayout
+  title="Work - Darren Sorrels Design"
+  description="Selected UX, product design, and interaction design case studies by Darren Sorrels."
+>
   <section class="work-page">
     <p class="chip" chip-type="tag">Selected Case Studies</p>
     <h2>Work</h2>
-    <div id="case-studies" class="card-group studies-grid"></div>
+    <div class="card-group studies-grid">
+      {
+        studies.length ? (
+          studies.map((study) => <CaseStudyCard study={study} />)
+        ) : (
+          <p>No case studies yet. Check back soon!</p>
+        )
+      }
+    </div>
   </section>
-  <CaseStudyCardTemplate />
-  <script slot="after-main" type="module" src="/js/work.js"></script>
 </BaseLayout>

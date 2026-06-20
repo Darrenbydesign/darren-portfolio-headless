@@ -1,7 +1,18 @@
 ---
-const { title = "darren-portfolio-headless" } = Astro.props;
-const strapiApiUrl =
-  import.meta.env.PUBLIC_STRAPI_API_URL || "http://localhost:1337/api";
+import "../styles/main.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = "Darren Sorrels Design",
+  description = "UX and interaction design portfolio for Darren Sorrels.",
+  noindex = false,
+} = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
 ---
 
 <!doctype html>
@@ -10,6 +21,16 @@ const strapiApiUrl =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Darren Sorrels Design" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="icon" href="/assets/logo-symbol.svg" type="image/svg+xml" />
     <script is:inline>
       (() => {
         const storageKey = "darren-theme";
@@ -39,7 +60,6 @@ const strapiApiUrl =
       href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Space+Grotesk:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content"> Skip to main content </a>
@@ -140,9 +160,6 @@ const strapiApiUrl =
       </div>
     </footer>
 
-    <script define:vars={{ strapiApiUrl }}>
-      window.DARREN_STRAPI_API_URL = strapiApiUrl;
-    </script>
     <script>
       const themeStorageKey = "darren-theme";
       const themeToggle = document.querySelector("[data-theme-toggle]");

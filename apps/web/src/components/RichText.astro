@@ -1,0 +1,12 @@
+---
+import type { RichTextNode } from "../lib/types";
+import RichTextBlock from "./RichTextBlock.astro";
+
+interface Props {
+  content?: RichTextNode[];
+}
+
+const { content = [] } = Astro.props;
+---
+
+{content.map((block) => <RichTextBlock block={block} />)}
