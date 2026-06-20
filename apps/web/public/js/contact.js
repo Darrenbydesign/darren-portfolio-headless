@@ -1,5 +1,3 @@
-import { fetchFromStrapi } from "./api.js";
-
 export function setupContactForm() {
   const form = document.getElementById("contact-form");
   const statusEl =
@@ -9,25 +7,31 @@ export function setupContactForm() {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const submitButton = form.querySelector('button[type="submit"]');
 
-    const name = document.getElementById("name")?.value.trim() || "";
-    const email = document.getElementById("email")?.value.trim() || "";
-    const message = document.getElementById("message")?.value.trim() || "";
+    if (!form.reportValidity()) return;
+
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = true;
+    }
+
+    setFormStatus(statusEl, "Sending message...", "pending");
 
     try {
-      await fetchFromStrapi("/contact-messages", {
+      const body = new URLSearchParams();
+      new FormData(form).forEach((value, key) => {
+        if (typeof value === "string") body.append(key, value);
+      });
+
+      const response = await fetch("/", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify({
-          data: {
-            name,
-            email,
-            message,
-          },
-        }),
+        body: body.toString(),
       });
+
+      if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
 
       setFormStatus(
         statusEl,
@@ -42,13 +46,17 @@ export function setupContactForm() {
         "Error sending message. Please try again.",
         "error",
       );
+    } finally {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+      }
     }
   });
 }
 
 function setFormStatus(statusEl, message, state) {
   statusEl.textContent = message;
-  statusEl.classList.remove("success", "error");
+  statusEl.classList.remove("success", "error", "pending");
   statusEl.classList.add(state);
 }
 

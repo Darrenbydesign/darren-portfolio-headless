@@ -1,0 +1,41 @@
+---
+import { extractText } from "../lib/content";
+import type { RichTextNode } from "../lib/types";
+import InlineRichText from "./InlineRichText.astro";
+import MediaElement from "./MediaElement.astro";
+
+interface Props {
+  block: RichTextNode;
+}
+
+const { block } = Astro.props;
+const children = block.children ?? [];
+const headingLevel = Math.min(Math.max(Number(block.level) || 2, 1), 6);
+const Heading = `h${headingLevel}`;
+const List = block.format === "ordered" ? "ol" : "ul";
+const hasText = Boolean(extractText([block]));
+---
+
+{
+  block.type === "paragraph" && hasText ? (
+    <p class="rich-paragraph">
+      {children.map((node) => <InlineRichText node={node} />)}
+    </p>
+  ) : block.type === "heading" && hasText ? (
+    <Heading class="rich-heading" counter-item>
+      {children.map((node) => <InlineRichText node={node} />)}
+    </Heading>
+  ) : block.type === "list" && children.length ? (
+    <List class="rich-list">
+      {children.map((item) => (
+        <li class="rich-list-item">
+          {(item.children ?? []).map((node) => <InlineRichText node={node} />)}
+        </li>
+      ))}
+    </List>
+  ) : block.type === "image" && block.image ? (
+    <figure class="media rich-media" media-variant="cover" media-density="large">
+      <MediaElement media={block.image} />
+    </figure>
+  ) : null
+}

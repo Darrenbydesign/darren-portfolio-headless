@@ -1,0 +1,52 @@
+---
+import {
+  extractListItems,
+  extractText,
+  formatDate,
+  getCoverSize,
+  getPreviewText,
+  unwrapMedia,
+} from "../lib/content";
+import type { CaseStudy } from "../lib/types";
+import MediaElement from "./MediaElement.astro";
+
+interface Props {
+  study: CaseStudy;
+}
+
+const { study } = Astro.props;
+const cover = unwrapMedia(study.caseStudyCover);
+const preview = getPreviewText(extractText(study.description));
+const tools = extractListItems(study.tools);
+---
+
+<article
+  class="card"
+  card-layout="vertical"
+  card-effect="halftone"
+  card-interactive="true"
+>
+  {
+    cover?.url && (
+      <figure
+        class="media"
+        media-variant="cover"
+        media-density={getCoverSize(study.coverSize)}
+      >
+        <MediaElement media={cover} alt={study.title || "Case study cover"} />
+      </figure>
+    )
+  }
+  <div class="card-content">
+    <h3 class="card-heading">{study.title || "Untitled Case Study"}</h3>
+    {study.datePublished && <p class="chip" chip-type="date">{formatDate(study.datePublished)}</p>}
+    {preview && <p class="card-text">{preview}</p>}
+    <p class="chip-group" chip-group-type="meta">
+      <strong>Tools:</strong>
+      <span class="chip-group">
+        {tools.length ? tools.map((tool) => <span class="chip">{tool}</span>) : "N/A"}
+      </span>
+    </p>
+    <a class="button" button-style="filled" href={`/work/${study.slug}/`}>View Case Study</a>
+  </div>
+</article>

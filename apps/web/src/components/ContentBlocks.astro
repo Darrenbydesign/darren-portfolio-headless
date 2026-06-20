@@ -1,0 +1,104 @@
+---
+import { normalizeMediaList } from "../lib/content";
+import type { ContentBlock } from "../lib/types";
+import MediaElement from "./MediaElement.astro";
+import RichText from "./RichText.astro";
+
+interface Props {
+  blocks?: ContentBlock[];
+}
+
+const { blocks = [] } = Astro.props;
+const supportedBlocks = blocks.filter((block) => block?.__component);
+---
+
+{
+  supportedBlocks.map((block) => {
+    switch (block.__component) {
+      case "shared.rich-text":
+      case "shared.content-rich-text":
+        return (
+          <section class="content-block content-block-rich-text">
+            {Array.isArray(block.body) ? (
+              <RichText content={block.body} />
+            ) : typeof block.body === "string" && block.body.trim() ? (
+              <p class="rich-paragraph">{block.body.trim()}</p>
+            ) : null}
+          </section>
+        );
+      case "shared.media":
+        return block.file ? (
+          <figure
+            class="media content-block content-block-media"
+            media-variant="cover"
+            media-density="large"
+          >
+            <div><MediaElement media={block.file} /></div>
+          </figure>
+        ) : null;
+      case "shared.external-image":
+        return block.url?.trim() ? (
+          <figure
+            class="media content-block content-block-media"
+            media-variant="cover"
+            media-density="large"
+          >
+            <div>
+              <img
+                src={block.url.trim()}
+                alt={block.alt ?? ""}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            {block.caption?.trim() && <figcaption>{block.caption.trim()}</figcaption>}
+          </figure>
+        ) : null;
+      case "shared.quote":
+        return block.body || block.title ? (
+          <figure class="content-block content-block-quote content-quote">
+            {typeof block.body === "string" && <blockquote>{block.body.trim()}</blockquote>}
+            {block.title?.trim() && <figcaption>{block.title.trim()}</figcaption>}
+          </figure>
+        ) : null;
+      case "shared.slider": {
+        const mediaItems = normalizeMediaList(block.files);
+        return mediaItems.length ? (
+          <section class="content-block content-block-slider content-slider" aria-label="Image gallery">
+            <ul class="content-slider-list">
+              {mediaItems.map((media) => (
+                <li class="content-slider-item">
+                  <figure class="media" media-variant="cover" media-density="small">
+                    <div><MediaElement media={media} /></div>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null;
+      }
+      case "shared.external-gallery": {
+        const images = Array.isArray(block.images) ? block.images : [];
+        return images.length ? (
+          <section class="content-block content-block-slider content-slider" aria-label="Image gallery">
+            <ul class="content-slider-list">
+              {images.map((image) => (
+                <li class="content-slider-item">
+                  <figure class="media" media-variant="cover" media-density="small">
+                    <div>
+                      {image.url?.trim() && (
+                        <img src={image.url.trim()} alt={image.alt ?? ""} loading="lazy" decoding="async" />
+                      )}
+                    </div>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null;
+      }
+      default:
+        return null;
+    }
+  })
+}

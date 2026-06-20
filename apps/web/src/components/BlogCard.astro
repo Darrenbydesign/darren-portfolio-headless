@@ -1,0 +1,44 @@
+---
+import {
+  extractText,
+  formatDate,
+  getCoverSize,
+  getPreviewText,
+  unwrapMedia,
+} from "../lib/content";
+import type { BlogPost } from "../lib/types";
+import MediaElement from "./MediaElement.astro";
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const cover = unwrapMedia(post.blogPostCover);
+const preview = post.excerpt?.trim() || getPreviewText(extractText(post.content));
+---
+
+<article
+  class="card"
+  card-layout="vertical"
+  card-effect="halftone"
+  card-interactive="true"
+>
+  {
+    cover?.url && (
+      <figure
+        class="media"
+        media-variant="cover"
+        media-density={getCoverSize(post.coverSize)}
+      >
+        <MediaElement media={cover} alt={post.title || "Blog post cover"} />
+      </figure>
+    )
+  }
+  <div class="card-content">
+    <h3 class="card-heading">{post.title || "Untitled Post"}</h3>
+    {post.datePublished && <p class="chip" chip-type="date">{formatDate(post.datePublished)}</p>}
+    {preview && <p class="card-text">{preview}</p>}
+    <a class="button" button-style="filled" href={`/blog/${post.slug}/`}>Read More</a>
+  </div>
+</article>

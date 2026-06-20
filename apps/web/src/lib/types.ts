@@ -1,0 +1,95 @@
+export interface StrapiMedia {
+  id?: number;
+  documentId?: string;
+  url?: string;
+  alternativeText?: string | null;
+  caption?: string | null;
+  mime?: string;
+  width?: number | null;
+  height?: number | null;
+  attributes?: StrapiMedia;
+  data?: StrapiMedia | null;
+}
+
+export interface RichTextNode {
+  type?: string;
+  text?: string;
+  level?: number;
+  format?: "ordered" | "unordered";
+  url?: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strikethrough?: boolean;
+  code?: boolean;
+  image?: StrapiMedia;
+  children?: RichTextNode[];
+}
+
+export interface HeroMetaItem {
+  id?: number;
+  label?: string;
+}
+
+export interface DetailStat {
+  id?: number;
+  label?: string;
+  value?: string;
+}
+
+export interface ProgressItem {
+  id?: number;
+  label?: string;
+  percentage?: number;
+}
+
+export interface ExternalImage {
+  url?: string;
+  alt?: string;
+  caption?: string;
+}
+
+export interface ContentBlock {
+  id?: number;
+  __component?: string;
+  body?: RichTextNode[] | string;
+  title?: string;
+  file?: StrapiMedia;
+  files?: StrapiMedia[] | { data?: StrapiMedia[] };
+  images?: ExternalImage[];
+  url?: string;
+  alt?: string;
+  caption?: string;
+}
+
+interface BaseEntry {
+  id?: number;
+  documentId?: string;
+  title: string;
+  slug: string;
+  coverSize?: string;
+  heroMeta?: HeroMetaItem[];
+  contentBlocks?: ContentBlock[];
+  datePublished?: string;
+  publishedAt?: string;
+}
+
+export interface BlogPost extends BaseEntry {
+  blogPostCover?: StrapiMedia;
+  content?: RichTextNode[];
+  excerpt?: string;
+  media?: StrapiMedia[];
+  tags?: string;
+}
+
+export interface CaseStudy extends BaseEntry {
+  caseStudyCover?: StrapiMedia;
+  projectStats?: DetailStat[];
+  description?: RichTextNode[];
+  media?: StrapiMedia[];
+  challenge?: RichTextNode[];
+  solution?: RichTextNode[];
+  results?: RichTextNode[];
+  tools?: RichTextNode[];
+  deliverableProgress?: ProgressItem[];
+}

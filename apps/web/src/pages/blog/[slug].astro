@@ -1,0 +1,60 @@
+---
+import ContentBlocks from "../../components/ContentBlocks.astro";
+import HeroMeta from "../../components/HeroMeta.astro";
+import MediaElement from "../../components/MediaElement.astro";
+import RichText from "../../components/RichText.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { extractText, formatDate, getCoverSize, getPreviewText, unwrapMedia } from "../../lib/content";
+import { getBlogPosts } from "../../lib/strapi";
+import type { BlogPost } from "../../lib/types";
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+
+  return posts
+    .filter((post) => post.slug?.trim())
+    .map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const cover = unwrapMedia(post.blogPostCover);
+const hasContentBlocks = Boolean(post.contentBlocks?.length);
+const description =
+  post.excerpt?.trim() || getPreviewText(extractText(post.content), 155);
+---
+
+<BaseLayout
+  title={`${post.title || "Blog Post"} - Darren Sorrels Design`}
+  description={description || "A journal entry from Darren Sorrels Design."}
+>
+  <article class="detail-page">
+    <a class="button back-link" button-style="outline" href="/blog/">Back to Journal</a>
+
+    <header class="detail-header">
+      <p class="chip" chip-type="tag">Journal Entry</p>
+      {post.datePublished && <p class="chip" chip-type="date">{formatDate(post.datePublished)}</p>}
+      <h1>{post.title || "Untitled Post"}</h1>
+      <HeroMeta items={post.heroMeta} label="Blog post highlights" />
+      {post.excerpt?.trim() && <p class="detail-excerpt">{post.excerpt.trim()}</p>}
+      {
+        cover?.url && (
+          <figure
+            class="media detail-cover-media"
+            media-variant="cover"
+            media-density={getCoverSize(post.coverSize)}
+          >
+            <MediaElement media={cover} alt={post.title || "Blog post cover"} eager />
+          </figure>
+        )
+      }
+    </header>
+
+    <div class="detail-content">
+      {hasContentBlocks ? <ContentBlocks blocks={post.contentBlocks} /> : <RichText content={post.content} />}
+    </div>
+  </article>
+</BaseLayout>

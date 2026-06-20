@@ -2,65 +2,13 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Blog Post - Darren Sorrels Design">
-  <article id="blog-post-detail" class="detail-page">
-    <p>Loading blog post...</p>
-  </article>
-
-  <template id="blog-detail-template">
-    <a class="button back-link" button-style="outline" href="/blog"
-      >Back to Journal</a
-    >
-
-    <header class="detail-header">
-      <p class="chip" chip-type="tag">Journal Entry</p>
-      <p class="chip" chip-type="date" data-blog-date></p>
-      <h1 data-blog-title></h1>
-      <ul
-        class="hero-meta"
-        aria-label="Blog post highlights"
-        data-blog-hero-meta
-        hidden
-      >
-      </ul>
-      <template data-blog-hero-meta-template>
-        <li class="chip" chip-style="outline"></li>
-      </template>
-      <p class="detail-excerpt" data-blog-excerpt hidden></p>
-      <figure
-        class="media detail-cover-media"
-        media-variant="cover"
-        media-density="medium"
-        data-blog-cover-media
-        hidden
-      >
-      </figure>
-    </header>
-
-    <div class="detail-content" data-blog-content></div>
-    <template data-content-block-media-template>
-      <figure class="media" media-variant="cover" media-density="large">
-        <div data-content-block-media-frame></div>
-      </figure>
-    </template>
-    <template data-content-block-quote-template>
-      <figure class="content-quote">
-        <blockquote data-content-block-quote-body></blockquote>
-        <figcaption data-content-block-quote-title hidden></figcaption>
-      </figure>
-    </template>
-    <template data-content-block-slider-template>
-      <section class="content-slider" aria-label="Image gallery">
-        <ul class="content-slider-list" data-content-block-slider-list></ul>
-      </section>
-    </template>
-    <template data-content-block-slider-item-template>
-      <li class="content-slider-item">
-        <figure class="media" media-variant="cover" media-density="small">
-          <div data-content-block-slider-frame></div>
-        </figure>
-      </li>
-    </template>
-  </template>
-  <script slot="after-main" type="module" src="/js/blogDetail.js"></script>
+<BaseLayout title="Opening Blog Post - Darren Sorrels Design" description="Redirecting to the requested journal entry." noindex>
+  <section class="detail-page" aria-live="polite">
+    <p>Opening the requested blog post...</p>
+    <noscript><p><a href="/blog/">Browse all journal entries</a></p></noscript>
+  </section>
+  <script slot="after-main" is:inline>
+    const slug = new URLSearchParams(window.location.search).get("slug");
+    window.location.replace(slug ? `/blog/${encodeURIComponent(slug)}/` : "/blog/");
+  </script>
 </BaseLayout>

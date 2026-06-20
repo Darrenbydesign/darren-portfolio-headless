@@ -1,0 +1,151 @@
+---
+import ContentBlocks from "../../components/ContentBlocks.astro";
+import HeroMeta from "../../components/HeroMeta.astro";
+import MediaElement from "../../components/MediaElement.astro";
+import RichText from "../../components/RichText.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  extractListItems,
+  extractText,
+  formatDate,
+  getCoverSize,
+  getPreviewText,
+  normalizeMediaList,
+  normalizeProgress,
+  normalizeStats,
+  unwrapMedia,
+} from "../../lib/content";
+import { getCaseStudies } from "../../lib/strapi";
+import type { CaseStudy } from "../../lib/types";
+
+export async function getStaticPaths() {
+  const studies = await getCaseStudies();
+
+  return studies
+    .filter((study) => study.slug?.trim())
+    .map((study) => ({ params: { slug: study.slug }, props: { study } }));
+}
+
+interface Props {
+  study: CaseStudy;
+}
+
+const { study } = Astro.props;
+const cover = unwrapMedia(study.caseStudyCover);
+const tools = extractListItems(study.tools);
+const stats = normalizeStats(study.projectStats);
+const progress = normalizeProgress(study.deliverableProgress);
+const mediaItems = normalizeMediaList(study.media);
+const hasContentBlocks = Boolean(study.contentBlocks?.length);
+const description = getPreviewText(extractText(study.description), 155);
+const monogram = (study.title || "DS").slice(0, 2).toUpperCase();
+---
+
+<BaseLayout
+  title={`${study.title || "Case Study"} - Darren Sorrels Design`}
+  description={description || "A UX and product design case study by Darren Sorrels."}
+>
+  <article class="detail-page panel" panel-type="detail">
+    <a class="button back-link" button-style="outline" href="/work/">Back to Work</a>
+
+    <header class="hero detail-hero" hero-layout="split" hero-density="medium">
+      <div class="hero-copy">
+        <p class="chip" chip-type="tag" chip-tone="inverse">Case Study</p>
+        <h1 class="hero-title">{study.title || "Untitled Case Study"}</h1>
+        {study.datePublished && <p class="hero-text text-lead">{formatDate(study.datePublished)}</p>}
+        <HeroMeta items={study.heroMeta} label="Case study highlights" />
+      </div>
+
+      <div
+        class="panel hero-media"
+        media-density={getCoverSize(study.coverSize)}
+        aria-hidden={cover?.url ? undefined : "true"}
+      >
+        <div class="hero-media-inner">
+          {
+            cover?.url ? (
+              <MediaElement media={cover} alt={study.title || "Case study cover"} eager />
+            ) : (
+              <span class="monogram">{monogram}</span>
+            )
+          }
+        </div>
+      </div>
+    </header>
+
+    <section class="detail-stats counter-list" aria-label="Case study snapshot">
+      <header class="section-heading"><h2 class="section-title">Key Outcomes</h2></header>
+      <dl class="stats-section">
+        {
+          stats.map((stat) => (
+            <div class="card detail-stat" card-type="stat" card-density="medium" card-effect="halftone">
+              <dt class="chip" chip-type="tag">{stat.label}</dt>
+              <dd class="detail-stat-value"><strong class="card-value">{stat.value}</strong></dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <div class="case-layout detail-layout">
+      <div class="case-main">
+        <section class="detail-content counter-list" aria-label="Case study details">
+          {
+            hasContentBlocks ? (
+              <ContentBlocks blocks={study.contentBlocks} />
+            ) : (
+              <>
+                <section class="detail-section" aria-label="Description"><header><RichText content={study.description} /></header></section>
+                <section class="detail-section" aria-label="Challenge"><header><RichText content={study.challenge} /></header></section>
+                <section class="detail-section" aria-label="Solution"><header><RichText content={study.solution} /></header></section>
+                <section class="detail-section" aria-label="Results"><header><RichText content={study.results} /></header></section>
+              </>
+            )
+          }
+
+          {
+            mediaItems.length > 0 && (
+              <section class="detail-media" aria-label="Project media">
+                <ul class="detail-media-list">
+                  {mediaItems.map((media) => (
+                    <li class="detail-media-item">
+                      <figure class="media" media-variant="cover" media-density="small">
+                        <div><MediaElement media={media} /></div>
+                      </figure>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )
+          }
+        </section>
+      </div>
+
+      <aside class="case-sidebar">
+        <section class="panel" panel-type="sidebar">
+          <h2 class="panel-heading">Contributions</h2>
+          <div class="progress-list">
+            {progress.map((item) => (
+              <div class="progress-item">
+                <span>{item.label}</span>
+                <output>{item.percentage}%</output>
+                <progress class="progress-bar" max="100" value={item.percentage} aria-label={`${item.label}: ${item.percentage}%`}></progress>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section class="panel" panel-type="sidebar">
+          <h2 class="panel-heading">Skills Used</h2>
+          <div class="chip-group">
+            {(tools.length ? tools : ["Strategy", "UX", "UI"]).map((tool) => <span class="chip">{tool}</span>)}
+          </div>
+        </section>
+        <section class="panel" panel-type="cta">
+          <h2 class="panel-heading">Work With Me</h2>
+          <p class="panel-text">Let's build something as impactful as this.</p>
+          <a class="button" button-style="filled" href="/#contact">Hire Me Now</a>
+        </section>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

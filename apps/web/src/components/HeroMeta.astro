@@ -1,0 +1,19 @@
+---
+import type { HeroMetaItem } from "../lib/types";
+
+interface Props {
+  items?: HeroMetaItem[];
+  label: string;
+}
+
+const { items = [], label } = Astro.props;
+const labels = items.map((item) => item.label?.trim()).filter(Boolean);
+---
+
+{
+  labels.length > 0 && (
+    <ul class="hero-meta" aria-label={label}>
+      {labels.map((item) => <li class="chip" chip-style="outline">{item}</li>)}
+    </ul>
+  )
+}

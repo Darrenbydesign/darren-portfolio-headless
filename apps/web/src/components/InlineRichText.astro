@@ -1,0 +1,36 @@
+---
+import type { RichTextNode } from "../lib/types";
+
+interface Props {
+  node: RichTextNode;
+}
+
+const { node } = Astro.props;
+const textNode = { ...node };
+const text = node.text ?? "";
+const children = node.children ?? [];
+const href =
+  typeof node.url === "string" && /^(https?:\/\/|\/|#|mailto:)/i.test(node.url)
+    ? node.url
+    : undefined;
+---
+
+{
+  node.bold ? (
+    <strong><Astro.self node={{ ...textNode, bold: false }} /></strong>
+  ) : node.italic ? (
+    <em><Astro.self node={{ ...textNode, italic: false }} /></em>
+  ) : node.underline ? (
+    <u><Astro.self node={{ ...textNode, underline: false }} /></u>
+  ) : node.strikethrough ? (
+    <s><Astro.self node={{ ...textNode, strikethrough: false }} /></s>
+  ) : node.code ? (
+    <code><Astro.self node={{ ...textNode, code: false }} /></code>
+  ) : node.type === "link" && href ? (
+    <a href={href}>{children.map((child) => <Astro.self node={child} />)}</a>
+  ) : node.type === "link" ? (
+    children.map((child) => <Astro.self node={child} />)
+  ) : (
+    text || children.map((child) => <Astro.self node={child} />)
+  )
+}

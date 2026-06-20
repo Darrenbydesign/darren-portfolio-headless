@@ -1,10 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import BlogCardTemplate from "../components/BlogCardTemplate.astro";
-import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
+import BlogCard from "../components/BlogCard.astro";
+import CaseStudyCard from "../components/CaseStudyCard.astro";
+import { getBlogPosts, getCaseStudies } from "../lib/strapi";
+
+const [blogPosts, caseStudies] = await Promise.all([
+  getBlogPosts(),
+  getCaseStudies(),
+]);
 ---
 
-<BaseLayout title="Darren Sorrels - UX Designer">
+<BaseLayout
+  title="Darren Sorrels - UX Designer"
+  description="UX and interaction design portfolio for Darren Sorrels, featuring product strategy, research, interface design, and front-end work."
+>
   <section
     id="home"
     class="panel hero"
@@ -166,26 +175,56 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
 
     <section id="blog" class="content-section blog">
       <h2>Latest Blog Posts</h2>
-      <div id="blog-posts" class="card-group posts-grid"></div>
-      <BlogCardTemplate />
+      <div class="card-group posts-grid">
+        {
+          blogPosts.length ? (
+            blogPosts.map((post) => <BlogCard post={post} />)
+          ) : (
+            <p>No blog posts yet. Check back soon!</p>
+          )
+        }
+      </div>
     </section>
 
     <section id="work" class="content-section case-studies">
       <h2>Featured Work</h2>
-      <div id="case-studies" class="card-group studies-grid"></div>
-      <CaseStudyCardTemplate />
+      <div class="card-group studies-grid">
+        {
+          caseStudies.length ? (
+            caseStudies.map((study) => <CaseStudyCard study={study} />)
+          ) : (
+            <p>No case studies yet. Check back soon!</p>
+          )
+        }
+      </div>
     </section>
 
     <section id="contact" class="contact">
       <h2>Get In Touch</h2>
-      <form id="contact-form">
+      <form
+        id="contact-form"
+        name="contact"
+        method="POST"
+        action="/?contact=success#contact"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p hidden>
+          <label>
+            Do not fill this out if you are human:
+            <input name="bot-field" autocomplete="off" />
+          </label>
+        </p>
         <label class="field">
           <span>Name</span>
           <input
             class="field-control"
             type="text"
             id="name"
+            name="name"
             placeholder="Your Name"
+            autocomplete="name"
             required
           />
         </label>
@@ -195,7 +234,9 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
             class="field-control"
             type="email"
             id="email"
+            name="email"
             placeholder="Your Email"
+            autocomplete="email"
             required
           />
         </label>
@@ -205,6 +246,7 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
             class="field-control"
             field-variant="multiline"
             id="message"
+            name="message"
             placeholder="Your Message"
             required></textarea>
         </label>
@@ -212,6 +254,6 @@ import CaseStudyCardTemplate from "../components/CaseStudyCardTemplate.astro";
       </form>
       <p id="form-status" class="form-status"></p>
     </section>
-    <script slot="after-main" type="module" src="/js/index.js"></script>
+    <script slot="after-main" type="module" src="/js/contact.js"></script>
   </div>
 </BaseLayout>

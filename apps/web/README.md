@@ -22,5 +22,9 @@ Or from this folder:
 npm run dev
 ```
 
-Set `PUBLIC_STRAPI_API_URL` in `apps/web/.env` if Strapi is not running at
-`http://localhost:1337/api`.
+Copy `.env.example` to `.env` and set `STRAPI_API_URL` plus a read-only
+`STRAPI_API_TOKEN`. Astro reads Strapi during the build, so neither value is
+included in browser JavaScript.
+
+Production hosting and domain steps are documented in the repository root at
+`PUBLISHING.md`.
