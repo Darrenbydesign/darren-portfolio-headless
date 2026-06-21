@@ -1,5 +1,16 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SharedContentRichText extends Struct.ComponentSchema {
+  collectionName: 'components_shared_content_rich_texts';
+  info: {
+    displayName: 'Content Rich Text';
+    icon: 'align-justify';
+  };
+  attributes: {
+    body: Schema.Attribute.Blocks;
+  };
+}
+
 export interface SharedDetailStat extends Struct.ComponentSchema {
   collectionName: 'components_shared_detail_stats';
   info: {
@@ -10,6 +21,30 @@ export interface SharedDetailStat extends Struct.ComponentSchema {
   attributes: {
     label: Schema.Attribute.String & Schema.Attribute.Required;
     value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedExternalGallery extends Struct.ComponentSchema {
+  collectionName: 'components_shared_external_galleries';
+  info: {
+    displayName: 'External Gallery';
+    icon: 'images';
+  };
+  attributes: {
+    images: Schema.Attribute.JSON & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedExternalImage extends Struct.ComponentSchema {
+  collectionName: 'components_shared_external_images';
+  info: {
+    displayName: 'External Image';
+    icon: 'picture';
+  };
+  attributes: {
+    alt: Schema.Attribute.String;
+    caption: Schema.Attribute.String;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -111,7 +146,10 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'shared.content-rich-text': SharedContentRichText;
       'shared.detail-stat': SharedDetailStat;
+      'shared.external-gallery': SharedExternalGallery;
+      'shared.external-image': SharedExternalImage;
       'shared.hero-meta-chip': SharedHeroMetaChip;
       'shared.media': SharedMedia;
       'shared.progress-item': SharedProgressItem;

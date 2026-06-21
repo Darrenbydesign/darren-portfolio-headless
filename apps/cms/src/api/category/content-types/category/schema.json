@@ -24,6 +24,12 @@
       "target": "api::article.article",
       "mappedBy": "category"
     },
+    "blogPosts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog-post.blog-post",
+      "mappedBy": "category"
+    },
     "description": {
       "type": "text"
     }

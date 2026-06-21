@@ -17,14 +17,14 @@ export function getStrapiOrigin() {
 
 export function getBlogPosts() {
   blogPostsPromise ??= fetchCollection<BlogPost>(
-    "/blog-posts?sort[0]=datePublished:desc&pagination[pageSize]=100&populate[blogPostCover]=true&populate[heroMeta]=true&populate[media]=true&populate[contentBlocks][populate]=*",
+    "/blog-posts?sort[0]=datePublished:desc&pagination[pageSize]=100&populate[blogPostCover]=true&populate[author]=true&populate[category]=true&populate[media]=true&populate[contentBlocks][populate]=*",
   );
   return blogPostsPromise;
 }
 
 export function getCaseStudies() {
   caseStudiesPromise ??= fetchCollection<CaseStudy>(
-    "/case-studies?sort[0]=datePublished:desc&pagination[pageSize]=100&populate[caseStudyCover]=true&populate[heroMeta]=true&populate[projectStats]=true&populate[deliverableProgress]=true&populate[media]=true&populate[contentBlocks][populate]=*",
+    "/case-studies?sort[0]=datePublished:desc&pagination[pageSize]=100&populate[caseStudyCover]=true&populate[heroMeta]=true&populate[projectStats]=true&populate[deliverableProgress]=true&populate[media]=true&populate[description][populate]=*&populate[challenge][populate]=*&populate[solution][populate]=*&populate[results][populate]=*",
   );
   return caseStudiesPromise;
 }

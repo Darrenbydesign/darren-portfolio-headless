@@ -1,6 +1,5 @@
 ---
 import ContentBlocks from "../../components/ContentBlocks.astro";
-import HeroMeta from "../../components/HeroMeta.astro";
 import MediaElement from "../../components/MediaElement.astro";
 import RichText from "../../components/RichText.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -25,6 +24,8 @@ const cover = unwrapMedia(post.blogPostCover);
 const hasContentBlocks = Boolean(post.contentBlocks?.length);
 const description =
   post.excerpt?.trim() || getPreviewText(extractText(post.content), 155);
+const authorName = post.author?.name?.trim();
+const categoryName = post.category?.name?.trim();
 ---
 
 <BaseLayout
@@ -35,10 +36,10 @@ const description =
     <a class="button back-link" button-style="outline" href="/blog/">Back to Journal</a>
 
     <header class="detail-header">
-      <p class="chip" chip-type="tag">Journal Entry</p>
+      <p class="chip" chip-type="tag">{categoryName || "Journal Entry"}</p>
       {post.datePublished && <p class="chip" chip-type="date">{formatDate(post.datePublished)}</p>}
       <h1>{post.title || "Untitled Post"}</h1>
-      <HeroMeta items={post.heroMeta} label="Blog post highlights" />
+      {authorName && <p class="detail-byline">By {authorName}</p>}
       {post.excerpt?.trim() && <p class="detail-excerpt">{post.excerpt.trim()}</p>}
       {
         cover?.url && (

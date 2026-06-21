@@ -31,6 +31,19 @@ export interface HeroMetaItem {
   label?: string;
 }
 
+export interface Author {
+  id?: number;
+  documentId?: string;
+  name?: string;
+}
+
+export interface Category {
+  id?: number;
+  documentId?: string;
+  name?: string;
+  slug?: string;
+}
+
 export interface DetailStat {
   id?: number;
   label?: string;
@@ -68,28 +81,29 @@ interface BaseEntry {
   title: string;
   slug: string;
   coverSize?: string;
-  heroMeta?: HeroMetaItem[];
-  contentBlocks?: ContentBlock[];
   datePublished?: string;
   publishedAt?: string;
 }
 
 export interface BlogPost extends BaseEntry {
   blogPostCover?: StrapiMedia;
+  author?: Author;
+  category?: Category;
   content?: RichTextNode[];
+  contentBlocks?: ContentBlock[];
   excerpt?: string;
   media?: StrapiMedia[];
-  tags?: string;
 }
 
 export interface CaseStudy extends BaseEntry {
   caseStudyCover?: StrapiMedia;
+  heroMeta?: HeroMetaItem[];
   projectStats?: DetailStat[];
-  description?: RichTextNode[];
+  description?: ContentBlock[];
   media?: StrapiMedia[];
-  challenge?: RichTextNode[];
-  solution?: RichTextNode[];
-  results?: RichTextNode[];
+  challenge?: ContentBlock[];
+  solution?: ContentBlock[];
+  results?: ContentBlock[];
   tools?: RichTextNode[];
   deliverableProgress?: ProgressItem[];
 }

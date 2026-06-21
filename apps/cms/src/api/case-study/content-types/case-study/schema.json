@@ -52,9 +52,6 @@
       "component": "shared.detail-stat"
     },
     "description": {
-      "type": "blocks"
-    },
-    "contentBlocks": {
       "type": "dynamiczone",
       "components": [
         "shared.content-rich-text",
@@ -76,13 +73,37 @@
       ]
     },
     "challenge": {
-      "type": "blocks"
+      "type": "dynamiczone",
+      "components": [
+        "shared.content-rich-text",
+        "shared.media",
+        "shared.external-image",
+        "shared.quote",
+        "shared.slider",
+        "shared.external-gallery"
+      ]
     },
     "solution": {
-      "type": "blocks"
+      "type": "dynamiczone",
+      "components": [
+        "shared.content-rich-text",
+        "shared.media",
+        "shared.external-image",
+        "shared.quote",
+        "shared.slider",
+        "shared.external-gallery"
+      ]
     },
     "results": {
-      "type": "blocks"
+      "type": "dynamiczone",
+      "components": [
+        "shared.content-rich-text",
+        "shared.media",
+        "shared.external-image",
+        "shared.quote",
+        "shared.slider",
+        "shared.external-gallery"
+      ]
     },
     "tools": {
       "type": "blocks"
