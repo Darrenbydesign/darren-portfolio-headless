@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogCard from "../components/BlogCard.astro";
 import CaseStudyCard from "../components/CaseStudyCard.astro";
+import EmptyState from "../components/EmptyState.astro";
 import { getBlogPosts, getCaseStudies } from "../lib/strapi";
 
 const [blogPosts, caseStudies] = await Promise.all([
@@ -180,7 +181,7 @@ const [blogPosts, caseStudies] = await Promise.all([
           blogPosts.length ? (
             blogPosts.map((post) => <BlogCard post={post} />)
           ) : (
-            <p>No blog posts yet. Check back soon!</p>
+            <EmptyState kind="journal" />
           )
         }
       </div>
@@ -193,7 +194,7 @@ const [blogPosts, caseStudies] = await Promise.all([
           caseStudies.length ? (
             caseStudies.map((study) => <CaseStudyCard study={study} />)
           ) : (
-            <p>No case studies yet. Check back soon!</p>
+            <EmptyState kind="work" />
           )
         }
       </div>

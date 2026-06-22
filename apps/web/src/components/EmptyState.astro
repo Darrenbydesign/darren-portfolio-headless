@@ -1,0 +1,98 @@
+---
+interface Props {
+  kind: "journal" | "work";
+  eyebrow?: string;
+  title?: string;
+  message?: string;
+}
+
+const defaults = {
+  journal: {
+    eyebrow: "Drafting now",
+    title: "New writing is in progress",
+    message:
+      "No journal entries are published yet. Check back soon for notes on design, research, and front-end craft.",
+  },
+  work: {
+    eyebrow: "Building the story",
+    title: "Case studies are being prepared",
+    message:
+      "No case studies are published yet. Check back soon for the process, decisions, and outcomes behind the work.",
+  },
+} as const;
+
+const { kind } = Astro.props;
+const eyebrow = Astro.props.eyebrow ?? defaults[kind].eyebrow;
+const title = Astro.props.title ?? defaults[kind].title;
+const message = Astro.props.message ?? defaults[kind].message;
+---
+
+<div
+  class="panel empty-state"
+  panel-density="large"
+  panel-effect="halftone"
+  empty-state-kind={kind}
+>
+  <div class="empty-state-graphic" aria-hidden="true">
+    <svg viewBox="0 0 360 240" focusable="false">
+      <path
+        class="empty-state-orbit"
+        d="M35 155C58 66 142 22 232 45c66 17 99 70 90 128"
+      />
+      <circle class="empty-state-dot" cx="48" cy="64" r="9" />
+      <circle class="empty-state-dot" cx="313" cy="49" r="5" />
+
+      {
+        kind === "journal" ? (
+          <g class="empty-state-journal">
+            <path
+              class="empty-state-shadow"
+              d="m87 196 132 24 61-38-131-24-62 38Z"
+            />
+            <path class="empty-state-surface" d="M83 47h177v137H83z" />
+            <path class="empty-state-accent" d="M83 47h177v25H83z" />
+            <circle class="empty-state-ink" cx="99" cy="59.5" r="3" />
+            <circle class="empty-state-ink" cx="111" cy="59.5" r="3" />
+            <path
+              class="empty-state-line"
+              d="M111 98h91M111 121h118M111 144h72"
+            />
+            <path
+              class="empty-state-pencil"
+              d="m213 159 69-69 18 18-69 69-25 7 7-25Z"
+            />
+            <path
+              class="empty-state-pencil-tip"
+              d="m206 184 7-25 18 18-25 7Z"
+            />
+          </g>
+        ) : (
+          <g class="empty-state-work">
+            <path
+              class="empty-state-shadow"
+              d="m71 196 136 25 81-38-136-25-81 38Z"
+            />
+            <path class="empty-state-surface" d="M68 56h220v132H68z" />
+            <path class="empty-state-accent" d="M68 56h220v24H68z" />
+            <circle class="empty-state-ink" cx="84" cy="68" r="3" />
+            <circle class="empty-state-ink" cx="96" cy="68" r="3" />
+            <path
+              class="empty-state-frame"
+              d="M88 101h74v62H88zM181 101h87v15h-87zM181 127h66v9h-66zM181 147h48v9h-48z"
+            />
+            <path
+              class="empty-state-cursor"
+              d="m252 144 36 18-16 6-8 17-12-41Z"
+            />
+          </g>
+        )
+      }
+    </svg>
+  </div>
+
+  <div class="empty-state-content">
+    <p class="chip" chip-type="tag">{eyebrow}</p>
+    <h3 class="empty-state-heading">{title}</h3>
+    <p class="empty-state-message">{message}</p>
+  </div>
+</div>
