@@ -30,13 +30,3 @@ Build both apps:
 ```bash
 npm run build
 ```
-
-## Environment
-
-The frontend reads Strapi from:
-
-```bash
-PUBLIC_STRAPI_API_URL=http://localhost:1337/api
-```
-
-Add that value to `apps/web/.env` when you need a different API URL.
