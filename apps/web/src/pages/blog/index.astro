@@ -1,5 +1,6 @@
 ---
 import BlogCard from "../../components/BlogCard.astro";
+import EmptyState from "../../components/EmptyState.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getBlogPosts } from "../../lib/strapi";
 
@@ -18,7 +19,7 @@ const posts = await getBlogPosts();
         posts.length ? (
           posts.map((post) => <BlogCard post={post} />)
         ) : (
-          <p>No blog posts yet. Check back soon!</p>
+          <EmptyState kind="journal" />
         )
       }
     </div>

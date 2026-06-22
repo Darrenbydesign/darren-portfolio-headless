@@ -22,6 +22,7 @@ Cascade order:
 @import url("./components/hero.css");
 @import url("./components/showcase.css");
 @import url("./components/progress.css");
+@import url("./components/empty-state.css");
 @import url("./layout/layout-primitives.css");
 @import url("./layout/site-shell.css");
 @import url("./layout/page-layouts.css");
