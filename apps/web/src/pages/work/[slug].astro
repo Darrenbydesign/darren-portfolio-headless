@@ -2,11 +2,10 @@
 import ContentBlocks from "../../components/ContentBlocks.astro";
 import HeroMeta from "../../components/HeroMeta.astro";
 import MediaElement from "../../components/MediaElement.astro";
-import RichText from "../../components/RichText.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
   extractListItems,
-  extractText,
+  extractContentBlockText,
   formatDate,
   getCoverSize,
   getPreviewText,
@@ -36,8 +35,13 @@ const tools = extractListItems(study.tools);
 const stats = normalizeStats(study.projectStats);
 const progress = normalizeProgress(study.deliverableProgress);
 const mediaItems = normalizeMediaList(study.media);
-const hasContentBlocks = Boolean(study.contentBlocks?.length);
-const description = getPreviewText(extractText(study.description), 155);
+const description = getPreviewText(extractContentBlockText(study.description), 155);
+const sections = [
+  { title: "Overview", blocks: study.description },
+  { title: "Challenge", blocks: study.challenge },
+  { title: "Solution", blocks: study.solution },
+  { title: "Results", blocks: study.results },
+].filter((section) => section.blocks?.length);
 const monogram = (study.title || "DS").slice(0, 2).toUpperCase();
 ---
 
@@ -90,18 +94,12 @@ const monogram = (study.title || "DS").slice(0, 2).toUpperCase();
     <div class="case-layout detail-layout">
       <div class="case-main">
         <section class="detail-content counter-list" aria-label="Case study details">
-          {
-            hasContentBlocks ? (
-              <ContentBlocks blocks={study.contentBlocks} />
-            ) : (
-              <>
-                <section class="detail-section" aria-label="Description"><header><RichText content={study.description} /></header></section>
-                <section class="detail-section" aria-label="Challenge"><header><RichText content={study.challenge} /></header></section>
-                <section class="detail-section" aria-label="Solution"><header><RichText content={study.solution} /></header></section>
-                <section class="detail-section" aria-label="Results"><header><RichText content={study.results} /></header></section>
-              </>
-            )
-          }
+          {sections.map((section) => (
+            <section class="detail-section" aria-labelledby={`${section.title.toLowerCase()}-heading`}>
+              <header><h2 id={`${section.title.toLowerCase()}-heading`}>{section.title}</h2></header>
+              <ContentBlocks blocks={section.blocks} />
+            </section>
+          ))}
 
           {
             mediaItems.length > 0 && (

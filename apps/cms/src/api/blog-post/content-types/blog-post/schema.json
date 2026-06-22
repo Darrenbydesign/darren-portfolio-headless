@@ -41,10 +41,17 @@
       ],
       "default": "medium"
     },
-    "heroMeta": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.hero-meta-chip"
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::author.author",
+      "inversedBy": "blogPosts"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "blogPosts"
     },
     "content": {
       "type": "blocks"
@@ -76,9 +83,6 @@
         "videos",
         "audios"
       ]
-    },
-    "tags": {
-      "type": "string"
     }
   }
 }

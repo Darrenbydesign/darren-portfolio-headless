@@ -157,10 +157,20 @@ async function createEntryIfMissing({ uid, slug, data }) {
   console.log(`Created ${uid} entry: ${slug}`);
 }
 
+async function findOrCreateEntry({ uid, where, data }) {
+  const existingEntry = await strapi.db.query(uid).findOne({ where });
+  if (existingEntry) return existingEntry;
+
+  return strapi.documents(uid).create({ data });
+}
+
 async function importCaseStudies() {
   for (const caseStudy of caseStudies) {
     const cover = await findOrUploadFiles([caseStudy.caseStudyCover]);
-    const contentBlocks = await hydrateContentBlocks(caseStudy.contentBlocks);
+    const description = await hydrateContentBlocks(caseStudy.description);
+    const challenge = await hydrateContentBlocks(caseStudy.challenge);
+    const solution = await hydrateContentBlocks(caseStudy.solution);
+    const results = await hydrateContentBlocks(caseStudy.results);
 
     await createEntryIfMissing({
       uid: 'api::case-study.case-study',
@@ -168,9 +178,11 @@ async function importCaseStudies() {
       data: {
         ...caseStudy,
         caseStudyCover: cover,
-        description: normalizeRichTextBlocks(caseStudy.description),
+        description,
+        challenge,
+        solution,
+        results,
         tools: normalizeRichTextBlocks(caseStudy.tools),
-        contentBlocks,
       },
     });
   }
@@ -178,15 +190,28 @@ async function importCaseStudies() {
 
 async function importBlogPosts() {
   for (const blogPost of blogPosts) {
+    const { author: authorData, category: categoryData, ...postData } = blogPost;
     const cover = await findOrUploadFiles([blogPost.blogPostCover]);
     const contentBlocks = await hydrateContentBlocks(blogPost.contentBlocks);
+    const author = await findOrCreateEntry({
+      uid: 'api::author.author',
+      where: { email: authorData.email },
+      data: authorData,
+    });
+    const category = await findOrCreateEntry({
+      uid: 'api::category.category',
+      where: { slug: categoryData.slug },
+      data: categoryData,
+    });
 
     await createEntryIfMissing({
       uid: 'api::blog-post.blog-post',
       slug: blogPost.slug,
       data: {
-        ...blogPost,
+        ...postData,
         blogPostCover: cover,
+        author: { connect: [author.documentId] },
+        category: { connect: [category.documentId] },
         content: normalizeRichTextBlocks(blogPost.content),
         contentBlocks,
       },
@@ -198,6 +223,8 @@ async function seedPortfolioContent() {
   await setPublicPermissions({
     'blog-post': ['find', 'findOne'],
     'case-study': ['find', 'findOne'],
+    author: ['find', 'findOne'],
+    category: ['find', 'findOne'],
   });
 
   await importCaseStudies();

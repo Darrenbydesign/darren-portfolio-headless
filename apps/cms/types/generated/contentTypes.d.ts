@@ -26,6 +26,11 @@ export interface AdminApiToken extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
+    adminPermissions: Schema.Attribute.Relation<
+      'oneToMany',
+      'admin::permission'
+    >;
+    adminUserOwner: Schema.Attribute.Relation<'manyToOne', 'admin::user'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -39,6 +44,9 @@ export interface AdminApiToken extends Struct.CollectionTypeSchema {
         minLength: 1;
       }>;
     expiresAt: Schema.Attribute.DateTime;
+    kind: Schema.Attribute.Enumeration<['content-api', 'admin']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'content-api'>;
     lastUsedAt: Schema.Attribute.DateTime;
     lifespan: Schema.Attribute.BigInteger;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -56,7 +64,6 @@ export interface AdminApiToken extends Struct.CollectionTypeSchema {
     >;
     publishedAt: Schema.Attribute.DateTime;
     type: Schema.Attribute.Enumeration<['read-only', 'full-access', 'custom']> &
-      Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'read-only'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -171,6 +178,7 @@ export interface AdminPermission extends Struct.CollectionTypeSchema {
         minLength: 1;
       }>;
     actionParameters: Schema.Attribute.JSON & Schema.Attribute.DefaultTo<{}>;
+    apiToken: Schema.Attribute.Relation<'manyToOne', 'admin::api-token'>;
     conditions: Schema.Attribute.JSON & Schema.Attribute.DefaultTo<[]>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -422,6 +430,8 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    apiTokens: Schema.Attribute.Relation<'oneToMany', 'admin::api-token'> &
+      Schema.Attribute.Private;
     blocked: Schema.Attribute.Boolean &
       Schema.Attribute.Private &
       Schema.Attribute.DefaultTo<false>;
@@ -550,6 +560,10 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   attributes: {
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
     avatar: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    blogPosts: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-post.blog-post'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -579,10 +593,22 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    author: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
     blogPostCover: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
-    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
+    content: Schema.Attribute.Blocks;
+    contentBlocks: Schema.Attribute.DynamicZone<
+      [
+        'shared.content-rich-text',
+        'shared.media',
+        'shared.external-image',
+        'shared.quote',
+        'shared.slider',
+        'shared.external-gallery',
+      ]
+    >;
     coverSize: Schema.Attribute.Enumeration<
       ['small', 'medium', 'large', 'zen']
     > &
@@ -592,7 +618,6 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     datePublished: Schema.Attribute.Date;
     excerpt: Schema.Attribute.Text;
-    heroMeta: Schema.Attribute.Component<'shared.hero-meta-chip', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -607,7 +632,6 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    tags: Schema.Attribute.String;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -631,7 +655,16 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
     caseStudyCover: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
-    challenge: Schema.Attribute.Blocks;
+    challenge: Schema.Attribute.DynamicZone<
+      [
+        'shared.content-rich-text',
+        'shared.media',
+        'shared.external-image',
+        'shared.quote',
+        'shared.slider',
+        'shared.external-gallery',
+      ]
+    >;
     coverSize: Schema.Attribute.Enumeration<
       ['small', 'medium', 'large', 'zen']
     > &
@@ -644,7 +677,16 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
       'shared.progress-item',
       true
     >;
-    description: Schema.Attribute.Blocks;
+    description: Schema.Attribute.DynamicZone<
+      [
+        'shared.content-rich-text',
+        'shared.media',
+        'shared.external-image',
+        'shared.quote',
+        'shared.slider',
+        'shared.external-gallery',
+      ]
+    >;
     heroMeta: Schema.Attribute.Component<'shared.hero-meta-chip', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -658,11 +700,29 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
     >;
     projectStats: Schema.Attribute.Component<'shared.detail-stat', true>;
     publishedAt: Schema.Attribute.DateTime;
-    results: Schema.Attribute.Blocks;
+    results: Schema.Attribute.DynamicZone<
+      [
+        'shared.content-rich-text',
+        'shared.media',
+        'shared.external-image',
+        'shared.quote',
+        'shared.slider',
+        'shared.external-gallery',
+      ]
+    >;
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    solution: Schema.Attribute.Blocks;
+    solution: Schema.Attribute.DynamicZone<
+      [
+        'shared.content-rich-text',
+        'shared.media',
+        'shared.external-image',
+        'shared.quote',
+        'shared.slider',
+        'shared.external-gallery',
+      ]
+    >;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -686,6 +746,10 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
   attributes: {
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    blogPosts: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-post.blog-post'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

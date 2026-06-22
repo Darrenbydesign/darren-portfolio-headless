@@ -1,5 +1,6 @@
 import type {
   DetailStat,
+  ContentBlock,
   ProgressItem,
   RichTextNode,
   StrapiMedia,
@@ -25,6 +26,20 @@ export function extractText(nodes?: RichTextNode[]) {
     .map((node) => {
       if (typeof node.text === "string") return node.text;
       return extractText(node.children);
+    })
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function extractContentBlockText(blocks?: ContentBlock[]) {
+  if (!Array.isArray(blocks)) return "";
+
+  return blocks
+    .map((block) => {
+      if (Array.isArray(block.body)) return extractText(block.body);
+      if (typeof block.body === "string") return block.body;
+      return "";
     })
     .join(" ")
     .replace(/\s+/g, " ")

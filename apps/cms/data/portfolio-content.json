@@ -32,10 +32,109 @@
       ],
       "description": [
         {
-          "type": "paragraph",
-          "children": [
+          "__component": "shared.content-rich-text",
+          "body": [
             {
-              "text": "A sample case study that validates the new dynamic content block model."
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "A sample case study that validates a named-section content model built from reusable dynamic blocks."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "challenge": [
+        {
+          "__component": "shared.content-rich-text",
+          "body": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Case studies need a predictable narrative structure without limiting authors to rich text when media or callouts provide stronger evidence."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Design note",
+          "body": "A useful content model should preserve clear story sections while allowing each section to use the right content format."
+        }
+      ],
+      "solution": [
+        {
+          "__component": "shared.external-image",
+          "url": "https://picsum.photos/id/119/1200/800",
+          "alt": "Abstract workspace image from Picsum"
+        },
+        {
+          "__component": "shared.content-rich-text",
+          "body": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Description, challenge, solution, and results remain recognizable fields, while each field accepts the shared rich text, media, quote, slider, and gallery blocks."
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "format": "unordered",
+              "children": [
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Keep the story easy to scan in the editor"
+                    }
+                  ]
+                },
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Place evidence inside the section it supports"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "__component": "shared.content-rich-text",
+          "body": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "The resulting authoring model is structured enough for consistent case studies and flexible enough for project-specific storytelling."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__component": "shared.external-gallery",
+          "images": [
+            {
+              "url": "https://picsum.photos/id/180/900/600",
+              "alt": "Desk setup detail from Picsum"
+            },
+            {
+              "url": "https://picsum.photos/id/201/900/600",
+              "alt": "Process reference image from Picsum"
+            },
+            {
+              "url": "https://picsum.photos/id/225/900/600",
+              "alt": "Gallery detail image from Picsum"
             }
           ]
         }
@@ -86,110 +185,7 @@
           "percentage": 80
         }
       ],
-      "datePublished": "2026-06-18",
-      "contentBlocks": [
-        {
-          "__component": "shared.content-rich-text",
-          "body": [
-            {
-              "type": "heading",
-              "level": 2,
-              "children": [
-                {
-                  "text": "Why this structure works"
-                }
-              ]
-            },
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "text": "The case study now has one ordered narrative stream, so writing, imagery, callouts, and galleries can appear exactly where the story needs them."
-                }
-              ]
-            },
-            {
-              "type": "list",
-              "format": "unordered",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Lead with context and project framing"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Place evidence and media beside the relevant decision"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Close with outcomes without forcing every project into the same section order"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Design note",
-          "body": "A flexible content system should preserve editorial intent without turning every page into a bespoke template."
-        },
-        {
-          "__component": "shared.external-image",
-          "url": "https://picsum.photos/id/119/1200/800",
-          "alt": "Abstract workspace image from Picsum"
-        },
-        {
-          "__component": "shared.content-rich-text",
-          "body": [
-            {
-              "type": "heading",
-              "level": 2,
-              "children": [
-                {
-                  "text": "Block order as the source of truth"
-                }
-              ]
-            },
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "text": "Rather than maintaining separate challenge, solution, and results fields forever, the CMS can now model the case study as a sequence of reusable content blocks."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "__component": "shared.external-gallery",
-          "images": [
-            {
-              "url": "https://picsum.photos/id/180/900/600",
-              "alt": "Desk setup detail from Picsum"
-            },
-            {
-              "url": "https://picsum.photos/id/201/900/600",
-              "alt": "Process reference image from Picsum"
-            },
-            {
-              "url": "https://picsum.photos/id/225/900/600",
-              "alt": "Gallery detail image from Picsum"
-            }
-          ]
-        }
-      ]
+      "datePublished": "2026-06-18"
     }
   ],
   "blogPosts": [
@@ -198,17 +194,15 @@
       "slug": "testing-dynamic-blocks-blog-post",
       "blogPostCover": "beautiful-picture.jpg",
       "coverSize": "medium",
-      "heroMeta": [
-        {
-          "label": "CMS"
-        },
-        {
-          "label": "Publishing"
-        },
-        {
-          "label": "Pattern Test"
-        }
-      ],
+      "author": {
+        "name": "Darren Sorrels",
+        "email": "darren@example.com"
+      },
+      "category": {
+        "name": "Content Design",
+        "slug": "content-design",
+        "description": "Content modeling, publishing systems, and reusable editorial patterns."
+      },
       "content": [
         {
           "type": "paragraph",
@@ -221,7 +215,6 @@
       ],
       "excerpt": "A sample blog post that exercises rich text, quote, media, and gallery dynamic blocks.",
       "datePublished": "2026-06-18",
-      "tags": "cms,dynamic-blocks,content-design",
       "contentBlocks": [
         {
           "__component": "shared.content-rich-text",

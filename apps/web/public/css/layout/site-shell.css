@@ -55,32 +55,21 @@
 }
 
 .site-nav-link {
-  display: inline-flex;
-  align-items: center;
+  --button-color: var(--sys-color-on-surface);
   min-height: 2.5rem;
   padding: var(--sys-space-sm) var(--sys-space-md);
-  border: var(--sys-border-ink);
-  border-radius: var(--sys-radius-md);
-  background: var(--sys-color-surface-container-lowest);
-  color: var(--sys-color-on-surface);
-  font-family: var(--sys-typography-label-font-family);
-  font-size: var(--sys-typography-label-font-size);
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1;
-  text-decoration: none;
-  text-transform: uppercase;
   transition:
-    background-color var(--sys-motion-transition),
     color var(--sys-motion-transition),
-    transform var(--sys-motion-transition),
-    box-shadow var(--sys-motion-transition);
+    text-decoration-color var(--sys-motion-transition);
 
   &:where(:hover, :focus-visible) {
-    background: var(--sys-color-secondary);
-    color: var(--sys-color-on-secondary);
-    box-shadow: var(--sys-offset-hard);
-    transform: translate(-0.125rem, -0.125rem);
+    background: transparent;
+    color: var(--sys-color-primary);
+    box-shadow: none;
+    text-decoration: underline;
+    text-decoration-thickness: 0.125rem;
+    text-underline-offset: 0.25rem;
+    transform: none;
   }
 }
 
