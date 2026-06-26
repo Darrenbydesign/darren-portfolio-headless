@@ -10,6 +10,10 @@ const apiUrl = (
   ?.trim()
   .replace(/\/$/, "");
 const apiToken = import.meta.env.STRAPI_API_TOKEN?.trim();
+const blogPostsPath =
+  "/blog-posts?sort[0]=datePublished:desc&pagination[pageSize]=100&populate[blogPostCover]=true&populate[author]=true&populate[category]=true&populate[media]=true&populate[contentBlocks][populate]=*";
+const blogPostsFallbackPath =
+  "/blog-posts?sort[0]=datePublished:desc&pagination[pageSize]=100&populate[blogPostCover]=true&populate[media]=true&populate[contentBlocks][populate]=*";
 
 let blogPostsPromise: Promise<BlogPost[]> | undefined;
 let caseStudiesPromise: Promise<CaseStudy[]> | undefined;
@@ -20,9 +24,7 @@ export function getStrapiOrigin() {
 }
 
 export function getBlogPosts() {
-  blogPostsPromise ??= fetchCollection<BlogPost>(
-    "/blog-posts?sort[0]=datePublished:desc&pagination[pageSize]=100&populate[blogPostCover]=true&populate[author]=true&populate[category]=true&populate[media]=true&populate[contentBlocks][populate]=*",
-  );
+  blogPostsPromise ??= fetchBlogPosts();
   return blogPostsPromise;
 }
 
@@ -47,13 +49,50 @@ async function fetchCollection<T>(path: string) {
 
   if (!response.ok) {
     const detail = (await response.text()).slice(0, 500);
-    throw new Error(
-      `Strapi request failed (${response.status} ${response.statusText}) for ${path}.${detail ? ` ${detail}` : ""}`,
-    );
+    throw new StrapiFetchError(response.status, response.statusText, path, detail);
   }
 
   const payload = (await response.json()) as StrapiCollectionResponse<T>;
   return (payload.data ?? []).map(normalizeEntry);
+}
+
+async function fetchBlogPosts() {
+  try {
+    return await fetchCollection<BlogPost>(blogPostsPath);
+  } catch (error) {
+    if (!canRetryWithoutBlogRelations(error)) throw error;
+
+    console.warn(
+      "Blog author/category population failed. Building without those relations until Strapi schema and API token permissions are updated.",
+    );
+    return fetchCollection<BlogPost>(blogPostsFallbackPath);
+  }
+}
+
+function canRetryWithoutBlogRelations(error: unknown) {
+  if (!(error instanceof StrapiFetchError)) return false;
+  if (![400, 403].includes(error.status)) return false;
+
+  const detail = error.detail.toLowerCase();
+  return (
+    error.path.includes("populate[author]") ||
+    error.path.includes("populate[category]") ||
+    detail.includes("author") ||
+    detail.includes("category")
+  );
+}
+
+class StrapiFetchError extends Error {
+  constructor(
+    readonly status: number,
+    statusText: string,
+    readonly path: string,
+    readonly detail: string,
+  ) {
+    super(
+      `Strapi request failed (${status} ${statusText}) for ${path}.${detail ? ` ${detail}` : ""}`,
+    );
+  }
 }
 
 function normalizeEntry<T>(entry: T | { id?: number; documentId?: string; attributes?: T }) {
