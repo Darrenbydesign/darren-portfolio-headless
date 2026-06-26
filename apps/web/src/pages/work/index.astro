@@ -1,5 +1,6 @@
 ---
 import CaseStudyCard from "../../components/CaseStudyCard.astro";
+import EmptyState from "../../components/EmptyState.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCaseStudies } from "../../lib/strapi";
 
@@ -18,7 +19,7 @@ const studies = await getCaseStudies();
         studies.length ? (
           studies.map((study) => <CaseStudyCard study={study} headingLevel={2} />)
         ) : (
-          <p>No case studies yet. Check back soon!</p>
+          <EmptyState kind="work" />
         )
       }
     </div>

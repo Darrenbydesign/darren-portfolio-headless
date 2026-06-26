@@ -1,0 +1,116 @@
+.empty-state {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.85fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(var(--sys-space-lg), 5vw, var(--sys-space-xxl));
+  min-block-size: 22rem;
+}
+
+.empty-state {
+  position: relative;
+}
+
+.empty-state > :where(.empty-state-graphic, .empty-state-content) {
+  position: relative;
+  z-index: 1;
+}
+
+.empty-state .empty-state-graphic {
+  color: var(--sys-color-primary);
+}
+
+.empty-state .empty-state-graphic svg {
+  display: block;
+  inline-size: min(100%, 28rem);
+  block-size: auto;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.empty-state .empty-state-content {
+  display: grid;
+  justify-items: start;
+  gap: var(--sys-space-md);
+}
+
+.empty-state :where(.empty-state-heading, .empty-state-message) {
+  margin: 0;
+}
+
+.empty-state .empty-state-message {
+  max-inline-size: 38rem;
+  color: var(--sys-color-on-surface-variant);
+  font-size: var(--sys-typography-body-large-font-size);
+  line-height: 1.6;
+}
+
+.empty-state :where(.empty-state-orbit, .empty-state-line) {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+
+.empty-state .empty-state-orbit {
+  stroke-dasharray: 7 12;
+  stroke-width: 3;
+}
+
+.empty-state :where(.empty-state-dot, .empty-state-accent) {
+  fill: var(--sys-color-primary-fixed-dim);
+}
+
+.empty-state .empty-state-shadow {
+  fill: var(--sys-color-surface-container-high);
+}
+
+.empty-state .empty-state-surface {
+  fill: var(--sys-color-surface-container-lowest);
+  stroke: var(--sys-color-ink);
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.empty-state :where(.empty-state-ink, .empty-state-frame) {
+  fill: var(--sys-color-ink);
+}
+
+.empty-state .empty-state-line {
+  stroke-width: 7;
+}
+
+.empty-state :where(.empty-state-pencil, .empty-state-cursor) {
+  fill: var(--sys-color-primary);
+  stroke: var(--sys-color-ink);
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.empty-state .empty-state-pencil-tip {
+  fill: var(--sys-color-on-surface);
+}
+
+.empty-state:where([empty-state-kind="work"]) .empty-state-graphic {
+  color: var(--sys-color-secondary);
+}
+
+.empty-state:where([empty-state-kind="work"])
+  :where(.empty-state-accent, .empty-state-cursor) {
+  fill: var(--sys-color-secondary-container);
+}
+
+@media (width <= 40rem) {
+  .empty-state {
+    grid-template-columns: 1fr;
+    min-block-size: auto;
+    text-align: center;
+  }
+
+  .empty-state .empty-state-graphic svg {
+    inline-size: min(100%, 20rem);
+  }
+
+  .empty-state .empty-state-content {
+    justify-items: center;
+  }
+}
