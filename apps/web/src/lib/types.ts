@@ -68,6 +68,10 @@ export interface ContentBlock {
   body?: RichTextNode[] | string;
   title?: string;
   file?: StrapiMedia;
+  captions?: StrapiMedia;
+  captionsLanguage?: string;
+  captionsLabel?: string;
+  transcript?: RichTextNode[];
   files?: StrapiMedia[] | { data?: StrapiMedia[] };
   images?: ExternalImage[];
   url?: string;

@@ -12,11 +12,11 @@ const studies = await getCaseStudies();
 >
   <section class="work-page">
     <p class="chip" chip-type="tag">Selected Case Studies</p>
-    <h2>Work</h2>
+    <h1 class="page-heading">Work</h1>
     <div class="card-group studies-grid">
       {
         studies.length ? (
-          studies.map((study) => <CaseStudyCard study={study} />)
+          studies.map((study) => <CaseStudyCard study={study} headingLevel={2} />)
         ) : (
           <p>No case studies yet. Check back soon!</p>
         )

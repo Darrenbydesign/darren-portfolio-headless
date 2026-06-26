@@ -147,6 +147,9 @@ async function updateBlocks(blocks) {
       const blockCopy = { ...block };
       // Replace the file name on the block with the actual file
       blockCopy.file = uploadedFiles;
+      if (block.captions) {
+        blockCopy.captions = await checkFileExistsBeforeUpload([block.captions]);
+      }
       updatedBlocks.push(blockCopy);
     } else if (block.__component === 'shared.slider') {
       // Get files already uploaded to Strapi or upload new files

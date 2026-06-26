@@ -13,6 +13,8 @@ const {
   noindex = false,
 } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isCurrentPage = (path: string) => currentPath === path;
 ---
 
 <!doctype html>
@@ -107,16 +109,16 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
           </button>
           <ul class="site-nav-list">
             <li class="site-nav-item">
-              <a class="button site-nav-link" button-style="text" href="/" data-menu-close>Home</a>
+              <a class="button site-nav-link" button-style="text" href="/" aria-current={isCurrentPage("/") ? "page" : undefined} data-menu-close>Home</a>
             </li>
             <li class="site-nav-item">
-              <a class="button site-nav-link" button-style="text" href="/blog" data-menu-close>Blog</a>
+              <a class="button site-nav-link" button-style="text" href="/blog" aria-current={isCurrentPage("/blog") ? "page" : undefined} data-menu-close>Blog</a>
             </li>
             <li class="site-nav-item">
-              <a class="button site-nav-link" button-style="text" href="/work" data-menu-close>Work</a>
+              <a class="button site-nav-link" button-style="text" href="/work" aria-current={isCurrentPage("/work") ? "page" : undefined} data-menu-close>Work</a>
             </li>
             <li class="site-nav-item">
-              <a class="button site-nav-link" button-style="text" href="/about" data-menu-close>About</a>
+              <a class="button site-nav-link" button-style="text" href="/about" aria-current={isCurrentPage("/about") ? "page" : undefined} data-menu-close>About</a>
             </li>
             <li class="site-nav-item">
               <a class="button site-nav-link" button-style="text" href="/#contact" data-menu-close>Contact</a

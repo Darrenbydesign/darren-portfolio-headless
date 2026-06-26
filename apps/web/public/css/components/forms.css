@@ -97,6 +97,12 @@
   font-weight: 700;
   text-transform: uppercase;
 
+  &:where(.pending) {
+    display: block;
+    background: var(--comp-status-pending-background);
+    color: var(--comp-status-pending-foreground);
+  }
+
   &:where(.success) {
     display: block;
     background: var(--comp-status-success-background);

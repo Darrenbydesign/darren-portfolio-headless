@@ -7,11 +7,22 @@ interface Props {
   media?: StrapiMedia;
   alt?: string;
   eager?: boolean;
+  captions?: StrapiMedia;
+  captionsLanguage?: string;
+  captionsLabel?: string;
 }
 
-const { media, alt, eager = false } = Astro.props;
+const {
+  media,
+  alt,
+  eager = false,
+  captions,
+  captionsLanguage = "en",
+  captionsLabel = "English",
+} = Astro.props;
 const normalized = unwrapMedia(media);
 const src = getMediaUrl(media, getStrapiOrigin());
+const captionsSrc = getMediaUrl(captions, getStrapiOrigin());
 const mime = normalized?.mime ?? "";
 const alternativeText =
   alt ?? normalized?.alternativeText ?? normalized?.caption ?? "";
@@ -19,7 +30,17 @@ const alternativeText =
 
 {
   src && mime.startsWith("video/") ? (
-    <video src={src} controls playsinline muted preload="metadata"></video>
+    <video src={src} controls playsinline muted preload="metadata">
+      {captionsSrc && (
+        <track
+          kind="captions"
+          src={captionsSrc}
+          srclang={captionsLanguage}
+          label={captionsLabel}
+          default
+        />
+      )}
+    </video>
   ) : src && mime.startsWith("audio/") ? (
     <audio src={src} controls preload="metadata"></audio>
   ) : src && mime && !mime.startsWith("image/") ? (

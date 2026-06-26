@@ -33,7 +33,20 @@ const supportedBlocks = blocks.filter((block) => block?.__component);
             media-variant="cover"
             media-density="large"
           >
-            <div><MediaElement media={block.file} /></div>
+            <div>
+              <MediaElement
+                media={block.file}
+                captions={block.captions}
+                captionsLanguage={block.captionsLanguage}
+                captionsLabel={block.captionsLabel}
+              />
+            </div>
+            {block.transcript?.length && (
+              <details class="media-transcript">
+                <summary>Transcript</summary>
+                <RichText content={block.transcript} />
+              </details>
+            )}
           </figure>
         ) : null;
       case "shared.external-image":

@@ -252,7 +252,13 @@ const [blogPosts, caseStudies] = await Promise.all([
         </label>
         <button class="button" type="submit">Send Message</button>
       </form>
-      <p id="form-status" class="form-status"></p>
+      <p
+        id="form-status"
+        class="form-status"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      ></p>
     </section>
     <script slot="after-main" type="module" src="/js/contact.js"></script>
   </div>

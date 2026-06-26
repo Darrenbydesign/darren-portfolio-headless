@@ -109,3 +109,14 @@
     --cover-block-size: min(78vh, 56.25rem);
   }
 }
+
+.media-transcript {
+  margin-block-start: var(--sys-space-md);
+  color: var(--sys-color-on-surface);
+
+  & summary {
+    cursor: pointer;
+    font-family: var(--sys-typography-label-font-family);
+    font-weight: 700;
+  }
+}

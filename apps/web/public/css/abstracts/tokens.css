@@ -266,6 +266,8 @@
   --comp-field-foreground: var(--sys-color-on-surface);
   --comp-status-success-background: var(--sys-color-success-container);
   --comp-status-success-foreground: var(--sys-color-on-success-container);
+  --comp-status-pending-background: var(--sys-color-surface-container-low);
+  --comp-status-pending-foreground: var(--sys-color-on-surface);
 
   --comp-site-header-background: var(--ref-color-alpha-shell-light);
   --comp-site-backdrop-background: var(--ref-color-alpha-scrim-light);

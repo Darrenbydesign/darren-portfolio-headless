@@ -24,6 +24,20 @@
   }
 }
 
+.page-heading {
+  margin-block-end: var(--sys-space-lg);
+  font-size: var(--sys-typography-headline-font-size);
+  font-style: normal;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.page-title {
+  margin-block: var(--sys-space-lg);
+  font-size: var(--sys-typography-display-font-size);
+  font-family: var(--sys-typography-heading-font-family);
+}
+
 .back-link {
   margin-block: 0 var(--sys-space-lg);
 }
