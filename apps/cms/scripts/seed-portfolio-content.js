@@ -70,6 +70,10 @@ async function hydrateContentBlocks(blocks) {
       hydratedBlocks.push({
         ...block,
         file: await findOrUploadFiles([block.file]),
+        ...(block.captions
+          ? { captions: await findOrUploadFiles([block.captions]) }
+          : {}),
+        transcript: normalizeRichTextBlocks(block.transcript),
       });
       continue;
     }

@@ -12,12 +12,14 @@ import MediaElement from "./MediaElement.astro";
 
 interface Props {
   study: CaseStudy;
+  headingLevel?: 2 | 3;
 }
 
-const { study } = Astro.props;
+const { study, headingLevel = 3 } = Astro.props;
 const cover = unwrapMedia(study.caseStudyCover);
 const preview = getPreviewText(extractText(study.description));
 const tools = extractListItems(study.tools);
+const Heading = `h${headingLevel}`;
 ---
 
 <article
@@ -38,7 +40,7 @@ const tools = extractListItems(study.tools);
     )
   }
   <div class="card-content">
-    <h3 class="card-heading">{study.title || "Untitled Case Study"}</h3>
+    <Heading class="card-heading">{study.title || "Untitled Case Study"}</Heading>
     {study.datePublished && <p class="chip" chip-type="date">{formatDate(study.datePublished)}</p>}
     {preview && <p class="card-text">{preview}</p>}
     <p class="chip-group" chip-group-type="meta">

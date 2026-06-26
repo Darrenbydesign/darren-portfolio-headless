@@ -4,7 +4,11 @@ interface StrapiCollectionResponse<T> {
   data?: Array<T | { id?: number; documentId?: string; attributes?: T }>;
 }
 
-const apiUrl = import.meta.env.STRAPI_API_URL?.trim().replace(/\/$/, "");
+const apiUrl = (
+  import.meta.env.STRAPI_API_URL || import.meta.env.PUBLIC_STRAPI_API_URL
+)
+  ?.trim()
+  .replace(/\/$/, "");
 const apiToken = import.meta.env.STRAPI_API_TOKEN?.trim();
 
 let blogPostsPromise: Promise<BlogPost[]> | undefined;

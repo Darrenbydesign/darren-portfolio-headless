@@ -13,11 +13,11 @@ const posts = await getBlogPosts();
 >
   <section class="blog-page">
     <p class="chip" chip-type="tag">Notes and Process</p>
-    <h2>Journal</h2>
+    <h1 class="page-heading">Journal</h1>
     <div class="card-group posts-grid">
       {
         posts.length ? (
-          posts.map((post) => <BlogCard post={post} />)
+          posts.map((post) => <BlogCard post={post} headingLevel={2} />)
         ) : (
           <EmptyState kind="journal" />
         )

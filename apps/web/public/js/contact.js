@@ -14,6 +14,7 @@ export function setupContactForm() {
     if (submitButton instanceof HTMLButtonElement) {
       submitButton.disabled = true;
     }
+    form.setAttribute("aria-busy", "true");
 
     setFormStatus(statusEl, "Sending message...", "pending");
 
@@ -47,6 +48,7 @@ export function setupContactForm() {
         "error",
       );
     } finally {
+      form.removeAttribute("aria-busy");
       if (submitButton instanceof HTMLButtonElement) {
         submitButton.disabled = false;
       }

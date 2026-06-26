@@ -73,6 +73,13 @@
   }
 }
 
+.site-nav-link:where([aria-current="page"]) {
+  color: var(--sys-color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 0.125rem;
+  text-underline-offset: 0.25rem;
+}
+
 @media (width <= 48rem) {
   .site-nav {
     padding: var(--sys-space-sm) var(--sys-space-md);
